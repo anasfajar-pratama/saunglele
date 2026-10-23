@@ -10,6 +10,8 @@ type Props = {
     quotations: any[];
     nextNumber: string;
     selectedCustomerId: number;
+    selectedQuotationId: number;
+    sourceQuotation: any;
 };
 
 function todayPlus(days: number): string {
@@ -18,23 +20,27 @@ function todayPlus(days: number): string {
     return date.toISOString().slice(0, 10);
 }
 
-export default function PurchaseOrderCreate({ customers, products, quotations, nextNumber, selectedCustomerId }: Props) {
+export default function PurchaseOrderCreate({ customers, products, quotations, nextNumber, selectedCustomerId, selectedQuotationId, sourceQuotation }: Props) {
     const [productTab, setProductTab] = useState<'mbg' | 'kolam'>('mbg');
     const firstProduct = products.find((product) => product.category !== 'seed') ?? products[0];
-    const firstCustomer = customers.find((customer) => customer.id === selectedCustomerId) ?? customers[0];
+    const firstCustomer = customers.find((customer) => customer.id === (sourceQuotation?.customer_id ?? selectedCustomerId)) ?? customers[0];
+
+    const initialItems = sourceQuotation?.items?.length
+        ? sourceQuotation.items
+        : firstProduct
+          ? [{ product_id: firstProduct.id, description: `${firstProduct.name} — ${firstProduct.size_grade}`, qty: 1, unit: firstProduct.unit, unit_price: firstProduct.base_price }]
+          : [];
 
     const form = useForm<any>({
         customer_id: firstCustomer?.id ?? '',
         customer_po_number: '',
-        quotation_id: '',
+        quotation_id: sourceQuotation?.id ?? selectedQuotationId ?? '',
         requested_delivery_at: todayPlus(2),
-        shipping: 0,
-        tax_rate: 0.11,
-        payment_terms: '14 hari',
-        notes: '',
-        items: firstProduct
-            ? [{ product_id: firstProduct.id, description: `${firstProduct.name} — ${firstProduct.size_grade}`, qty: 1, unit: firstProduct.unit, unit_price: firstProduct.base_price }]
-            : [],
+        shipping: sourceQuotation?.shipping ?? 0,
+        tax_rate: sourceQuotation?.tax_rate ?? 0.11,
+        payment_terms: sourceQuotation?.payment_terms ?? '14 hari',
+        notes: sourceQuotation?.notes ?? '',
+        items: initialItems,
     });
 
     const selectedCustomer = customers.find((customer) => String(customer.id) === String(form.data.customer_id)) ?? firstCustomer;
@@ -56,6 +62,31 @@ export default function PurchaseOrderCreate({ customers, products, quotations, n
     const taxRate = Number(form.data.tax_rate || 0);
     const tax = Math.round((subtotal + shipping) * taxRate);
     const total = subtotal + shipping + tax;
+
+    function applyQuotation(quotationId: string) {
+        const quotation = quotations.find((item) => String(item.id) === String(quotationId));
+
+        if (!quotation) {
+            form.setData('quotation_id', quotationId);
+            return;
+        }
+
+        form.setData({
+            ...form.data,
+            quotation_id: quotation.id,
+            customer_id: quotation.customer_id,
+            shipping: quotation.shipping,
+            tax_rate: quotation.tax_rate,
+            payment_terms: quotation.payment_terms,
+            notes: quotation.notes,
+            items: quotation.items?.length ? quotation.items : form.data.items,
+        });
+
+        const customer = customers.find((item) => String(item.id) === String(quotation.customer_id));
+        if (customer?.segment) {
+            setProductTab(customer.segment === 'kolam' ? 'kolam' : 'mbg');
+        }
+    }
 
     function updateItem(index: number, key: string, value: any) {
         const items = form.data.items.map((item: any, itemIndex: number) => {
@@ -118,6 +149,12 @@ export default function PurchaseOrderCreate({ customers, products, quotations, n
                             <span>{Object.values(form.errors).join(' ')}</span>
                         </div>
                     )}
+                    {sourceQuotation && String(form.data.quotation_id) === String(sourceQuotation.id) && (
+                        <div className="info-strip mb-2" style={{ background: 'var(--brand-soft)', borderColor: '#c4e8df', color: 'var(--brand-ink)' }}>
+                            <Icon name="package" />
+                            <span>Item, pelanggan, ongkir, dan pajak diambil dari quotation <strong>{sourceQuotation.number}</strong>. Anda masih bisa menyesuaikan qty/harga sebelum menyimpan.</span>
+                        </div>
+                    )}
                     <div className="grid grid-2-1">
                         <div className="stack">
                             <section className="card">
@@ -126,7 +163,7 @@ export default function PurchaseOrderCreate({ customers, products, quotations, n
                                     <div className="form-grid">
                                         <div className="field">
                                             <label>Pelanggan</label>
-                                            <select className="form-select" value={form.data.customer_id} onChange={(event) => form.setData('customer_id', event.target.value)}>
+                                            <select className="form-select" value={form.data.customer_id} onChange={(event) => form.setData({ ...form.data, customer_id: event.target.value, quotation_id: '' })}>
                                                 {customers.map((customer) => <option key={customer.id} value={customer.id}>{customer.name}</option>)}
                                             </select>
                                             {selectedCustomer && <div className="row mt-1"><span className={`badge ${segmentBadgeClass(selectedCustomer.segment)}`}>{selectedCustomer.segment_label}</span><span className="text-xs muted">{selectedCustomer.phone}</span></div>}
@@ -134,7 +171,7 @@ export default function PurchaseOrderCreate({ customers, products, quotations, n
                                         <div className="field"><label>No. PO customer</label><input className="input" value={form.data.customer_po_number} onChange={(event) => form.setData('customer_po_number', event.target.value)} placeholder="MBG/NUS/1025" /></div>
                                         <div className="field">
                                             <label>Referensi quotation</label>
-                                            <select className="form-select" value={form.data.quotation_id} onChange={(event) => form.setData('quotation_id', event.target.value)}>
+                                            <select className="form-select" value={form.data.quotation_id} onChange={(event) => applyQuotation(event.target.value)}>
                                                 <option value="">Tanpa quotation</option>
                                                 {customerQuotations.map((quotation) => <option key={quotation.id} value={quotation.id}>{quotation.number} · {formatRupiah(quotation.total)}</option>)}
                                             </select>

@@ -4,8 +4,10 @@ use App\Http\Controllers\BuybackController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeadController;
+use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\MessageTemplateController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicDocumentController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\ReportController;
@@ -15,12 +17,20 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
+Route::get('/share/quotation/{token}', [PublicDocumentController::class, 'quotation'])
+    ->middleware('throttle:60,1')
+    ->name('public.quotations.show');
+Route::get('/share/po/{token}', [PublicDocumentController::class, 'purchaseOrder'])
+    ->middleware('throttle:60,1')
+    ->name('public.purchase-orders.show');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
     Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
     Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
+    Route::patch('/customers/{customer}', [CustomerController::class, 'update'])->name('customers.update');
     Route::post('/customers/{customer}/interactions', [CustomerController::class, 'storeInteraction'])->name('customers.interactions.store');
     Route::post('/customers/{customer}/messages', [CustomerController::class, 'storeMessage'])->name('customers.messages.store');
     Route::patch('/follow-ups/{followUp}/complete', [CustomerController::class, 'completeFollowUp'])->name('follow-ups.complete');
@@ -36,6 +46,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/quotations', [QuotationController::class, 'index'])->name('quotations.index');
     Route::post('/quotations', [QuotationController::class, 'store'])->name('quotations.store');
+    Route::get('/quotations/history', [QuotationController::class, 'history'])->name('quotations.history');
+    Route::get('/quotations/{quotation}/edit', [QuotationController::class, 'edit'])->name('quotations.edit');
+    Route::patch('/quotations/{quotation}', [QuotationController::class, 'update'])->name('quotations.update');
     Route::get('/quotations/{quotation}', [QuotationController::class, 'show'])->name('quotations.show');
     Route::patch('/quotations/{quotation}/status', [QuotationController::class, 'updateStatus'])->name('quotations.status');
 
@@ -53,6 +66,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/buybacks/settle', [BuybackController::class, 'settle'])->name('buybacks.settle');
 
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+
+    Route::get('/master', [MasterDataController::class, 'index'])->name('master.index');
+    Route::post('/master/products', [MasterDataController::class, 'storeProduct'])->name('master.products.store');
+    Route::patch('/master/products/{product}', [MasterDataController::class, 'updateProduct'])->name('master.products.update');
+    Route::post('/master/terms', [MasterDataController::class, 'storeTerm'])->name('master.terms.store');
+    Route::patch('/master/terms/{quotationTerm}', [MasterDataController::class, 'updateTerm'])->name('master.terms.update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

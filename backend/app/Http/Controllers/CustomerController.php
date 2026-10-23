@@ -237,6 +237,7 @@ class CustomerController extends Controller
                 'status' => $customer->status,
                 'status_label' => $customer->status_label,
                 'source' => $customer->source,
+                'owner_id' => $customer->owner_id,
                 'phone' => $customer->phone,
                 'email' => $customer->email,
                 'city' => $customer->city,
@@ -246,6 +247,7 @@ class CustomerController extends Controller
                 'lifetime_value' => (float) $customer->lifetime_value,
                 'last_order_at' => optional($customer->last_order_at)->toIso8601String(),
                 'last_order_label' => $customer->last_order_at?->diffForHumans() ?? 'Belum ada order',
+                'notes' => $customer->notes,
                 'created_at' => $customer->created_at->toIso8601String(),
                 'created_label' => $customer->created_at->translatedFormat('M Y'),
                 'owner' => $customer->owner?->name,
@@ -298,6 +300,91 @@ class CustomerController extends Controller
         ]);
     }
 
+    public function update(Request $request, Customer $customer)
+    {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'segment' => ['required', 'in:mbg,kolam'],
+            'status' => ['required', 'in:'.implode(',', array_keys(Customer::STATUSES))],
+            'source' => ['nullable', 'string', 'max:100'],
+            'owner_id' => ['nullable', 'exists:users,id'],
+            'phone' => ['required', 'string', 'max:30'],
+            'email' => ['nullable', 'email'],
+            'city' => ['nullable', 'string', 'max:100'],
+            'address' => ['nullable', 'string'],
+            'notes' => ['nullable', 'string'],
+            'pic_name' => ['required', 'string', 'max:120'],
+            'pic_role' => ['nullable', 'string', 'max:120'],
+            'kitchen_capacity' => ['nullable', 'integer', 'min:0'],
+            'delivery_window' => ['nullable', 'string', 'max:120'],
+            'certifications' => ['nullable', 'string', 'max:255'],
+            'pond_count' => ['nullable', 'integer', 'min:0'],
+            'pond_area_m2' => ['nullable', 'numeric', 'min:0'],
+            'water_source' => ['nullable', 'string', 'max:120'],
+            'grow_out_capacity_kg' => ['nullable', 'numeric', 'min:0'],
+            'target_abw_g' => ['nullable', 'numeric', 'min:0'],
+            'preferred_products' => ['nullable', 'string', 'max:255'],
+            'delivery_days' => ['nullable', 'string', 'max:100'],
+            'buyback_agreement' => ['nullable', 'string'],
+            'payment_terms_days' => ['nullable', 'integer', 'min:0', 'max:365'],
+        ]);
+
+        $customer->update([
+            'name' => $data['name'],
+            'segment' => $data['segment'],
+            'status' => $data['status'],
+            'source' => $data['source'] ?? $customer->source,
+            'owner_id' => $data['owner_id'] ?? $customer->owner_id,
+            'phone' => $data['phone'],
+            'email' => $data['email'] ?? null,
+            'city' => $data['city'] ?? null,
+            'address' => $data['address'] ?? null,
+            'notes' => $data['notes'] ?? null,
+        ]);
+
+        $customer->profile()->updateOrCreate(
+            ['customer_id' => $customer->id],
+            [
+                'kitchen_capacity' => $data['kitchen_capacity'] ?? null,
+                'delivery_window' => $data['delivery_window'] ?? null,
+                'certifications' => $data['certifications'] ?? null,
+                'pond_count' => $data['pond_count'] ?? null,
+                'pond_area_m2' => $data['pond_area_m2'] ?? null,
+                'water_source' => $data['water_source'] ?? null,
+                'grow_out_capacity_kg' => $data['grow_out_capacity_kg'] ?? null,
+                'target_abw_g' => $data['target_abw_g'] ?? null,
+                'preferred_products' => $data['preferred_products'] ?? null,
+                'delivery_days' => $data['delivery_days'] ?? null,
+                'buyback_agreement' => $data['buyback_agreement'] ?? null,
+                'payment_terms_days' => $data['payment_terms_days'] ?? 14,
+            ]
+        );
+
+        $contact = $customer->contacts()->where('is_primary', true)->first()
+            ?? $customer->contacts()->first();
+
+        if ($contact) {
+            $contact->update([
+                'name' => $data['pic_name'],
+                'role' => $data['pic_role'] ?? 'PIC',
+                'phone' => $data['phone'],
+                'email' => $data['email'] ?? null,
+            ]);
+        } else {
+            Contact::create([
+                'customer_id' => $customer->id,
+                'name' => $data['pic_name'],
+                'role' => $data['pic_role'] ?? 'PIC',
+                'phone' => $data['phone'],
+                'email' => $data['email'] ?? null,
+                'is_primary' => true,
+                'wa_opt_in' => true,
+            ]);
+        }
+
+        return back()->with('success', 'Profil pelanggan berhasil diperbarui.');
+    }
+
     public function storeInteraction(Request $request, Customer $customer)
     {
         $data = $request->validate([
@@ -337,21 +424,83 @@ class CustomerController extends Controller
 
     public function completeFollowUp(Request $request, FollowUp $followUp)
     {
+        $data = $request->validate([
+            'result' => ['nullable', 'string', 'max:2000'],
+            'next_follow_up_date' => ['nullable', 'date'],
+            'next_follow_up_time' => ['nullable', 'date_format:H:i'],
+            'next_follow_up_title' => ['nullable', 'string', 'max:255'],
+            'next_priority' => ['nullable', 'in:low,normal,high'],
+            'assigned_to' => ['nullable', 'exists:users,id'],
+        ]);
+
+        $result = trim($data['result'] ?? '') ?: 'Follow-up diselesaikan.';
+
+        $interaction = Interaction::create([
+            'customer_id' => $followUp->customer_id,
+            'type' => 'note',
+            'body' => 'Follow-up selesai: '.$followUp->title,
+            'outcome' => $result,
+            'created_by' => $request->user()->id,
+        ]);
+
         $followUp->update([
             'status' => 'done',
             'completed_at' => now(),
+            'notes' => $result,
         ]);
 
-        return back()->with('success', 'Follow-up ditandai selesai.');
+        if (! empty($data['next_follow_up_date'])) {
+            FollowUp::create([
+                'customer_id' => $followUp->customer_id,
+                'interaction_id' => $interaction->id,
+                'title' => $data['next_follow_up_title'] ?: 'Tindak lanjut: '.$followUp->title,
+                'due_at' => Carbon::parse($data['next_follow_up_date'].' '.($data['next_follow_up_time'] ?? '09:00')),
+                'priority' => $data['next_priority'] ?? $followUp->priority,
+                'status' => 'open',
+                'assigned_to' => $data['assigned_to'] ?? $followUp->assigned_to ?? $request->user()->id,
+                'notes' => $result,
+            ]);
+        }
+
+        return back()->with('success', ! empty($data['next_follow_up_date'])
+            ? 'Follow-up selesai, hasil dicatat ke timeline, dan follow-up berikutnya dijadwalkan.'
+            : 'Follow-up selesai dan hasilnya dicatat ke timeline.');
     }
 
     public function snoozeFollowUp(Request $request, FollowUp $followUp)
     {
-        $followUp->update([
-            'due_at' => ($followUp->due_at ?? now())->addDay(),
+        $data = $request->validate([
+            'result' => ['nullable', 'string', 'max:2000'],
+            'due_date' => ['nullable', 'date'],
+            'due_time' => ['nullable', 'date_format:H:i'],
         ]);
 
-        return back()->with('success', 'Follow-up ditunda satu hari.');
+        $result = trim($data['result'] ?? '') ?: 'Follow-up ditunda.';
+
+        if (! empty($data['due_date'])) {
+            $dueAt = Carbon::parse($data['due_date'].' '.($data['due_time'] ?? '09:00'));
+        } else {
+            $dueAt = ($followUp->due_at ?? now())->copy()->addDay();
+
+            if (! empty($data['due_time'])) {
+                $dueAt->setTimeFromTimeString($data['due_time']);
+            }
+        }
+
+        $followUp->update([
+            'due_at' => $dueAt,
+            'notes' => $result,
+        ]);
+
+        Interaction::create([
+            'customer_id' => $followUp->customer_id,
+            'type' => 'note',
+            'body' => 'Follow-up ditunda: '.$followUp->title,
+            'outcome' => $result.' · Dijadwalkan ulang '.$dueAt->translatedFormat('d M Y, H.i'),
+            'created_by' => $request->user()->id,
+        ]);
+
+        return back()->with('success', 'Follow-up ditunda dan hasilnya dicatat ke timeline.');
     }
 
     public function storeMessage(Request $request, Customer $customer)
@@ -390,6 +539,7 @@ class CustomerController extends Controller
             'notes' => $followUp->notes,
             'assignee' => $followUp->assignee?->name,
             'assignee_role' => $followUp->assignee?->role,
+            'assigned_to' => $followUp->assigned_to,
             'is_overdue' => $followUp->due_at?->isPast() ?? false,
         ];
     }

@@ -66,6 +66,10 @@ const NAV: { label: string; items: NavItem[] }[] = [
         label: 'Analitik',
         items: [{ label: 'Laporan', icon: 'chart', href: '/reports', active: 'reports' }],
     },
+    {
+        label: 'Pengaturan',
+        items: [{ label: 'Master Data', icon: 'settings', href: '/master', active: 'master' }],
+    },
 ];
 
 const ROLE_LABELS: Record<string, string> = {

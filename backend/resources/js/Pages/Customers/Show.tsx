@@ -1,4 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import CrmModal from '@/Components/CrmModal';
 import Icon from '@/Components/Icon';
 import UserAvatar from '@/Components/UserAvatar';
 import {
@@ -11,7 +12,7 @@ import {
     whatsappUrl,
 } from '@/lib/format';
 import { Head, Link, router, useForm } from '@inertiajs/react';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 type Props = {
     customer: any;
@@ -30,6 +31,8 @@ const TABS = [
 
 export default function CustomerShow({ customer, templates, users }: Props) {
     const [tab, setTab] = useState('overview');
+    const [showEdit, setShowEdit] = useState(false);
+    const [followUpAction, setFollowUpAction] = useState<{ mode: 'complete' | 'snooze'; followUp: any } | null>(null);
     const contact = customer.contacts?.[0];
     const profile = customer.profile ?? {};
     const isAtRisk = customer.health_score < 60 || (customer.last_order_at && Date.now() - new Date(customer.last_order_at).getTime() > 30 * 86400000);
@@ -44,6 +47,52 @@ export default function CustomerShow({ customer, templates, users }: Props) {
         priority: 'normal',
         assigned_to: users[0]?.id ?? '',
     });
+
+    const followUpForm = useForm<any>({
+        result: '',
+        due_date: new Date(Date.now() + 86400000).toISOString().slice(0, 10),
+        due_time: '09:00',
+        next_follow_up_date: '',
+        next_follow_up_time: '09:00',
+        next_follow_up_title: '',
+        next_priority: 'normal',
+        assigned_to: users[0]?.id ?? '',
+    });
+
+    const editData = () => ({
+        name: customer.name ?? '',
+        segment: customer.segment ?? 'mbg',
+        status: customer.status ?? 'active',
+        source: customer.source ?? '',
+        owner_id: customer.owner_id ?? '',
+        phone: customer.phone ?? '',
+        email: customer.email ?? '',
+        city: customer.city ?? '',
+        address: customer.address ?? '',
+        notes: customer.notes ?? '',
+        pic_name: contact?.name ?? '',
+        pic_role: contact?.role ?? '',
+        kitchen_capacity: profile.kitchen_capacity ?? '',
+        delivery_window: profile.delivery_window ?? '',
+        certifications: profile.certifications ?? '',
+        pond_count: profile.pond_count ?? '',
+        pond_area_m2: profile.pond_area_m2 ?? '',
+        water_source: profile.water_source ?? '',
+        grow_out_capacity_kg: profile.grow_out_capacity_kg ?? '',
+        target_abw_g: profile.target_abw_g ?? '',
+        preferred_products: profile.preferred_products ?? '',
+        delivery_days: profile.delivery_days ?? '',
+        buyback_agreement: profile.buyback_agreement ?? '',
+        payment_terms_days: profile.payment_terms_days ?? 14,
+    });
+
+    const editForm = useForm<any>(editData());
+
+    useEffect(() => {
+        if (showEdit) {
+            editForm.setData(editData());
+        }
+    }, [showEdit]);
 
     const availableTemplates = templates.filter((template) => template.segment === 'all' || template.segment === customer.segment);
 
@@ -70,12 +119,60 @@ export default function CustomerShow({ customer, templates, users }: Props) {
         });
     }
 
-    function completeFollowUp(id: number) {
-        router.patch(route('follow-ups.complete', id), {}, { preserveScroll: true });
+    function completeFollowUp(followUp: any) {
+        setFollowUpAction({ mode: 'complete', followUp });
+        followUpForm.setData({
+            result: '',
+            due_date: new Date(Date.now() + 86400000).toISOString().slice(0, 10),
+            due_time: '09:00',
+            next_follow_up_date: '',
+            next_follow_up_time: '09:00',
+            next_follow_up_title: '',
+            next_priority: followUp.priority ?? 'normal',
+            assigned_to: followUp.assigned_to ?? users[0]?.id ?? '',
+        });
+        followUpForm.clearErrors();
     }
 
-    function snoozeFollowUp(id: number) {
-        router.patch(route('follow-ups.snooze', id), {}, { preserveScroll: true });
+    function goToNoteForm() {
+        setTab('overview');
+        window.setTimeout(() => document.getElementById('noteForm')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+    }
+
+    function submitFollowUpAction(event: { preventDefault: () => void }) {
+        event.preventDefault();
+
+        if (!followUpAction) return;
+
+        const routeName = followUpAction.mode === 'complete' ? 'follow-ups.complete' : 'follow-ups.snooze';
+
+        followUpForm.patch(route(routeName, followUpAction.followUp.id), {
+            preserveScroll: true,
+            onSuccess: () => setFollowUpAction(null),
+        });
+    }
+
+    function submitEdit(event: FormEvent) {
+        event.preventDefault();
+        editForm.patch(route('customers.update', customer.id), {
+            preserveScroll: true,
+            onSuccess: () => setShowEdit(false),
+        });
+    }
+
+    function snoozeFollowUp(followUp: any) {
+        setFollowUpAction({ mode: 'snooze', followUp });
+        followUpForm.setData({
+            result: '',
+            due_date: new Date(Date.now() + 86400000).toISOString().slice(0, 10),
+            due_time: '09:00',
+            next_follow_up_date: '',
+            next_follow_up_time: '09:00',
+            next_follow_up_title: '',
+            next_priority: followUp.priority ?? 'normal',
+            assigned_to: followUp.assigned_to ?? users[0]?.id ?? '',
+        });
+        followUpForm.clearErrors();
     }
 
     const documents = [
@@ -132,6 +229,7 @@ export default function CustomerShow({ customer, templates, users }: Props) {
                             <button className="btn btn-wa" onClick={sendGeneric}><Icon name="whatsapp" /> WhatsApp</button>
                             <Link className="btn btn-secondary" href={route('quotations.index', { customer_id: customer.id })}><Icon name="file" /> Buat Quotation</Link>
                             <a className="btn btn-secondary" href="#noteForm"><Icon name="plus" /> Catat Follow-up</a>
+                            <button className="btn btn-secondary" onClick={() => setShowEdit(true)}><Icon name="edit" /> Edit Profil</button>
                         </div>
                     </div>
 
@@ -204,6 +302,16 @@ export default function CustomerShow({ customer, templates, users }: Props) {
                                         />
                                     </div>
 
+                                    <div className="field mt-2">
+                                        <label>Hasil / kesimpulan (opsional)</label>
+                                        <input
+                                            className="input"
+                                            value={noteForm.data.outcome}
+                                            onChange={(event) => noteForm.setData('outcome', event.target.value)}
+                                            placeholder="Contoh: minta sample 5 kg, harga disetujui, tunggu konfirmasi manajer."
+                                        />
+                                    </div>
+
                                     <div className="form-grid form-grid-3 mt-2">
                                         <div className="field">
                                             <label>Follow-up berikutnya</label>
@@ -270,6 +378,7 @@ export default function CustomerShow({ customer, templates, users }: Props) {
                                         <h2>Timeline lengkap</h2>
                                         <p>Riwayat hubungan dengan {customer.name}</p>
                                     </div>
+                                    <button className="btn btn-primary btn-sm" onClick={goToNoteForm}><Icon name="plus" /> Catat hasil</button>
                                 </div>
                                 <div className="timeline mt-2">
                                     {customer.interactions.map((interaction: any) => (
@@ -412,8 +521,9 @@ export default function CustomerShow({ customer, templates, users }: Props) {
                                             <div className="pref-row"><span>Prioritas</span><strong>{customer.next_follow_up.priority}</strong></div>
                                         </div>
                                         <div className="row mt-2">
-                                            <button className="btn btn-primary btn-sm" onClick={() => completeFollowUp(customer.next_follow_up.id)}><Icon name="check" /> Selesaikan</button>
-                                            <button className="btn btn-secondary btn-sm" onClick={() => snoozeFollowUp(customer.next_follow_up.id)}><Icon name="clock" /> Tunda</button>
+                                            <button className="btn btn-primary btn-sm" onClick={() => completeFollowUp(customer.next_follow_up)}><Icon name="check" /> Selesaikan</button>
+                                            <button className="btn btn-secondary btn-sm" onClick={() => snoozeFollowUp(customer.next_follow_up)}><Icon name="clock" /> Tunda</button>
+                                            <button className="btn btn-secondary btn-sm" onClick={() => setTab('timeline')}><Icon name="list" /> Timeline</button>
                                             <button className="btn btn-wa btn-sm" onClick={sendGeneric}><Icon name="whatsapp" /> WA</button>
                                         </div>
                                     </>
@@ -493,6 +603,277 @@ export default function CustomerShow({ customer, templates, users }: Props) {
                     </div>
                 </div>
             </div>
+            <CrmModal
+                open={showEdit}
+                onClose={() => setShowEdit(false)}
+                title="Edit profil pelanggan"
+                description={customer.name}
+                large
+                footer={
+                    <>
+                        <button className="btn btn-secondary" type="button" onClick={() => setShowEdit(false)}>Batal</button>
+                        <button className="btn btn-primary" type="submit" form="editCustomerForm" disabled={editForm.processing}>
+                            <Icon name="check" /> Simpan perubahan
+                        </button>
+                    </>
+                }
+            >
+                <form id="editCustomerForm" onSubmit={submitEdit}>
+                    {Object.keys(editForm.errors).length > 0 && (
+                        <div className="alert alert-danger mb-2">
+                            <Icon name="alert-circle" />
+                            <span>Periksa kembali data pelanggan. Pastikan nama, segmen, dan PIC terisi.</span>
+                        </div>
+                    )}
+
+                    <div className="form-grid">
+                        <div className="field">
+                            <label>Nama usaha / pelanggan</label>
+                            <input className="input" value={editForm.data.name} onChange={(event) => editForm.setData('name', event.target.value)} />
+                        </div>
+                        <div className="field">
+                            <label>Segmen</label>
+                            <select className="form-select" value={editForm.data.segment} onChange={(event) => editForm.setData('segment', event.target.value)}>
+                                <option value="mbg">Dapur MBG</option>
+                                <option value="kolam">Kolam Pembesaran</option>
+                            </select>
+                        </div>
+                        <div className="field">
+                            <label>Status pelanggan</label>
+                            <select className="form-select" value={editForm.data.status} onChange={(event) => editForm.setData('status', event.target.value)}>
+                                <option value="active">Pelanggan aktif</option>
+                                <option value="attention">Perlu perhatian</option>
+                                <option value="risk">Berisiko</option>
+                                <option value="churn">Churn</option>
+                                <option value="prospect">Prospect</option>
+                                <option value="lead">Lead</option>
+                            </select>
+                        </div>
+                        <div className="field">
+                            <label>Sumber lead</label>
+                            <input className="input" value={editForm.data.source} onChange={(event) => editForm.setData('source', event.target.value)} />
+                        </div>
+                        <div className="field">
+                            <label>Pemilik akun</label>
+                            <select className="form-select" value={editForm.data.owner_id} onChange={(event) => editForm.setData('owner_id', event.target.value)}>
+                                <option value="">Tidak ada</option>
+                                {users.map((user) => <option key={user.id} value={user.id}>{user.name}</option>)}
+                            </select>
+                        </div>
+                        <div className="field">
+                            <label>Nomor WhatsApp</label>
+                            <input className="input" value={editForm.data.phone} onChange={(event) => editForm.setData('phone', event.target.value)} />
+                        </div>
+                        <div className="field">
+                            <label>Email</label>
+                            <input className="input" type="email" value={editForm.data.email} onChange={(event) => editForm.setData('email', event.target.value)} />
+                        </div>
+                        <div className="field">
+                            <label>Kota / kabupaten</label>
+                            <input className="input" value={editForm.data.city} onChange={(event) => editForm.setData('city', event.target.value)} />
+                        </div>
+                    </div>
+
+                    <div className="field mt-2">
+                        <label>Alamat</label>
+                        <input className="input" value={editForm.data.address} onChange={(event) => editForm.setData('address', event.target.value)} />
+                    </div>
+
+                    <div className="divider" />
+
+                    <span className="eyebrow">Kontak PIC</span>
+                    <div className="form-grid mt-1">
+                        <div className="field">
+                            <label>Nama PIC</label>
+                            <input className="input" value={editForm.data.pic_name} onChange={(event) => editForm.setData('pic_name', event.target.value)} />
+                        </div>
+                        <div className="field">
+                            <label>Jabatan PIC</label>
+                            <input className="input" value={editForm.data.pic_role} onChange={(event) => editForm.setData('pic_role', event.target.value)} />
+                        </div>
+                    </div>
+
+                    <div className="divider" />
+
+                    <span className="eyebrow">Preferensi {editForm.data.segment === 'mbg' ? 'Dapur MBG' : 'Kolam Pembesaran'}</span>
+
+                    {editForm.data.segment === 'mbg' ? (
+                        <div className="form-grid mt-1">
+                            <div className="field">
+                                <label>Kapasitas dapur (porsi/hari)</label>
+                                <input className="input" type="number" value={editForm.data.kitchen_capacity} onChange={(event) => editForm.setData('kitchen_capacity', event.target.value)} />
+                            </div>
+                            <div className="field">
+                                <label>Jendela pengiriman</label>
+                                <input className="input" value={editForm.data.delivery_window} onChange={(event) => editForm.setData('delivery_window', event.target.value)} />
+                            </div>
+                            <div className="field">
+                                <label>Sertifikasi</label>
+                                <input className="input" value={editForm.data.certifications} onChange={(event) => editForm.setData('certifications', event.target.value)} />
+                            </div>
+                            <div className="field">
+                                <label>Produk favorit</label>
+                                <input className="input" value={editForm.data.preferred_products} onChange={(event) => editForm.setData('preferred_products', event.target.value)} />
+                            </div>
+                            <div className="field">
+                                <label>Hari pengiriman</label>
+                                <input className="input" value={editForm.data.delivery_days} onChange={(event) => editForm.setData('delivery_days', event.target.value)} />
+                            </div>
+                            <div className="field">
+                                <label>Termin pembayaran (hari)</label>
+                                <input className="input" type="number" value={editForm.data.payment_terms_days} onChange={(event) => editForm.setData('payment_terms_days', event.target.value)} />
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="form-grid mt-1">
+                            <div className="field">
+                                <label>Jumlah kolam</label>
+                                <input className="input" type="number" value={editForm.data.pond_count} onChange={(event) => editForm.setData('pond_count', event.target.value)} />
+                            </div>
+                            <div className="field">
+                                <label>Luas kolam (m²)</label>
+                                <input className="input" type="number" value={editForm.data.pond_area_m2} onChange={(event) => editForm.setData('pond_area_m2', event.target.value)} />
+                            </div>
+                            <div className="field">
+                                <label>Sumber air</label>
+                                <input className="input" value={editForm.data.water_source} onChange={(event) => editForm.setData('water_source', event.target.value)} />
+                            </div>
+                            <div className="field">
+                                <label>Kapasitas tebar (kg)</label>
+                                <input className="input" type="number" value={editForm.data.grow_out_capacity_kg} onChange={(event) => editForm.setData('grow_out_capacity_kg', event.target.value)} />
+                            </div>
+                            <div className="field">
+                                <label>Target ABW (gram)</label>
+                                <input className="input" type="number" value={editForm.data.target_abw_g} onChange={(event) => editForm.setData('target_abw_g', event.target.value)} />
+                            </div>
+                            <div className="field">
+                                <label>Termin pembayaran (hari)</label>
+                                <input className="input" type="number" value={editForm.data.payment_terms_days} onChange={(event) => editForm.setData('payment_terms_days', event.target.value)} />
+                            </div>
+                            <div className="field" style={{ gridColumn: '1 / -1' }}>
+                                <label>Produk favorit</label>
+                                <input className="input" value={editForm.data.preferred_products} onChange={(event) => editForm.setData('preferred_products', event.target.value)} />
+                            </div>
+                            <div className="field" style={{ gridColumn: '1 / -1' }}>
+                                <label>Skema buyback</label>
+                                <textarea className="textarea" style={{ minHeight: 70 }} value={editForm.data.buyback_agreement} onChange={(event) => editForm.setData('buyback_agreement', event.target.value)} />
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="field mt-2">
+                        <label>Catatan pelanggan</label>
+                        <textarea className="textarea" value={editForm.data.notes} onChange={(event) => editForm.setData('notes', event.target.value)} placeholder="Konteks penting, permintaan khusus, atau catatan hubungan..." />
+                    </div>
+
+                    <div className="template-note mt-2">
+                        <Icon name="alert-circle" />
+                        <span>Perubahan hanya menyimpan profil pelanggan. Riwayat transaksi, quotation, dan PO tidak berubah.</span>
+                    </div>
+                </form>
+            </CrmModal>
+
+            <CrmModal
+                open={!!followUpAction}
+                onClose={() => setFollowUpAction(null)}
+                title={followUpAction?.mode === 'complete' ? 'Selesaikan follow-up' : 'Tunda follow-up'}
+                description={followUpAction ? `${followUpAction.followUp.title} · jatuh tempo ${followUpAction.followUp.due_label}` : ''}
+                large
+                footer={
+                    <>
+                        <button className="btn btn-secondary" type="button" onClick={() => setFollowUpAction(null)}>Batal</button>
+                        <button
+                            className="btn btn-primary"
+                            type="button"
+                            onClick={submitFollowUpAction}
+                            disabled={followUpForm.processing || !followUpForm.data.result.trim() || (followUpAction?.mode === 'snooze' && !followUpForm.data.due_date)}
+                        >
+                            <Icon name={followUpAction?.mode === 'complete' ? 'check' : 'clock'} />
+                            {followUpAction?.mode === 'complete' ? 'Selesaikan & catat hasil' : 'Tunda & catat hasil'}
+                        </button>
+                    </>
+                }
+            >
+                <form onSubmit={submitFollowUpAction}>
+                    {Object.keys(followUpForm.errors).length > 0 && (
+                        <div className="alert alert-danger mb-2">
+                            <Icon name="alert-circle" />
+                            <span>Periksa kembali hasil follow-up dan tanggal yang diisi.</span>
+                        </div>
+                    )}
+
+                    <div className="field">
+                        <label>Hasil follow-up</label>
+                        <textarea
+                            className="textarea"
+                            style={{ minHeight: 110 }}
+                            value={followUpForm.data.result}
+                            onChange={(event) => followUpForm.setData('result', event.target.value)}
+                            placeholder="Tulis hasil pembicaraan, kesepakatan, atau alasan penundaan..."
+                        />
+                        <span className="sub">Hasil ini otomatis muncul di timeline pelanggan.</span>
+                    </div>
+
+                    {followUpAction?.mode === 'complete' ? (
+                        <div className="mt-2">
+                            <div className="divider" />
+                            <div className="card-head" style={{ padding: '12px 0' }}>
+                                <div>
+                                    <h3 style={{ fontSize: 12 }}>Follow-up berikutnya (opsional)</h3>
+                                    <p>Kosongkan jika tidak ada tindak lanjut.</p>
+                                </div>
+                            </div>
+                            <div className="form-grid form-grid-3">
+                                <div className="field">
+                                    <label>Tanggal</label>
+                                    <input className="input" type="date" value={followUpForm.data.next_follow_up_date} onChange={(event) => followUpForm.setData('next_follow_up_date', event.target.value)} />
+                                </div>
+                                <div className="field">
+                                    <label>Waktu</label>
+                                    <input className="input" type="time" value={followUpForm.data.next_follow_up_time} onChange={(event) => followUpForm.setData('next_follow_up_time', event.target.value)} />
+                                </div>
+                                <div className="field">
+                                    <label>Prioritas</label>
+                                    <select className="form-select" value={followUpForm.data.next_priority} onChange={(event) => followUpForm.setData('next_priority', event.target.value)}>
+                                        <option value="high">Tinggi</option>
+                                        <option value="normal">Normal</option>
+                                        <option value="low">Rendah</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-grid mt-2">
+                                <div className="field">
+                                    <label>Judul follow-up</label>
+                                    <input className="input" value={followUpForm.data.next_follow_up_title} onChange={(event) => followUpForm.setData('next_follow_up_title', event.target.value)} placeholder="Otomatis: Tindak lanjut..." />
+                                </div>
+                                <div className="field">
+                                    <label>Penanggung jawab</label>
+                                    <select className="form-select" value={followUpForm.data.assigned_to} onChange={(event) => followUpForm.setData('assigned_to', event.target.value)}>
+                                        {users.map((user) => <option key={user.id} value={user.id}>{user.name}</option>)}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="form-grid mt-2">
+                            <div className="field">
+                                <label>Tunda sampai</label>
+                                <input className="input" type="date" value={followUpForm.data.due_date} onChange={(event) => followUpForm.setData('due_date', event.target.value)} />
+                            </div>
+                            <div className="field">
+                                <label>Jam</label>
+                                <input className="input" type="time" value={followUpForm.data.due_time} onChange={(event) => followUpForm.setData('due_time', event.target.value)} />
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="form-note mt-2">
+                        {followUpAction?.mode === 'complete'
+                            ? 'Hasil masuk ke timeline. Jika tanggal follow-up berikutnya diisi, pengingat baru langsung dibuat.'
+                            : 'Follow-up tetap terbuka dengan jadwal baru, dan hasil penundaan masuk ke timeline.'}
+                    </div>
+                </form>
+            </CrmModal>
         </AuthenticatedLayout>
     );
 }

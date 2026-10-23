@@ -18,6 +18,7 @@ type Props = {
 export default function PurchaseOrderShow({ order, steps, statusOptions }: Props) {
     const [showStatus, setShowStatus] = useState(false);
     const [showDelivery, setShowDelivery] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     const statusForm = useForm({
         status: order.status,
@@ -49,8 +50,15 @@ export default function PurchaseOrderShow({ order, steps, statusOptions }: Props
     }
 
     function sendUpdate() {
-        const message = `Bapak/Ibu ${order.customer.contact ?? order.customer.name}, update untuk PO ${order.number}: status saat ini ${order.status_label}. ${order.latest_delivery ? `Pengiriman dijadwalkan ${order.latest_delivery.scheduled_label} oleh ${order.latest_delivery.driver_name ?? 'tim Saung Lele'}.` : ''} Terima kasih.`;
+        const message = `Bapak/Ibu ${order.customer.contact ?? order.customer.name}, update untuk PO ${order.number}: status saat ini ${order.status_label}. ${order.latest_delivery ? `Pengiriman dijadwalkan ${order.latest_delivery.scheduled_label} oleh ${order.latest_delivery.driver_name ?? 'tim Saung Lele'}.` : ''} Terima kasih.\n\nLihat PO: ${order.public_url}`;
         window.open(whatsappUrl(order.customer.phone, message), '_blank');
+    }
+
+    function copyPublicLink() {
+        navigator.clipboard.writeText(order.public_url).then(() => {
+            setCopied(true);
+            window.setTimeout(() => setCopied(false), 2000);
+        });
     }
 
     const checklist = [
@@ -87,6 +95,7 @@ export default function PurchaseOrderShow({ order, steps, statusOptions }: Props
                         </div>
                         <div className="page-actions">
                             <button className="btn btn-secondary" onClick={sendUpdate}><Icon name="whatsapp" /> Kirim update</button>
+                            <button className="btn btn-secondary" onClick={copyPublicLink}><Icon name="link" /> {copied ? 'Link tersalin' : 'Salin link'}</button>
                             <button className="btn btn-secondary" onClick={() => window.print()}><Icon name="clipboard" /> Surat jalan</button>
                             <button className="btn btn-primary" onClick={() => setShowStatus(true)}><Icon name="refresh" /> Update status</button>
                         </div>

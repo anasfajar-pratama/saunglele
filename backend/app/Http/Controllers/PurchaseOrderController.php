@@ -9,8 +9,10 @@ use App\Models\Product;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderItem;
 use App\Models\Quotation;
+use App\Support\PublicDocumentLink;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 class PurchaseOrderController extends Controller
@@ -94,8 +96,17 @@ class PurchaseOrderController extends Controller
 
     public function create(Request $request)
     {
+        $sourceQuotation = null;
+
+        if ($request->filled('quotation_id')) {
+            $sourceQuotation = Quotation::with(['customer.profile', 'items'])
+                ->find($request->integer('quotation_id'));
+        }
+
         return Inertia::render('PurchaseOrders/Create', [
-            'selectedCustomerId' => $request->integer('customer_id'),
+            'selectedCustomerId' => $sourceQuotation?->customer_id ?? $request->integer('customer_id'),
+            'selectedQuotationId' => $sourceQuotation?->id ?? $request->integer('quotation_id'),
+            'sourceQuotation' => $sourceQuotation ? $this->mapQuotationSource($sourceQuotation) : null,
             'customers' => Customer::with(['primaryContact', 'profile'])
                 ->whereIn('status', ['active', 'attention', 'risk'])
                 ->orderBy('name')
@@ -119,19 +130,46 @@ class PurchaseOrderController extends Controller
                 'unit' => $product->unit,
                 'base_price' => (float) $product->base_price,
             ]),
-            'quotations' => Quotation::with('customer')
-                ->whereIn('status', ['sent', 'accepted'])
+            'quotations' => Quotation::with(['customer.profile', 'items'])
+                ->whereIn('status', ['sent', 'accepted', 'revised'])
                 ->latest('issued_at')
                 ->get()
-                ->map(fn (Quotation $quotation) => [
-                    'id' => $quotation->id,
-                    'number' => $quotation->number,
-                    'customer_id' => $quotation->customer_id,
-                    'customer' => $quotation->customer->name,
-                    'total' => (float) $quotation->total,
-                ]),
+                ->map(fn (Quotation $quotation) => $this->mapQuotationSource($quotation)),
             'nextNumber' => $this->nextNumber(),
         ]);
+    }
+
+    private function mapQuotationSource(Quotation $quotation): array
+    {
+        $taxable = max(0, (float) $quotation->subtotal - (float) $quotation->discount + (float) $quotation->shipping);
+        $taxRate = $taxable > 0 ? round((float) $quotation->tax / $taxable, 4) : 0;
+        $paymentTermsDays = $quotation->customer?->profile?->payment_terms_days ?? 14;
+
+        return [
+            'id' => $quotation->id,
+            'number' => $quotation->number,
+            'customer_id' => $quotation->customer_id,
+            'customer' => $quotation->customer?->name,
+            'total' => (float) $quotation->total,
+            'shipping' => (float) $quotation->shipping,
+            'tax_rate' => $taxRate,
+            'payment_terms' => $paymentTermsDays.' hari',
+            'notes' => 'Berdasarkan quotation '.$quotation->number.'.',
+            'items' => $quotation->items->map(function ($item) {
+                $qty = (float) $item->qty;
+                $effectiveUnitPrice = $qty > 0
+                    ? round((($qty * (float) $item->unit_price) - (float) $item->discount) / $qty, 2)
+                    : (float) $item->unit_price;
+
+                return [
+                    'product_id' => $item->product_id,
+                    'description' => $item->description,
+                    'qty' => $qty,
+                    'unit' => $item->unit,
+                    'unit_price' => $effectiveUnitPrice,
+                ];
+            })->values(),
+        ];
     }
 
     public function store(Request $request)
@@ -158,6 +196,16 @@ class PurchaseOrderController extends Controller
         $taxRate = (float) ($data['tax_rate'] ?? 0);
         $tax = round(($subtotal + $shipping) * $taxRate);
         $total = $subtotal + $shipping + $tax;
+
+        if (! empty($data['quotation_id'])) {
+            $quotation = Quotation::find($data['quotation_id']);
+
+            if ($quotation && (int) $quotation->customer_id !== (int) $data['customer_id']) {
+                throw ValidationException::withMessages([
+                    'quotation_id' => 'Quotation tidak sesuai dengan pelanggan yang dipilih.',
+                ]);
+            }
+        }
 
         $po = PurchaseOrder::create([
             'number' => $this->nextNumber(),
@@ -250,6 +298,7 @@ class PurchaseOrderController extends Controller
                 'notes' => $purchaseOrder->notes,
                 'created_label' => $purchaseOrder->created_at->translatedFormat('d M Y'),
                 'sales' => $purchaseOrder->creator?->name,
+                'public_url' => PublicDocumentLink::purchaseOrder($purchaseOrder),
                 'progress' => $this->statusProgress($purchaseOrder->status),
                 'customer' => [
                     'id' => $purchaseOrder->customer->id,

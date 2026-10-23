@@ -16,6 +16,8 @@ type Props = {
     quotations: any[];
     nextNumber: string;
     selectedCustomerId: number;
+    editingQuotation?: any;
+    defaultTerms: string;
     stats: any;
 };
 
@@ -25,34 +27,40 @@ function todayPlus(days: number): string {
     return date.toISOString().slice(0, 10);
 }
 
-export default function QuotationsIndex({ customers, products, quotations, nextNumber, selectedCustomerId, stats }: Props) {
+export default function QuotationsIndex({ customers, products, quotations, nextNumber, selectedCustomerId, editingQuotation, defaultTerms, stats }: Props) {
     const page = usePage<any>();
     const userName = page.props.auth?.user?.name ?? 'Sales';
     const [productTab, setProductTab] = useState<'mbg' | 'kolam'>('mbg');
+    const editing = editingQuotation;
 
-    const initialCustomer = customers.find((customer) => customer.id === selectedCustomerId) ?? customers[0];
+    const initialCustomer = customers.find((customer) => customer.id === (editing?.customer_id ?? selectedCustomerId)) ?? customers[0];
     const initialProduct = products.find((product) => product.category !== 'seed') ?? products[0];
+    const initialItems = editing?.items?.length
+        ? editing.items
+        : initialProduct
+          ? [
+                {
+                    product_id: initialProduct.id,
+                    description: `${initialProduct.name} — ${initialProduct.size_grade}`,
+                    qty: 1,
+                    unit: initialProduct.unit,
+                    unit_price: initialProduct.base_price,
+                    discount: 0,
+                },
+            ]
+          : [];
 
-    const form = useForm<any>({
-        customer_id: initialCustomer?.id ?? '',
-        valid_until: todayPlus(7),
-        shipping: 150000,
-        tax_rate: 0.11,
-        terms: 'Berlaku 7 hari. Pembayaran 14 hari setelah invoice. Pengiriman Selasa & Jumat.',
-        notes: 'Terima kasih atas kepercayaan Bapak/Ibu.',
-        items: initialProduct
-            ? [
-                  {
-                      product_id: initialProduct.id,
-                      description: `${initialProduct.name} — ${initialProduct.size_grade}`,
-                      qty: 1,
-                      unit: initialProduct.unit,
-                      unit_price: initialProduct.base_price,
-                      discount: 0,
-                  },
-              ]
-            : [],
-    });
+    const initialData = {
+        customer_id: editing?.customer_id ?? initialCustomer?.id ?? '',
+        valid_until: editing?.valid_until ?? todayPlus(7),
+        shipping: editing?.shipping ?? 150000,
+        tax_rate: editing?.tax_rate ?? 0.11,
+        terms: editing?.terms ?? defaultTerms,
+        notes: editing?.notes ?? 'Terima kasih atas kepercayaan Bapak/Ibu.',
+        items: initialItems,
+    };
+
+    const form = useForm<any>(initialData);
 
     const selectedCustomer = customers.find((customer) => String(customer.id) === String(form.data.customer_id)) ?? initialCustomer;
 
@@ -128,16 +136,27 @@ export default function QuotationsIndex({ customers, products, quotations, nextN
 
     function submit(event: FormEvent) {
         event.preventDefault();
+
+        if (editing) {
+            form.patch(route('quotations.update', editing.id));
+            return;
+        }
+
         form.post(route('quotations.store'));
     }
 
     function resetBuilder() {
+        if (editing) {
+            form.setData(initialData);
+            return;
+        }
+
         form.setData({
             customer_id: customers[0]?.id ?? '',
             valid_until: todayPlus(7),
             shipping: 150000,
             tax_rate: 0.11,
-            terms: 'Berlaku 7 hari. Pembayaran 14 hari setelah invoice. Pengiriman Selasa & Jumat.',
+            terms: defaultTerms,
             notes: 'Terima kasih atas kepercayaan Bapak/Ibu.',
             items: initialProduct
                 ? [{ product_id: initialProduct.id, description: `${initialProduct.name} — ${initialProduct.size_grade}`, qty: 1, unit: initialProduct.unit, unit_price: initialProduct.base_price, discount: 0 }]
@@ -145,22 +164,55 @@ export default function QuotationsIndex({ customers, products, quotations, nextN
         });
     }
 
+    function scrollToQuotations() {
+        document.getElementById('quotation-terbaru')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     return (
         <AuthenticatedLayout>
-            <Head title="Quotation" />
+            <Head title={editing ? 'Edit Quotation' : 'Quotation'} />
 
             <div className="content">
                 <div className="page-head">
                     <div>
-                        <div className="breadcrumb"><span>Beranda</span><Icon name="chevron-right" /><span>Quotation</span></div>
-                        <h1>Quotation</h1>
-                        <p>Buat penawaran sesuai segmen. Nomor berikutnya: <strong>{nextNumber}</strong>.</p>
+                        <div className="breadcrumb">
+                            <span>Beranda</span>
+                            <Icon name="chevron-right" />
+                            <span>Quotation</span>
+                            <Icon name="chevron-right" />
+                            <span>{editing ? editing.number : 'Baru'}</span>
+                        </div>
+                        <h1>{editing ? 'Edit Quotation' : 'Quotation'}</h1>
+                        <p>{editing ? `Perbarui ${editing.number}. Perubahan akan menyimpan item dan total terbaru.` : `Buat penawaran sesuai segmen. Nomor berikutnya: ${nextNumber}.`}</p>
                     </div>
                     <div className="page-actions">
-                        <button className="btn btn-secondary" onClick={resetBuilder}><Icon name="plus" /> Quotation Baru</button>
-                        <Link className="btn btn-primary" href={route('quotations.index')}><Icon name="file" /> Daftar Quotation</Link>
+                        {editing ? (
+                            <Link className="btn btn-secondary" href={route('quotations.show', editing.id)}>
+                                <Icon name="chevron-left" /> Kembali
+                            </Link>
+                        ) : (
+                            <button className="btn btn-secondary" onClick={resetBuilder}>
+                                <Icon name="plus" /> Quotation Baru
+                            </button>
+                        )}
+                        {editing ? (
+                            <Link className="btn btn-primary" href={route('quotations.show', editing.id)}>
+                                <Icon name="file" /> Lihat Quotation
+                            </Link>
+                        ) : (
+                            <button type="button" className="btn btn-primary" onClick={scrollToQuotations}>
+                                <Icon name="list" /> Daftar Quotation
+                            </button>
+                        )}
                     </div>
                 </div>
+
+                {editing && (
+                    <div className="info-strip mb-2" style={{ background: 'var(--brand-soft)', borderColor: '#c4e8df', color: 'var(--brand-ink)' }}>
+                        <Icon name="edit" />
+                        <span>Mode edit <strong>{editing.number}</strong>. Setelah disimpan, status quotation non-draft akan menjadi <strong>Revisi</strong>.</span>
+                    </div>
+                )}
 
                 <div className="quote-layout">
                     <div className="stack">
@@ -179,8 +231,8 @@ export default function QuotationsIndex({ customers, products, quotations, nextN
                                 </div>
 
                                 <div className="quote-meta">
-                                    <div className="field"><span className="field-label">Nomor quotation</span><input className="input" value={nextNumber} readOnly /><span className="sub">Otomatis</span></div>
-                                    <div className="field"><span className="field-label">Tanggal</span><input className="input" value={new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })} readOnly /><span className="sub">Hari ini</span></div>
+                                    <div className="field"><span className="field-label">Nomor quotation</span><input className="input" value={editing?.number ?? nextNumber} readOnly /><span className="sub">{editing ? 'Nomor tetap' : 'Otomatis'}</span></div>
+                                    <div className="field"><span className="field-label">Tanggal</span><input className="input" value={editing?.issued_at ? new Date(editing.issued_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })} readOnly /><span className="sub">{editing ? 'Tanggal quotation' : 'Hari ini'}</span></div>
                                     <div className="field"><span className="field-label">Berlaku sampai</span><input className="input" type="date" value={form.data.valid_until} onChange={(event) => form.setData('valid_until', event.target.value)} /><span className="sub">7 hari</span></div>
                                     <div className="field"><span className="field-label">Sales</span><input className="input" value={userName} readOnly /><span className="sub">Pemilik akun</span></div>
                                 </div>
@@ -255,10 +307,13 @@ export default function QuotationsIndex({ customers, products, quotations, nextN
                             </form>
                         </section>
 
-                        <section className="card">
+                        <section className="card" id="quotation-terbaru" style={{ scrollMarginTop: 90 }}>
                             <div className="card-head">
                                 <div><h2>Quotation terbaru</h2><p>{stats.total} quotation · {stats.accepted} diterima</p></div>
-                                <Link className="link" href={route('purchase-orders.create')}>Buat PO dari quotation</Link>
+                                <div className="row">
+                                    <Link className="link" href={route('quotations.history')}>Lihat semua</Link>
+                                    <Link className="link" href={route('purchase-orders.create')}>Buat PO manual</Link>
+                                </div>
                             </div>
                             <div className="table-wrap mt-2">
                                 <table className="table">
@@ -273,7 +328,21 @@ export default function QuotationsIndex({ customers, products, quotations, nextN
                                                 <td className="num">{formatRupiah(quotation.total)}</td>
                                                 <td><span className={`badge ${statusBadgeClass(quotation.status)}`}>{quotation.status_label}</span></td>
                                                 <td>{quotation.valid_label}</td>
-                                                <td className="cell-actions"><Link className="icon-btn sm" href={route('quotations.show', quotation.id)}><Icon name="chevron-right" /></Link></td>
+                                                <td className="cell-actions">
+                                                    {quotation.can_create_po && (
+                                                        <Link className="icon-btn sm" href={route('purchase-orders.create', { quotation_id: quotation.id })} title="Buat PO dari quotation" aria-label="Buat PO dari quotation">
+                                                            <Icon name="package" />
+                                                        </Link>
+                                                    )}
+                                                    {quotation.can_edit && (
+                                                        <Link className="icon-btn sm" href={route('quotations.edit', quotation.id)} title="Edit quotation" aria-label="Edit quotation">
+                                                            <Icon name="edit" />
+                                                        </Link>
+                                                    )}
+                                                    <Link className="icon-btn sm" href={route('quotations.show', quotation.id)} aria-label="Buka quotation">
+                                                        <Icon name="chevron-right" />
+                                                    </Link>
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -285,8 +354,8 @@ export default function QuotationsIndex({ customers, products, quotations, nextN
                     <aside className="summary">
                         <section className="card">
                             <div className="card-head">
-                                <div><h2>Ringkasan quotation</h2><p>Perhitungan otomatis</p></div>
-                                <span className="badge badge-neutral">Draft</span>
+                                <div><h2>Ringkasan quotation</h2><p>{editing ? 'Mode edit · perhitungan otomatis' : 'Perhitungan otomatis'}</p></div>
+                                <span className={`badge ${editing ? statusBadgeClass(editing.status) : 'badge-neutral'}`}>{editing ? editing.status_label : 'Draft'}</span>
                             </div>
                             <div className="summary-body">
                                 <div className="summary-row"><span>Subtotal</span><strong>{formatRupiah(subtotal, false)}</strong></div>
@@ -297,10 +366,10 @@ export default function QuotationsIndex({ customers, products, quotations, nextN
                                 <div className="form-note mt-2">Harga sudah termasuk kemasan. Pajak dihitung dari subtotal setelah diskon + ongkir.</div>
                             </div>
                             <div className="summary-actions">
-                                <button className="btn btn-primary btn-block" onClick={submit} disabled={form.processing}><Icon name="check" /> Simpan quotation</button>
-                                <button className="btn btn-wa btn-block" onClick={submit} disabled={form.processing}><Icon name="eye" /> Simpan &amp; lihat quotation</button>
+                                <button className="btn btn-primary btn-block" onClick={submit} disabled={form.processing}><Icon name="check" /> {editing ? 'Update quotation' : 'Simpan quotation'}</button>
+                                <button className="btn btn-wa btn-block" onClick={submit} disabled={form.processing}><Icon name="eye" /> {editing ? 'Update & lihat quotation' : 'Simpan & lihat quotation'}</button>
                                 <div className="row">
-                                    <Link className="btn btn-secondary btn-sm" style={{ flex: 1 }} href={route('quotations.index')}><Icon name="eye" /> Daftar</Link>
+                                    <button type="button" className="btn btn-secondary btn-sm" style={{ flex: 1 }} onClick={scrollToQuotations}><Icon name="list" /> Daftar</button>
                                     <button className="btn btn-secondary btn-sm" style={{ flex: 1 }} onClick={resetBuilder}><Icon name="refresh" /> Reset</button>
                                 </div>
                             </div>

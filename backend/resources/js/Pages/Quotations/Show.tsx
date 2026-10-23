@@ -2,19 +2,29 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Icon from '@/Components/Icon';
 import { formatRupiah, statusBadgeClass, whatsappUrl } from '@/lib/format';
 import { Head, Link, router } from '@inertiajs/react';
+import { useState } from 'react';
 
 type Props = {
     quotation: any;
 };
 
 export default function QuotationShow({ quotation }: Props) {
+    const [copied, setCopied] = useState(false);
+
     function updateStatus(status: string) {
         router.patch(route('quotations.status', quotation.id), { status }, { preserveScroll: true });
     }
 
     function sendWhatsapp() {
-        const message = `Halo Bapak/Ibu ${quotation.customer.contact ?? quotation.customer.name}, quotation ${quotation.number} dari Saung Lele dengan total ${formatRupiah(quotation.total, false)} sudah kami siapkan. Berlaku sampai ${quotation.valid_label}. Apakah ada yang ingin disesuaikan?`;
+        const message = `Halo Bapak/Ibu ${quotation.customer.contact ?? quotation.customer.name}, quotation ${quotation.number} dari Saung Lele dengan total ${formatRupiah(quotation.total, false)} sudah kami siapkan. Berlaku sampai ${quotation.valid_label}. Apakah ada yang ingin disesuaikan?\n\nLihat quotation: ${quotation.public_url}`;
         window.open(whatsappUrl(quotation.customer.phone, message), '_blank');
+    }
+
+    function copyPublicLink() {
+        navigator.clipboard.writeText(quotation.public_url).then(() => {
+            setCopied(true);
+            window.setTimeout(() => setCopied(false), 2000);
+        });
     }
 
     return (
@@ -27,7 +37,7 @@ export default function QuotationShow({ quotation }: Props) {
                         <div className="breadcrumb">
                             <Link href={route('dashboard')}>Beranda</Link>
                             <Icon name="chevron-right" />
-                            <Link href={route('quotations.index')}>Quotation</Link>
+                            <Link href={route('quotations.history')}>Quotation</Link>
                             <Icon name="chevron-right" />
                             <span>{quotation.number}</span>
                         </div>
@@ -35,17 +45,27 @@ export default function QuotationShow({ quotation }: Props) {
                         <p>{quotation.customer.name} · {quotation.issued_label} · berlaku sampai {quotation.valid_label}.</p>
                     </div>
                     <div className="page-actions">
+                        {quotation.can_edit && (
+                            <Link className="btn btn-secondary" href={route('quotations.edit', quotation.id)}>
+                                <Icon name="edit" /> Edit Quotation
+                            </Link>
+                        )}
                         {quotation.status === 'draft' && <button className="btn btn-secondary" onClick={() => updateStatus('sent')}><Icon name="send" /> Tandai terkirim</button>}
                         {quotation.status !== 'accepted' && <button className="btn btn-primary" onClick={() => updateStatus('accepted')}><Icon name="check" /> Tandai diterima</button>}
                         <button className="btn btn-wa" onClick={sendWhatsapp}><Icon name="whatsapp" /> Kirim WhatsApp</button>
                         <button className="btn btn-secondary" onClick={() => window.print()}><Icon name="download" /> Cetak</button>
+                        <button className="btn btn-secondary" onClick={copyPublicLink}><Icon name="link" /> {copied ? 'Link tersalin' : 'Salin link'}</button>
                     </div>
                 </div>
 
                 <div className="row mb-2">
                     <span className={`badge ${statusBadgeClass(quotation.status)}`} style={{ fontSize: 11, padding: '5px 11px' }}>{quotation.status_label}</span>
                     {quotation.status === 'accepted' && <span className="chip chip-success"><Icon name="check-circle" /> Siap dibuatkan PO</span>}
-                    <Link className="btn btn-secondary btn-sm" href={route('purchase-orders.create')}><Icon name="package" /> Buat PO</Link>
+                    {quotation.can_create_po && (
+                        <Link className="btn btn-secondary btn-sm" href={route('purchase-orders.create', { quotation_id: quotation.id })}>
+                            <Icon name="package" /> Buat PO dari quotation ini
+                        </Link>
+                    )}
                 </div>
 
                 <div className="doc-preview">
