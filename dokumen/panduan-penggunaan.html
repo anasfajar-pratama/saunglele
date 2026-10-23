@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panduan Penggunaan · Saung Lele CRM</title>
+  <meta name="description" content="Panduan penggunaan interaktif Saung Lele CRM dengan screenshot dan checklist implementasi.">
+  <link rel="icon" type="image/jpeg" href="kebunkode.jpg">
+  <link rel="apple-touch-icon" href="kebunkode.jpg">
+  <link rel="stylesheet" href="assets/docs.css">
+</head>
+<body class="guide-body">
+  <div class="guide-scroll-progress" aria-hidden="true"><i></i></div>
+
+  <header class="guide-topbar">
+    <button class="guide-menu-btn" type="button" data-guide-toggle aria-label="Buka daftar isi">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+    </button>
+    <a class="guide-brand" href="#mulai">
+      <img src="kebunkode.jpg" alt="Logo KebunKode">
+      <div><strong>Panduan Saung Lele CRM</strong><span>KebunKode · Sistem Informasi</span></div>
+    </a>
+    <label class="guide-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" id="docSearch" placeholder="Cari langkah, modul, atau fitur..." aria-label="Cari panduan">
+    </label>
+    <div class="guide-top-actions">
+      <button class="btn btn-secondary btn-sm no-print" type="button" data-print>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+        Cetak
+      </button>
+      <a class="btn btn-primary btn-sm no-print" href="penawaran-saung-lele.html">Penawaran</a>
+    </div>
+  </header>
+
+  <div id="guideBackdrop" class="guide-backdrop no-print"></div>
+
+  <div class="guide-layout">
+    <aside class="guide-sidebar no-print">
+      <div class="guide-nav-label">Memulai</div>
+      <a class="guide-nav-link active" href="#mulai"><span class="nav-dot"></span> Mulai &amp; peran</a>
+      <a class="guide-nav-link" href="#login"><span class="nav-dot"></span> Login &amp; akses</a>
+
+      <div class="guide-nav-label">Modul harian</div>
+      <a class="guide-nav-link" href="#dashboard"><span class="nav-dot"></span> Dashboard</a>
+      <a class="guide-nav-link" href="#pelanggan"><span class="nav-dot"></span> Pelanggan</a>
+      <a class="guide-nav-link" href="#customer-detail"><span class="nav-dot"></span> Detail pelanggan</a>
+      <a class="guide-nav-link" href="#pipeline"><span class="nav-dot"></span> Pipeline lead</a>
+
+      <div class="guide-nav-label">Penjualan</div>
+      <a class="guide-nav-link" href="#template"><span class="nav-dot"></span> Template WhatsApp</a>
+      <a class="guide-nav-link" href="#quotation"><span class="nav-dot"></span> Quotation</a>
+      <a class="guide-nav-link" href="#po"><span class="nav-dot"></span> Pesanan (PO)</a>
+
+      <div class="guide-nav-label">Kemitraan &amp; analitik</div>
+      <a class="guide-nav-link" href="#buyback"><span class="nav-dot"></span> Buyback panen</a>
+      <a class="guide-nav-link" href="#laporan"><span class="nav-dot"></span> Laporan</a>
+
+      <div class="guide-nav-label">Penutup</div>
+      <a class="guide-nav-link" href="#alur-harian"><span class="nav-dot"></span> Alur harian</a>
+      <a class="guide-nav-link" href="#checklist"><span class="nav-dot"></span> Checklist implementasi</a>
+      <a class="guide-nav-link" href="#faq"><span class="nav-dot"></span> FAQ</a>
+
+      <div class="guide-progress-card">
+        <strong>Progres belajar</strong>
+        <span>Centang saat sudah dicoba</span>
+        <div class="progress-track"><i data-progress-fill></i></div>
+        <div class="guide-progress-meta"><span data-progress-text>0 / 12</span><span data-progress-percent>0%</span></div>
+      </div>
+    </aside>
+
+    <main class="guide-main">
+      <section class="guide-hero">
+        <span class="eyebrow">Panduan penggunaan</span>
+        <h1>Saung Lele CRM, langkah demi langkah.</h1>
+        <p>Panduan ini membantu pemilik, sales, dan admin memahami alur kerja harian: dari follow-up pelanggan, quotation, PO, hingga buyback mitra kolam. Setiap gambar dapat diklik untuk diperbesar.</p>
+        <div class="hero-badges">
+          <span class="badge">Pemilik</span>
+          <span class="badge">Sales</span>
+          <span class="badge">Admin Operasional</span>
+          <span class="badge">Interaktif</span>
+        </div>
+      </section>
+
+      <div class="guide-quick-nav">
+        <a class="quick-card" href="#dashboard">
+          <span class="quick-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>
+          <strong>Dashboard</strong><span>Mulai hari dari follow-up.</span>
+        </a>
+        <a class="quick-card" href="#pelanggan">
+          <span class="quick-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <strong>Pelanggan</strong><span>Profil, filter, dan health.</span>
+        </a>
+        <a class="quick-card" href="#quotation">
+          <span class="quick-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg></span>
+          <strong>Quotation</strong><span>Buat penawaran per segmen.</span>
+        </a>
+        <a class="quick-card" href="#buyback">
+          <span class="quick-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span>
+          <strong>Buyback</strong><span>Dari bibit sampai pembayaran.</span>
+        </a>
+      </div>
+
+      <div id="searchStatus" class="muted" style="font-size:10px;margin:-8px 0 12px"></div>
+
+      <section class="doc-section" id="mulai">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Memulai</span>
+            <h2>Kenali sistem dan peran pengguna</h2>
+            <p>Saung Lele CRM dipakai bersama oleh pemilik, sales, dan admin. Setiap peran melihat menu yang sama, tetapi fokus pekerjaannya berbeda.</p>
+          </div>
+          <span class="section-index">01</span>
+        </div>
+        <p class="lead">Tujuan sistem ini sederhana: <strong>tidak ada pelanggan yang terlupakan dan tidak ada janji follow-up yang hilang.</strong> Semua interaksi, penawaran, pesanan, dan siklus buyback tercatat di satu tempat.</p>
+        <div class="role-grid">
+          <div class="role-card"><strong>Pemilik</strong><span>Melihat health pelanggan, pipeline, PO berjalan, laporan retensi, dan performa segmen. Fokus pada keputusan dan tindakan win-back.</span></div>
+          <div class="role-card"><strong>Sales</strong><span>Menghubungi pelanggan, mencatat interaksi, membuat follow-up, quotation, dan memantau lead. Fokus pada hubungan dan closing.</span></div>
+          <div class="role-card"><strong>Admin Operasional</strong><span>Menerima PO, memantau produksi/pengiriman, mencatat delivery, mengelola buyback, dan memastikan data tetap rapi.</span></div>
+        </div>
+        <div class="inline-note tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+          <span><strong>Cara memakai panduan ini:</strong> gunakan kolom pencarian untuk menemukan fitur, klik gambar untuk memperbesar, dan centang checklist di bagian akhir agar tim tahu apa yang sudah siap.</span>
+        </div>
+        <div class="step-list">
+          <div class="step"><span class="step-number">1</span><div><strong>Siapkan akun dan data awal</strong><span>Daftar pengguna, data pelanggan/lead, produk, harga, dan termin pembayaran.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Atur alur follow-up</strong><span>Tentukan siapa penanggung jawab dan kapan pengingat dibuat.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Coba satu transaksi end-to-end</strong><span>Pelanggan → quotation → PO → delivery, lalu satu siklus buyback.</span></div></div>
+        </div>
+      </section>
+
+      <section class="doc-section" id="login">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Akses</span>
+            <h2>Login dan masuk ke dashboard</h2>
+            <p>Gunakan akun yang diberikan admin. Setelah login, pengguna langsung diarahkan ke dashboard.</p>
+          </div>
+          <span class="section-index">02</span>
+        </div>
+        <div class="step-list">
+          <div class="step"><span class="step-number">1</span><div><strong>Buka alamat aplikasi</strong><span>Contoh lokal: <code>http://127.0.0.1:8000</code>. Di server produksi, gunakan domain yang diberikan KebunKode.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Masukkan email dan password</strong><span>Gunakan akun sesuai peran. Jangan berbagi password antar pengguna.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Klik “Log in”</strong><span>Jika berhasil, dashboard akan menampilkan follow-up hari ini dan ringkasan bisnis.</span></div></div>
+        </div>
+        <figure class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>login</span></div>
+          <div class="shot-image"><img class="zoomable" src="screenshots/login.png" alt="Halaman login Saung Lele CRM"></div>
+          <figcaption>Halaman login. Gunakan akun yang sudah dibuat admin.</figcaption>
+        </figure>
+        <div class="table-wrap" style="margin-top:14px">
+          <table class="price-table">
+            <thead><tr><th>Peran demo</th><th>Email</th><th>Password</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>Pemilik</td><td>owner@saunglele.test</td><td>password</td><td><button class="btn btn-secondary btn-sm" data-copy="owner@saunglele.test">Salin</button></td></tr>
+              <tr><td>Sales</td><td>rizky@saunglele.test</td><td>password</td><td><button class="btn btn-secondary btn-sm" data-copy="rizky@saunglele.test">Salin</button></td></tr>
+              <tr><td>Admin</td><td>admin@saunglele.test</td><td>password</td><td><button class="btn btn-secondary btn-sm" data-copy="admin@saunglele.test">Salin</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="inline-note warn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
+          <span>Akun di atas hanya untuk demo/evaluasi. Ganti password dan buat akun tim sebelum sistem dipakai sehari-hari.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="dashboard">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Modul harian</span>
+            <h2>Dashboard: mulai dari yang paling mendesak</h2>
+            <p>Dashboard menjawab satu pertanyaan: “Siapa yang harus dihubungi hari ini?”</p>
+          </div>
+          <span class="section-index">03</span>
+        </div>
+        <figure class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>dashboard</span></div>
+          <div class="shot-image"><img class="zoomable" src="screenshots/dashboard.png" alt="Dashboard Saung Lele CRM"></div>
+          <figcaption>KPI, follow-up hari ini, health pelanggan, pipeline, PO berjalan, dan performa segmen.</figcaption>
+        </figure>
+        <div class="step-list">
+          <div class="step"><span class="step-number">1</span><div><strong>Cek follow-up hari ini</strong><span>Daftar diurutkan dari yang paling mendesak. Item merah berarti sudah terlambat.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Klik tombol WA</strong><span>WhatsApp terbuka dengan pesan awal. Setelah dikirim, pesan dicatat ke timeline pelanggan.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Tandai selesai atau tunda</strong><span>Centang tugas jika sudah dihubungi. Gunakan halaman detail pelanggan untuk menunda satu hari.</span></div></div>
+          <div class="step"><span class="step-number">4</span><div><strong>Lihat panel “Akan datang”</strong><span>Jadwal beberapa hari ke depan tetap terlihat, tanpa mencampuri antrean hari ini.</span></div></div>
+          <div class="step"><span class="step-number">5</span><div><strong>Periksa health & pipeline</strong><span>Health menunjukkan pelanggan yang perlu perhatian; pipeline menunjukkan peluang yang sedang berjalan.</span></div></div>
+        </div>
+        <div class="inline-note tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+          <span>Follow-up hari ini hanya memuat jadwal hari ini dan yang sudah lewat. Jadwal besok/lusa muncul di panel <strong>Akan datang</strong>.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="pelanggan">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Modul harian</span>
+            <h2>Pelanggan: simpan profil dan lihat kesehatan hubungan</h2>
+            <p>Semua pelanggan Dapur MBG dan Kolam Pembesaran ada di satu daftar.</p>
+          </div>
+          <span class="section-index">04</span>
+        </div>
+        <figure class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>pelanggan</span></div>
+          <div class="shot-image"><img class="zoomable" src="screenshots/customers.png" alt="Daftar pelanggan Saung Lele CRM"></div>
+          <figcaption>Filter segmen, pencarian, health score, LTV, order terakhir, dan follow-up berikutnya.</figcaption>
+        </figure>
+        <div class="step-list">
+          <div class="step"><span class="step-number">1</span><div><strong>Klik “Tambah Pelanggan”</strong><span>Isi nama usaha, segmen, PIC, WhatsApp, kota, dan sumber lead. Field berbeda muncul sesuai segmen.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Gunakan filter segmen</strong><span>Pilih Semua, Dapur MBG, Kolam Pembesaran, atau Berisiko churn.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Cari dengan cepat</strong><span>Cari nama, PIC, atau kota. Filter kesehatan membantu menemukan pelanggan yang perlu perhatian.</span></div></div>
+          <div class="step"><span class="step-number">4</span><div><strong>Baca health score</strong><span>Hijau aman, kuning perlu perhatian, merah berisiko. Klik nama untuk melihat detail dan timeline.</span></div></div>
+        </div>
+        <div class="inline-note info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          <span>Jika pelanggan masih sedikit (satu halaman), kontrol pagination disembunyikan agar tampilan lebih bersih. Kontrol akan muncul otomatis saat data lebih dari satu halaman.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="customer-detail">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Modul harian</span>
+            <h2>Detail pelanggan: catat, ingatkan, dan tindak lanjuti</h2>
+            <p>Ini adalah halaman kerja utama sales. Semua konteks pelanggan ada di sini.</p>
+          </div>
+          <span class="section-index">05</span>
+        </div>
+        <figure class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>detail pelanggan</span></div>
+          <div class="shot-image"><img class="zoomable" src="screenshots/customer-detail.png" alt="Detail pelanggan Saung Lele CRM"></div>
+          <figcaption>Profil, health, timeline, catatan follow-up, preferensi, kontak PIC, dan template cepat.</figcaption>
+        </figure>
+        <div class="step-list">
+          <div class="step"><span class="step-number">1</span><div><strong>Baca ringkasan profil</strong><span>Lihat segmen, PIC, WhatsApp, sales, health score, LTV, jumlah order, dan rata-rata order.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Catat interaksi</strong><span>Pilih jenis (catatan, telepon, WhatsApp, kunjungan), tulis hasil, lalu tentukan tanggal follow-up berikutnya.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Simpan &amp; ingatkan</strong><span>Sistem membuat follow-up baru dan menampilkannya di dashboard pada tanggal yang dipilih.</span></div></div>
+          <div class="step"><span class="step-number">4</span><div><strong>Gunakan tab</strong><span>Lihat timeline lengkap, quotation, PO, buyback, dan dokumen tanpa berpindah halaman.</span></div></div>
+          <div class="step"><span class="step-number">5</span><div><strong>Kirim template cepat</strong><span>Klik template yang sesuai. Pesan dibuka di WhatsApp dan dicatat ke timeline setelah dikirim.</span></div></div>
+        </div>
+        <div class="inline-note tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+          <span>Jika Bapak/Ibu membuat jadwal tanggal 23 pukul 01.00, jadwal itu muncul di dashboard pada tanggal 23 (zona waktu Asia/Jakarta). Jika tanggalnya masih besok/lusa, lihat panel Akan datang.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="pipeline">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Modul harian</span>
+            <h2>Pipeline lead: jangan biarkan peluang menggantung</h2>
+            <p>Lead bergerak dari Lead Baru sampai Negosiasi. Setiap kartu punya next action.</p>
+          </div>
+          <span class="section-index">06</span>
+        </div>
+        <figure class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>pipeline lead</span></div>
+          <div class="shot-image"><img class="zoomable" src="screenshots/leads.png" alt="Pipeline lead Saung Lele CRM"></div>
+          <figcaption>Kanban lead, nilai peluang, sumber, next action, dan alasan kalah.</figcaption>
+        </figure>
+        <div class="step-list">
+          <div class="step"><span class="step-number">1</span><div><strong>Tambahkan lead baru</strong><span>Isi nama, segmen, sumber, estimasi nilai, WhatsApp, dan tanggal follow-up pertama.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Pindahkan tahap</strong><span>Gunakan dropdown di kartu untuk mengubah tahap. Kartu pindah ke kolom yang sesuai.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Tandai menang</strong><span>Memilih “Menang” akan membuat profil pelanggan baru secara otomatis, lalu lead terhubung ke pelanggan tersebut.</span></div></div>
+          <div class="step"><span class="step-number">4</span><div><strong>Catat alasan kalah</strong><span>Alasan membantu melihat pola: harga, stok, lokasi, kualitas, atau kompetitor.</span></div></div>
+        </div>
+        <div class="inline-note warn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
+          <span>Setelah lead menjadi “Menang”, lengkapi profil pelanggan dan preferensinya di halaman detail.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="template">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Penjualan</span>
+            <h2>Template WhatsApp: pesan konsisten, tetap personal</h2>
+            <p>Gunakan template agar tim tidak menulis pesan dari nol setiap kali.</p>
+          </div>
+          <span class="section-index">07</span>
+        </div>
+        <figure class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>template pesan</span></div>
+          <div class="shot-image"><img class="zoomable" src="screenshots/templates.png" alt="Template pesan WhatsApp Saung Lele CRM"></div>
+          <figcaption>Kategori, daftar template, pratinjau WhatsApp, variabel, dan form template baru.</figcaption>
+        </figure>
+        <div class="step-list">
+          <div class="step"><span class="step-number">1</span><div><strong>Pilih kategori</strong><span>Follow-up, penawaran, quotation, konfirmasi PO, pengiriman, buyback, pembayaran, retensi, atau win-back.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Pilih template</strong><span>Pratinjau WhatsApp langsung berubah. Variabel seperti <code>{{nama}}</code> dan <code>{{produk}}</code> akan diganti saat dipakai.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Salin atau gunakan</strong><span>Klik “Gunakan” untuk menyalin pesan, lalu tempel di WhatsApp. Dari detail pelanggan, pesan langsung dibuka dan dicatat.</span></div></div>
+          <div class="step"><span class="step-number">4</span><div><strong>Buat template baru</strong><span>Tentukan nama, kategori, segmen, isi pesan, dan variabel. Simpan agar bisa dipakai tim.</span></div></div>
+        </div>
+        <div class="inline-note info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          <span>Fase saat ini adalah klik-untuk-chat. Integrasi WhatsApp Cloud API (kirim otomatis dan status delivered/read) tersedia sebagai layanan tambahan.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="quotation">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Penjualan</span>
+            <h2>Quotation: penawaran sesuai segmen</h2>
+            <p>Dapur MBG mendapat ikan siap masak/fillet; Kolam Pembesaran mendapat bibit.</p>
+          </div>
+          <span class="section-index">08</span>
+        </div>
+        <div class="shot-grid">
+          <figure class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><span>quotation builder</span></div>
+            <div class="shot-image"><img class="zoomable" src="screenshots/quotations.png" alt="Quotation builder Saung Lele CRM"></div>
+            <figcaption>Pilih pelanggan, produk, qty, harga, diskon, ongkir, dan PPN.</figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><span>dokumen quotation</span></div>
+            <div class="shot-image"><img class="zoomable" src="screenshots/quotation-detail.png" alt="Dokumen quotation Saung Lele CRM"></div>
+            <figcaption>Pratinjau dokumen, status, tombol kirim WhatsApp, dan cetak.</figcaption>
+          </figure>
+        </div>
+        <div class="step-list">
+          <div class="step"><span class="step-number">1</span><div><strong>Pilih pelanggan</strong><span>Segmen otomatis menentukan katalog produk yang ditampilkan.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Tambahkan produk</strong><span>Klik kartu produk untuk menambah baris. Sesuaikan qty, harga, dan diskon.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Atur ongkir &amp; pajak</strong><span>Subtotal, diskon, ongkir, PPN, dan total dihitung otomatis.</span></div></div>
+          <div class="step"><span class="step-number">4</span><div><strong>Simpan &amp; cetak</strong><span>Setelah disimpan, buka halaman quotation untuk kirim WhatsApp atau cetak PDF.</span></div></div>
+        </div>
+        <div class="inline-note tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+          <span>Masa berlaku default 7 hari. Untuk bibit, sesuaikan menjadi 14 hari bila diperlukan.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="po">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Penjualan</span>
+            <h2>Pesanan (PO): dari diterima sampai delivery</h2>
+            <p>Pantau produksi, QC, pengiriman, dan bukti diterima pelanggan.</p>
+          </div>
+          <span class="section-index">09</span>
+        </div>
+        <div class="shot-grid">
+          <figure class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><span>daftar PO</span></div>
+            <div class="shot-image"><img class="zoomable" src="screenshots/purchase-orders.png" alt="Daftar PO Saung Lele CRM"></div>
+            <figcaption>Filter status, progres, tanggal kirim, dan antrean pengiriman hari ini.</figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><span>detail PO</span></div>
+            <div class="shot-image"><img class="zoomable" src="screenshots/po-detail.png" alt="Detail PO Saung Lele CRM"></div>
+            <figcaption>Stepper 7 tahap, item, riwayat, delivery, dokumen, dan checklist.</figcaption>
+          </figure>
+        </div>
+        <div class="step-list">
+          <div class="step"><span class="step-number">1</span><div><strong>Terima PO</strong><span>Isi pelanggan, nomor PO customer, referensi quotation, tanggal kirim, dan item.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Konfirmasi</strong><span>Validasi stok, harga, dan jadwal. Status berubah dari Diterima ke Dikonfirmasi.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Produksi &amp; QC</strong><span>Update status Produksi, lalu Siap Kirim setelah QC dan packing selesai.</span></div></div>
+          <div class="step"><span class="step-number">4</span><div><strong>Atur pengiriman</strong><span>Tambahkan driver, kendaraan, jadwal, dan catatan. Cetak surat jalan dari halaman PO.</span></div></div>
+          <div class="step"><span class="step-number">5</span><div><strong>Konfirmasi diterima</strong><span>Setelah pelanggan menerima, update status Diterima/Selesai dan catat bukti.</span></div></div>
+        </div>
+        <div class="inline-note warn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
+          <span>Setiap perubahan status tercatat di riwayat. Pastikan update dilakukan berurutan agar laporan on-time delivery akurat.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="buyback">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Kemitraan</span>
+            <h2>Buyback panen: dari bibit sampai pembayaran</h2>
+            <p>Pantau pertumbuhan ikan mitra dan jadwalkan pembelian kembali.</p>
+          </div>
+          <span class="section-index">10</span>
+        </div>
+        <figure class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>buyback panen</span></div>
+          <div class="shot-image"><img class="zoomable" src="screenshots/buybacks.png" alt="Buyback panen Saung Lele CRM"></div>
+          <figcaption>Siklus mitra, sampling ABW/SR, grafik pertumbuhan, estimasi panen, dan jadwal buyback.</figcaption>
+        </figure>
+        <div class="step-list">
+          <div class="step"><span class="step-number">1</span><div><strong>Buat siklus</strong><span>Pilih mitra, tanggal tebar, jumlah/ukuran bibit, target ABW, dan estimasi panen.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Catat sampling</strong><span>Masukkan jumlah sampel, ABW, dan estimasi SR. Sistem menghitung biomassa.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Pantau grafik</strong><span>Garis ABW aktual dibanding target. Status bergerak ke Mendekati Panen/Siap Buyback.</span></div></div>
+          <div class="step"><span class="step-number">4</span><div><strong>Jadwalkan &amp; selesaikan</strong><span>Atur tanggal, tim timbang, harga acuan, lalu catat settlement setelah panen.</span></div></div>
+        </div>
+        <div class="inline-note info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          <span>Estimasi biomassa = jumlah bibit × SR × ABW ÷ 1.000. Angka ini membantu memperkirakan berat panen dan nilai buyback.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="laporan">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Analitik</span>
+            <h2>Laporan: lihat retensi dan operasi dalam satu pandangan</h2>
+            <p>Gunakan laporan untuk keputusan mingguan, bukan sekadar arsip.</p>
+          </div>
+          <span class="section-index">11</span>
+        </div>
+        <figure class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>laporan</span></div>
+          <div class="shot-image"><img class="zoomable" src="screenshots/reports.png" alt="Laporan Saung Lele CRM"></div>
+          <figcaption>Repeat order, health, compliance, sumber lead, on-time delivery, dan pelanggan berisiko.</figcaption>
+        </figure>
+        <div class="step-list">
+          <div class="step"><span class="step-number">1</span><div><strong>Pilih rentang waktu</strong><span>Gunakan 6 bulan, bulan ini, atau 90 hari untuk melihat tren.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Baca retensi</strong><span>Repeat order dan churn menunjukkan apakah hubungan pelanggan membaik.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Cek compliance follow-up</strong><span>Lihat siapa yang paling banyak meninggalkan tugas dan tindak lanjuti.</span></div></div>
+          <div class="step"><span class="step-number">4</span><div><strong>Tinjau pelanggan berisiko</strong><span>Klik “Tangani” untuk membuka pelanggan dan menyiapkan win-back.</span></div></div>
+        </div>
+      </section>
+
+      <section class="doc-section" id="alur-harian">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Kebiasaan</span>
+            <h2>Alur kerja harian yang disarankan</h2>
+            <p>Lima ritual singkat agar CRM tidak menjadi pekerjaan tambahan.</p>
+          </div>
+          <span class="section-index">12</span>
+        </div>
+        <div class="workflow">
+          <div class="workflow-step"><span class="wf-num">1</span><strong>Cek dashboard</strong><span>08.00</span></div>
+          <div class="workflow-step"><span class="wf-num">2</span><strong>Hubungi pelanggan</strong><span>09.00</span></div>
+          <div class="workflow-step"><span class="wf-num">3</span><strong>Catat &amp; jadwalkan</strong><span>11.00</span></div>
+          <div class="workflow-step"><span class="wf-num">4</span><strong>Proses quotation/PO</strong><span>14.00</span></div>
+          <div class="workflow-step"><span class="wf-num">5</span><strong>Review &amp; laporan</strong><span>16.00</span></div>
+        </div>
+        <div class="role-grid">
+          <div class="role-card"><strong>Pagi</strong><span>Buka dashboard, selesaikan follow-up terlambat, kirim pesan WA, dan catat hasilnya.</span></div>
+          <div class="role-card"><strong>Siang</strong><span>Proses quotation, konfirmasi PO, update produksi, dan atur jadwal pengiriman.</span></div>
+          <div class="role-card"><strong>Sore</strong><span>Cek pengiriman, buyback mendatang, dan pelanggan berisiko. Tutup dengan laporan singkat.</span></div>
+        </div>
+        <div class="inline-note tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+          <span>Aturan emas: setelah menelepon atau mengirim WhatsApp, langsung catat hasilnya. Jangan menunda sampai lupa.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="checklist">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Implementasi</span>
+            <h2>Checklist kesiapan Saung Lele</h2>
+            <p>Centang satu per satu. Progres tersimpan di browser ini.</p>
+          </div>
+          <span class="section-index">13</span>
+        </div>
+        <div class="progress-track"><i data-progress-fill></i></div>
+        <div class="checklist-summary" style="margin-top:6px"><span data-progress-text>0 / 12</span> · <span data-progress-percent>0%</span> selesai</div>
+        <div class="checklist">
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="paket"><span>Tentukan paket dan jumlah pengguna.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="pelanggan"><span>Siapkan daftar pelanggan dan lead awal.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="produk"><span>Siapkan produk, grade/ukuran, satuan, dan harga.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="termin"><span>Tentukan termin pembayaran, ongkir, dan kebijakan harga.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="template"><span>Siapkan template WhatsApp per kategori.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="owner"><span>Tentukan penanggung jawab follow-up tiap segmen.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="import"><span>Import data awal dan cek hasilnya.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="role"><span>Atur pengguna dan hak akses sesuai peran.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="quotation"><span>Uji alur pelanggan → quotation → simpan.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="po"><span>Uji alur PO → status → jadwal pengiriman.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="buyback"><span>Uji siklus buyback dan catat satu sampling.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="laporan"><span>Review laporan minggu pertama dan tindak lanjuti pelanggan berisiko.</span></label>
+        </div>
+        <div class="checklist-actions">
+          <span class="checklist-summary">Progres otomatis tersimpan di browser.</span>
+          <button class="btn btn-secondary btn-sm" type="button" data-reset-checklist>Reset checklist</button>
+        </div>
+      </section>
+
+      <section class="doc-section" id="faq">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Pertanyaan umum</span>
+            <h2>FAQ singkat</h2>
+            <p>Hal yang paling sering ditanyakan saat evaluasi sistem.</p>
+          </div>
+          <span class="section-index">14</span>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Apakah sistem bisa dibuka dari HP?</summary>
+            <p>Bisa. Antarmuka responsif dan dapat dipakai dari browser HP. Untuk penggunaan lapangan, disarankan koneksi stabil.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Apakah WhatsApp terkirim otomatis?</summary>
+            <p>Pada fase saat ini, sistem membuka WhatsApp dengan pesan yang sudah terisi (klik-untuk-chat), lalu pesan dicatat ke timeline. Pengiriman otomatis dan status delivered/read memerlukan integrasi WhatsApp Cloud API sebagai layanan tambahan.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Apakah data pelanggan aman?</summary>
+            <p>Data disimpan di database dengan akses berbasis peran, koneksi HTTPS, dan backup. Data milik Saung Lele dan dapat diekspor.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Berapa lama setup awal?</summary>
+            <p>Untuk data awal yang sudah rapi, setup dan training dasar biasanya 3–7 hari kerja. Durasi bergantung pada jumlah data dan kesiapan tim.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Apakah bisa menambah pengguna atau cabang?</summary>
+            <p>Bisa. Pengguna tambahan dan cabang tambahan tersedia sebagai layanan bulanan. Untuk kebutuhan besar, paket Business lebih sesuai.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Apakah ada kontrak minimum?</summary>
+            <p>Skema referensi menggunakan minimum 3 bulan, lalu dapat diperpanjang bulanan. Ketentuan ini dapat disesuaikan.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Bagaimana jika ingin berhenti?</summary>
+            <p>Beritahukan minimal 30 hari sebelum periode berikutnya. Data dapat diekspor sebelum akun dinonaktifkan.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Apakah harga bisa disesuaikan?</summary>
+            <p>Ya. Harga dalam surat penawaran adalah referensi. Paket, jumlah pengguna, dan cara pembayaran dapat didiskusikan.</p>
+          </details>
+        </div>
+      </section>
+
+      <div class="search-empty" id="searchEmpty">
+        <strong>Tidak ada bagian yang cocok</strong>
+        <span>Coba kata kunci lain seperti “quotation”, “follow-up”, atau “buyback”.</span>
+      </div>
+
+      <footer class="guide-footer">
+        <div>
+          <strong>KebunKode</strong> · Website · E-Commerce · Sistem Informasi<br>
+          Anas Fajar Pratama · 0813 18 988 499 · Karawang, Jawa Barat
+        </div>
+        <div class="footer-links">
+          <a href="penawaran-saung-lele.html">Surat penawaran</a>
+          <a href="#mulai">Kembali ke atas</a>
+          <a href="#" data-print>Cetak panduan</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" type="button" aria-label="Tutup">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <button class="lightbox-prev" type="button" aria-label="Sebelumnya">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <img id="lightboxImage" src="" alt="Screenshot aplikasi">
+    <button class="lightbox-next" type="button" aria-label="Berikutnya">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+    <div class="lightbox-count" id="lightboxCount"></div>
+  </div>
+
+  <script src="assets/docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard · Saung Lele CRM</title>
+  <meta name="description" content="Dashboard CRM Saung Lele: follow-up hari ini, kesehatan pelanggan, pipeline, dan PO berjalan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="kebunkode.jpg">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="dashboard">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" data-sidebar-toggle aria-label="Buka menu"><span data-icon="menu"></span></button>
+        <div class="topbar-search">
+          <span data-icon="search"></span>
+          <input type="text" placeholder="Cari pelanggan, PO, atau quotation..." aria-label="Pencarian global">
+        </div>
+        <div class="topbar-actions">
+          <span class="topbar-date"><span data-icon="calendar"></span> Rabu, 21 Oktober 2026</span>
+          <button class="icon-btn has-dot" aria-label="Notifikasi"><span data-icon="bell"></span></button>
+          <div class="user-chip">
+            <span class="avatar avatar-sm">SL</span>
+            <div><strong>Saung Lele</strong><span>Pemilik</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="page-head">
+          <div>
+            <div class="breadcrumb">
+              <a href="index.html">Beranda</a>
+              <span data-icon="chevron-right"></span>
+              <span>Dashboard</span>
+            </div>
+            <h1>Dashboard</h1>
+            <p>Ringkasan hubungan pelanggan dan operasi hari ini. Fokus dulu pada yang terlambat.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" data-toast="Laporan dashboard disiapkan untuk diunduh."><span data-icon="download"></span> Ekspor</button>
+            <a class="btn btn-primary" href="customers.html"><span data-icon="plus"></span> Tambah Pelanggan</a>
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card accent">
+            <div class="kpi-top">
+              <span class="kpi-icon tone-amber"><span data-icon="clock"></span></span>
+              <span class="badge badge-warning">3 terlambat</span>
+            </div>
+            <div class="kpi-value">8</div>
+            <div class="kpi-label">Follow-up hari ini</div>
+            <div class="kpi-foot"><span>5 lagi terjadwal</span><span class="muted-2">·</span><a class="link" href="#followups">Lihat antrean</a></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <span class="kpi-icon tone-teal"><span data-icon="users"></span></span>
+              <span class="trend up">+8</span>
+            </div>
+            <div class="kpi-value">126</div>
+            <div class="kpi-label">Pelanggan aktif</div>
+            <div class="kpi-foot"><span>48 Dapur MBG</span><span class="muted-2">·</span><span>78 kolam</span></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <span class="kpi-icon tone-blue"><span data-icon="target"></span></span>
+              <span class="trend up">+12,4%</span>
+            </div>
+            <div class="kpi-value">Rp 84,5 jt</div>
+            <div class="kpi-label">Nilai pipeline</div>
+            <div class="kpi-foot"><span>18 lead aktif</span><span class="muted-2">·</span><a class="link" href="pipeline.html">Buka pipeline</a></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <span class="kpi-icon tone-purple"><span data-icon="package"></span></span>
+              <span class="badge badge-danger">2 telat</span>
+            </div>
+            <div class="kpi-value">12</div>
+            <div class="kpi-label">PO berjalan</div>
+            <div class="kpi-foot"><span>4 siap kirim</span><span class="muted-2">·</span><span>3 produksi</span></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <span class="kpi-icon tone-green"><span data-icon="trending-up"></span></span>
+              <span class="trend up">+5,2 pts</span>
+            </div>
+            <div class="kpi-value">68%</div>
+            <div class="kpi-label">Repeat order rate</div>
+            <div class="kpi-foot"><span>Target 70%</span><span class="muted-2">·</span><span>30 hari</span></div>
+          </div>
+        </div>
+
+        <div class="grid grid-2-1 mb-3">
+          <section class="card" id="followups">
+            <div class="card-head">
+              <div>
+                <h2>Follow-up hari ini</h2>
+                <p>8 tugas · 3 terlambat · diurutkan dari yang paling mendesak</p>
+              </div>
+              <a class="link" href="customers.html">Lihat semua</a>
+            </div>
+
+            <div class="reminder-list mt-2">
+              <div class="reminder">
+                <button class="reminder-check" aria-label="Tandai selesai"><span data-icon="check"></span></button>
+                <div class="reminder-main">
+                  <div class="reminder-top">
+                    <strong>Dapur MBG Nusantara 03</strong>
+                    <span class="badge badge-mbg">Dapur MBG</span>
+                    <span class="chip chip-danger"><span data-icon="alert-circle"></span> Terlambat 2 hari</span>
+                  </div>
+                  <p>Konfirmasi kebutuhan fillet minggu depan — minta spesifikasi ukuran 250 g dan jadwal kirim.</p>
+                  <div class="reminder-meta">
+                    <span><span data-icon="calendar"></span> 19 Okt 2026</span>
+                    <span><span data-icon="user"></span> Rizky</span>
+                    <span><span data-icon="message"></span> Catatan: minta sample fillet</span>
+                  </div>
+                </div>
+                <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span> WA</a>
+              </div>
+
+              <div class="reminder">
+                <button class="reminder-check" aria-label="Tandai selesai"><span data-icon="check"></span></button>
+                <div class="reminder-main">
+                  <div class="reminder-top">
+                    <strong>SPPG Kec. Tembalang</strong>
+                    <span class="badge badge-mbg">Dapur MBG</span>
+                    <span class="chip chip-warning"><span data-icon="clock"></span> Hari ini, 09.00</span>
+                  </div>
+                  <p>Kirim quotation revisi setelah perubahan volume menjadi 200 kg per minggu.</p>
+                  <div class="reminder-meta">
+                    <span><span data-icon="calendar"></span> Hari ini</span>
+                    <span><span data-icon="user"></span> Rizky</span>
+                    <span><span data-icon="file"></span> Quotation QUO/2610/0141</span>
+                  </div>
+                </div>
+                <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span> WA</a>
+              </div>
+
+              <div class="reminder">
+                <button class="reminder-check" aria-label="Tandai selesai"><span data-icon="check"></span></button>
+                <div class="reminder-main">
+                  <div class="reminder-top">
+                    <strong>Kolam Pak Harto</strong>
+                    <span class="badge badge-kolam">Kolam Pembesaran</span>
+                    <span class="chip chip-info"><span data-icon="clock"></span> Hari ini, 10.30</span>
+                  </div>
+                  <p>Sampling H-60: cek ABW dan SR sebelum menjadwalkan buyback.</p>
+                  <div class="reminder-meta">
+                    <span><span data-icon="calendar"></span> Hari ini</span>
+                    <span><span data-icon="user"></span> Dina</span>
+                    <span><span data-icon="sprout"></span> Siklus 12 Agu 2026</span>
+                  </div>
+                </div>
+                <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span> WA</a>
+              </div>
+
+              <div class="reminder">
+                <button class="reminder-check" aria-label="Tandai selesai"><span data-icon="check"></span></button>
+                <div class="reminder-main">
+                  <div class="reminder-top">
+                    <strong>Kelompok Tani Mina Jaya</strong>
+                    <span class="badge badge-kolam">Kolam Pembesaran</span>
+                    <span class="chip chip-info"><span data-icon="clock"></span> Hari ini, 13.00</span>
+                  </div>
+                  <p>Follow-up penawaran bibit 12.000 ekor ukuran 3–5 cm untuk siklus berikutnya.</p>
+                  <div class="reminder-meta">
+                    <span><span data-icon="calendar"></span> Hari ini</span>
+                    <span><span data-icon="user"></span> Dina</span>
+                    <span><span data-icon="fish"></span> Estimasi Rp 6,6 jt</span>
+                  </div>
+                </div>
+                <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span> WA</a>
+              </div>
+
+              <div class="reminder">
+                <button class="reminder-check" aria-label="Tandai selesai"><span data-icon="check"></span></button>
+                <div class="reminder-main">
+                  <div class="reminder-top">
+                    <strong>Dapur MBG Ceria Banyumanik</strong>
+                    <span class="badge badge-mbg">Dapur MBG</span>
+                    <span class="chip"><span data-icon="calendar"></span> Besok, 08.30</span>
+                  </div>
+                  <p>Cek kepuasan pengiriman terakhir dan tawarkan jadwal rutin 2× per minggu.</p>
+                  <div class="reminder-meta">
+                    <span><span data-icon="user"></span> Rizky</span>
+                    <span><span data-icon="package"></span> PO-2610-011 selesai</span>
+                  </div>
+                </div>
+                <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span> WA</a>
+              </div>
+            </div>
+          </section>
+
+          <div class="stack">
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Kesehatan pelanggan</h2>
+                  <p>Berdasarkan recency, frekuensi, nilai, dan engagement</p>
+                </div>
+                <a class="icon-btn sm" href="reports.html" aria-label="Buka laporan"><span data-icon="arrow-up-right"></span></a>
+              </div>
+              <div class="donut-wrap">
+                <div class="donut" role="img" aria-label="78 persen aman, 14 persen perlu perhatian, 8 persen berisiko">
+                  <div class="donut-center">
+                    <strong>78%</strong>
+                    <span>Aman</span>
+                  </div>
+                </div>
+                <div class="legend">
+                  <div class="legend-row"><span class="legend-dot" style="background:#0e7a6b"></span> Aman <strong>98</strong></div>
+                  <div class="legend-row"><span class="legend-dot" style="background:#e9963e"></span> Perlu perhatian <strong>18</strong></div>
+                  <div class="legend-row"><span class="legend-dot" style="background:#dc2626"></span> Berisiko <strong>10</strong></div>
+                  <div class="legend-row text-xs muted"><span class="legend-dot" style="background:#cfe3dd"></span> Rata-rata skor <strong>82</strong></div>
+                </div>
+              </div>
+              <div class="card-foot">
+                <div class="info-strip" style="background:#fdf3e6;border-color:#fde68a">
+                  <span data-icon="alert"></span>
+                  <span><strong>10 pelanggan berisiko churn.</strong> 6 belum dihubungi 30+ hari.</span>
+                  <a href="customers.html">Lihat</a>
+                </div>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Pipeline lead</h2>
+                  <p>18 lead · Rp 84,5 jt</p>
+                </div>
+                <a class="link" href="pipeline.html">Detail</a>
+              </div>
+              <div class="funnel">
+                <div class="funnel-row"><span>Lead baru</span><div class="funnel-bar"><i style="width:28%"></i></div><strong>4</strong></div>
+                <div class="funnel-row"><span>Dihubungi</span><div class="funnel-bar"><i style="width:44%"></i></div><strong>5</strong></div>
+                <div class="funnel-row"><span>Sample/Survey</span><div class="funnel-bar"><i style="width:34%"></i></div><strong>3</strong></div>
+                <div class="funnel-row"><span>Penawaran</span><div class="funnel-bar"><i style="width:56%"></i></div><strong>4</strong></div>
+                <div class="funnel-row"><span>Negosiasi</span><div class="funnel-bar"><i style="width:22%"></i></div><strong>2</strong></div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <section class="card mb-3">
+          <div class="card-head">
+            <div>
+              <h2>PO dalam progres</h2>
+              <p>Dari PO diterima sampai barang diterima pelanggan</p>
+            </div>
+            <a class="link" href="purchase-orders.html">Lihat semua PO</a>
+          </div>
+          <div class="table-wrap mt-2">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>No. PO</th>
+                  <th>Pelanggan</th>
+                  <th>Segmen</th>
+                  <th>Item</th>
+                  <th class="num">Nilai</th>
+                  <th>Status</th>
+                  <th>Progres</th>
+                  <th>Kirim</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <a class="link-strong" href="po-detail.html">PO-2610-018</a>
+                    <span class="sub">PO customer: MBG/NUS/1024</span>
+                  </td>
+                  <td>
+                    <div class="entity">
+                      <span class="avatar avatar-sm mbg">MB</span>
+                      <div><strong>Dapur MBG Nusantara 03</strong><span class="sub">Semarang</span></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>80 kg fillet<span class="sub">60 kg siap masak</span></td>
+                  <td class="num">Rp 6,16 jt</td>
+                  <td><span class="badge status-production">Produksi</span></td>
+                  <td><div class="progress purple"><i style="width:45%"></i></div></td>
+                  <td>23 Okt</td>
+                  <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO-2610-018"><span data-icon="chevron-right"></span></a></td>
+                </tr>
+                <tr>
+                  <td>
+                    <a class="link-strong" href="po-detail.html">PO-2610-017</a>
+                    <span class="sub">PO customer: SPPG/TMB/091</span>
+                  </td>
+                  <td>
+                    <div class="entity">
+                      <span class="avatar avatar-sm mbg">ST</span>
+                      <div><strong>SPPG Kec. Tembalang</strong><span class="sub">Semarang</span></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>200 kg siap masak<span class="sub">Ukuran 250–300 g</span></td>
+                  <td class="num">Rp 5,2 jt</td>
+                  <td><span class="badge status-ready">Siap kirim</span></td>
+                  <td><div class="progress amber"><i style="width:75%"></i></div></td>
+                  <td>Hari ini</td>
+                  <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO-2610-017"><span data-icon="chevron-right"></span></a></td>
+                </tr>
+                <tr>
+                  <td>
+                    <a class="link-strong" href="po-detail.html">PO-2610-016</a>
+                    <span class="sub">PO customer: PH/BB/1021</span>
+                  </td>
+                  <td>
+                    <div class="entity">
+                      <span class="avatar avatar-sm kolam">PH</span>
+                      <div><strong>Kolam Pak Harto</strong><span class="sub">Ungaran</span></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-kolam">Kolam</span></td>
+                  <td>12.000 ekor bibit<span class="sub">Ukuran 3–5 cm</span></td>
+                  <td class="num">Rp 6,6 jt</td>
+                  <td><span class="badge status-confirmed">Dikonfirmasi</span></td>
+                  <td><div class="progress blue"><i style="width:30%"></i></div></td>
+                  <td>22 Okt</td>
+                  <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO-2610-016"><span data-icon="chevron-right"></span></a></td>
+                </tr>
+                <tr>
+                  <td>
+                    <a class="link-strong" href="po-detail.html">PO-2610-013</a>
+                    <span class="sub">PO customer: MBG/SM/077</span>
+                  </td>
+                  <td>
+                    <div class="entity">
+                      <span class="avatar avatar-sm mbg">SM</span>
+                      <div><strong>Dapur MBG Sehat Mandiri</strong><span class="sub">Kendal</span></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>120 kg siap masak<span class="sub">Sudah QC</span></td>
+                  <td class="num">Rp 3,1 jt</td>
+                  <td><span class="badge status-late">Terlambat</span></td>
+                  <td><div class="progress red"><i style="width:75%"></i></div></td>
+                  <td>20 Okt</td>
+                  <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO-2610-013"><span data-icon="chevron-right"></span></a></td>
+                </tr>
+                <tr>
+                  <td>
+                    <a class="link-strong" href="po-detail.html">PO-2610-014</a>
+                    <span class="sub">PO customer: MJ/MM/080</span>
+                  </td>
+                  <td>
+                    <div class="entity">
+                      <span class="avatar avatar-sm kolam">MJ</span>
+                      <div><strong>Kelompok Tani Mina Jaya</strong><span class="sub">Demak</span></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-kolam">Kolam</span></td>
+                  <td>8.000 ekor bibit<span class="sub">Ukuran 5–7 cm</span></td>
+                  <td class="num">Rp 6,4 jt</td>
+                  <td><span class="badge status-done">Selesai</span></td>
+                  <td><div class="progress"><i style="width:100%"></i></div></td>
+                  <td>18 Okt</td>
+                  <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO-2610-014"><span data-icon="chevron-right"></span></a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="grid grid-3">
+          <div class="segment-card">
+            <span class="segment-icon mbg"><span data-icon="utensils"></span></span>
+            <div>
+              <span class="eyebrow">Dapur MBG</span>
+              <h3>Rp 48,2 jt</h3>
+              <p>48 pelanggan · 62% repeat · AOV Rp 2,4 jt</p>
+              <div class="progress mt-2"><i style="width:80%"></i></div>
+              <div class="row-between text-xs mt-1"><span class="muted">Target Okt Rp 60 jt</span><strong>80%</strong></div>
+              <div class="row-between text-xs mt-1"><span class="muted">Fillet 54% · siap masak 46%</span><strong>14 order</strong></div>
+              <div class="row-between text-xs mt-1"><span class="muted">Pelanggan baru</span><strong>3</strong></div>
+              <div class="row-between text-xs mt-1"><span class="muted">Churn bulan ini</span><strong>2%</strong></div>
+            </div>
+            <span class="segment-spark">
+              <span class="spark-bars blue">
+                <i style="height:14px"></i><i style="height:21px"></i><i style="height:17px"></i><i style="height:27px"></i><i style="height:22px"></i><i style="height:31px"></i><i style="height:26px"></i><i style="height:34px"></i>
+              </span>
+            </span>
+          </div>
+
+          <div class="segment-card">
+            <span class="segment-icon kolam"><span data-icon="sprout"></span></span>
+            <div>
+              <span class="eyebrow">Kolam Pembesaran</span>
+              <h3>Rp 31,6 jt</h3>
+              <p>78 mitra · 71% repeat · 23 siklus aktif</p>
+              <div class="progress mt-2"><i style="width:70%"></i></div>
+              <div class="row-between text-xs mt-1"><span class="muted">Target Okt Rp 45 jt</span><strong>70%</strong></div>
+              <div class="row-between text-xs mt-1"><span class="muted">Bibit 62% · buyback 38%</span><strong>SR 86%</strong></div>
+              <div class="row-between text-xs mt-1"><span class="muted">Mitra baru</span><strong>4</strong></div>
+              <div class="row-between text-xs mt-1"><span class="muted">Buyback terdekat</span><strong>23 Okt</strong></div>
+            </div>
+            <span class="segment-spark">
+              <span class="spark-bars">
+                <i style="height:12px"></i><i style="height:18px"></i><i style="height:15px"></i><i style="height:24px"></i><i style="height:21px"></i><i style="height:29px"></i><i style="height:25px"></i><i style="height:32px"></i>
+              </span>
+            </span>
+          </div>
+
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h2>Aktivitas terbaru</h2>
+                <p>Semua interaksi tercatat otomatis</p>
+              </div>
+              <a class="icon-btn sm" href="customers.html" aria-label="Lihat semua aktivitas"><span data-icon="arrow-up-right"></span></a>
+            </div>
+            <div class="timeline mt-2">
+              <div class="timeline-item">
+                <span class="timeline-dot"><span data-icon="whatsapp"></span></span>
+                <div class="timeline-head"><strong>Pesan WhatsApp terkirim</strong><time>10 menit lalu</time></div>
+                <div class="timeline-body">Template “Konfirmasi jadwal kirim” ke Dapur MBG Nusantara 03.</div>
+              </div>
+              <div class="timeline-item">
+                <span class="timeline-dot amber"><span data-icon="file-check"></span></span>
+                <div class="timeline-head"><strong>Quotation diterima</strong><time>42 menit lalu</time></div>
+                <div class="timeline-body">QUO/2610/0140 · SPPG Kec. Tembalang · Rp 5,2 jt.</div>
+              </div>
+              <div class="timeline-item">
+                <span class="timeline-dot purple"><span data-icon="package"></span></span>
+                <div class="timeline-head"><strong>PO baru diterima</strong><time>1 jam lalu</time></div>
+                <div class="timeline-body">PO-2610-018 dari Dapur MBG Nusantara 03.</div>
+              </div>
+              <div class="timeline-item">
+                <span class="timeline-dot blue"><span data-icon="sprout"></span></span>
+                <div class="timeline-head"><strong>Buyback dijadwalkan</strong><time>2 jam lalu</time></div>
+                <div class="timeline-body">Kolam Bu Endang · estimasi 1,2 ton · 28 Okt.</div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesanan (PO) · Saung Lele CRM</title>
+  <meta name="description" content="Kelola PO Saung Lele dari penerimaan, produksi, pengiriman, hingga diterima pelanggan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="kebunkode.jpg">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="pos">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" data-sidebar-toggle aria-label="Buka menu"><span data-icon="menu"></span></button>
+        <div class="topbar-search">
+          <span data-icon="search"></span>
+          <input type="text" placeholder="Cari pelanggan, PO, atau quotation..." aria-label="Pencarian global">
+        </div>
+        <div class="topbar-actions">
+          <span class="topbar-date"><span data-icon="calendar"></span> Rabu, 21 Oktober 2026</span>
+          <button class="icon-btn has-dot" aria-label="Notifikasi"><span data-icon="bell"></span></button>
+          <div class="user-chip">
+            <span class="avatar avatar-sm">SL</span>
+            <div><strong>Saung Lele</strong><span>Pemilik</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="page-head">
+          <div>
+            <div class="breadcrumb">
+              <a href="index.html">Beranda</a>
+              <span data-icon="chevron-right"></span>
+              <span>Pesanan (PO)</span>
+            </div>
+            <h1>Pesanan (PO)</h1>
+            <p>Terima PO, pantau produksi, QC, pengiriman, hingga diterima pelanggan.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" data-toast="Daftar PO diekspor ke CSV."><span data-icon="download"></span> Ekspor</button>
+            <button class="btn btn-primary" data-modal-open="poModal"><span data-icon="plus"></span> Terima PO</button>
+          </div>
+        </div>
+
+        <div class="kpi-grid cols-4">
+          <div class="kpi-card">
+            <div class="kpi-top"><span class="kpi-icon tone-blue"><span data-icon="inbox"></span></span><span class="badge badge-info">Baru</span></div>
+            <div class="kpi-value">3</div>
+            <div class="kpi-label">PO perlu dikonfirmasi</div>
+            <div class="kpi-foot"><span>SLA &lt; 4 jam kerja</span></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top"><span class="kpi-icon tone-purple"><span data-icon="package"></span></span><span class="trend up">3</span></div>
+            <div class="kpi-value">7</div>
+            <div class="kpi-label">PO diproses</div>
+            <div class="kpi-foot"><span>3 produksi · 4 siap kirim</span></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top"><span class="kpi-icon tone-amber"><span data-icon="truck"></span></span><span class="badge badge-warning">Hari ini</span></div>
+            <div class="kpi-value">2</div>
+            <div class="kpi-label">Pengiriman hari ini</div>
+            <div class="kpi-foot"><span>SPPG Tembalang · Mina Jaya</span></div>
+          </div>
+          <div class="kpi-card accent">
+            <div class="kpi-top"><span class="kpi-icon tone-red"><span data-icon="alert"></span></span><span class="badge badge-danger">Perlu tindakan</span></div>
+            <div class="kpi-value">2</div>
+            <div class="kpi-label">PO terlambat</div>
+            <div class="kpi-foot"><span>1 siap kirim · 1 menunggu konfirmasi</span></div>
+          </div>
+        </div>
+
+        <section class="card mb-3">
+          <div class="tabs">
+            <button class="tab active" data-po-filter="all">Semua <span class="count">14</span></button>
+            <button class="tab" data-po-filter="baru">Baru <span class="count">3</span></button>
+            <button class="tab" data-po-filter="dikonfirmasi">Dikonfirmasi <span class="count">2</span></button>
+            <button class="tab" data-po-filter="produksi">Produksi <span class="count">3</span></button>
+            <button class="tab" data-po-filter="siap">Siap kirim <span class="count">4</span></button>
+            <button class="tab" data-po-filter="dikirim">Dikirim <span class="count">1</span></button>
+            <button class="tab" data-po-filter="selesai">Selesai <span class="count">1</span></button>
+          </div>
+
+          <div class="toolbar">
+            <div class="search-field">
+              <span data-icon="search"></span>
+              <input type="search" placeholder="Cari nomor PO atau pelanggan..." aria-label="Cari PO">
+            </div>
+            <select class="select" aria-label="Filter segmen">
+              <option>Semua segmen</option>
+              <option>Dapur MBG</option>
+              <option>Kolam Pembesaran</option>
+            </select>
+            <select class="select" aria-label="Filter tanggal kirim">
+              <option>Semua tanggal kirim</option>
+              <option>Hari ini</option>
+              <option>7 hari ke depan</option>
+              <option>Terlambat</option>
+            </select>
+            <span class="text-xs muted" style="margin-left:auto">14 PO · 2 terlambat</span>
+          </div>
+
+          <div class="table-wrap">
+            <table class="table po-table">
+              <thead>
+                <tr>
+                  <th>No. PO</th>
+                  <th>Pelanggan</th>
+                  <th>Segmen</th>
+                  <th>Item</th>
+                  <th class="num">Nilai</th>
+                  <th>Status</th>
+                  <th>Progres</th>
+                  <th>Kirim</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-po-row data-po-status="produksi">
+                  <td><a class="link-strong nowrap" href="po-detail.html">PO-2610-018</a><span class="sub">PO customer: MBG/NUS/1024</span></td>
+                  <td><div class="entity"><span class="avatar avatar-sm mbg">MB</span><div><strong>Dapur MBG Nusantara 03</strong><span class="sub">Semarang</span></div></div></td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>80 kg fillet<span class="sub">60 kg siap masak</span></td>
+                  <td class="num">Rp 6,16 jt</td>
+                  <td><span class="badge status-production">Produksi</span></td>
+                  <td><div class="progress purple"><i style="width:45%"></i></div></td>
+                  <td>23 Okt</td>
+                  <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO-2610-018"><span data-icon="chevron-right"></span></a></td>
+                </tr>
+
+                <tr data-po-row data-po-status="siap">
+                  <td><a class="link-strong nowrap" href="po-detail.html">PO-2610-017</a><span class="sub">PO customer: SPPG/TMB/091</span></td>
+                  <td><div class="entity"><span class="avatar avatar-sm mbg">ST</span><div><strong>SPPG Kec. Tembalang</strong><span class="sub">Semarang</span></div></div></td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>200 kg siap masak<span class="sub">Ukuran 250–300 g</span></td>
+                  <td class="num">Rp 5,2 jt</td>
+                  <td><span class="badge status-ready">Siap kirim</span></td>
+                  <td><div class="progress amber"><i style="width:75%"></i></div></td>
+                  <td>Hari ini</td>
+                  <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO-2610-017"><span data-icon="chevron-right"></span></a></td>
+                </tr>
+
+                <tr data-po-row data-po-status="dikonfirmasi">
+                  <td><a class="link-strong nowrap" href="po-detail.html">PO-2610-016</a><span class="sub">PO customer: PH/BB/1021</span></td>
+                  <td><div class="entity"><span class="avatar avatar-sm kolam">PH</span><div><strong>Kolam Pak Harto</strong><span class="sub">Ungaran</span></div></div></td>
+                  <td><span class="badge badge-kolam">Kolam</span></td>
+                  <td>12.000 ekor bibit<span class="sub">Ukuran 3–5 cm</span></td>
+                  <td class="num">Rp 6,6 jt</td>
+                  <td><span class="badge status-confirmed">Dikonfirmasi</span></td>
+                  <td><div class="progress blue"><i style="width:30%"></i></div></td>
+                  <td>22 Okt</td>
+                  <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO-2610-016"><span data-icon="chevron-right"></span></a></td>
+                </tr>
+
+                <tr data-po-row data-po-status="baru">
+                  <td><a class="link-strong nowrap" href="po-detail.html">PO-2610-015</a><span class="sub">PO customer: CB/SPPG/088</span></td>
+                  <td><div class="entity"><span class="avatar avatar-sm mbg">CB</span><div><strong>Dapur MBG Ceria Banyumanik</strong><span class="sub">Semarang</span></div></div></td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>100 kg fillet<span class="sub">Perlu konfirmasi stok</span></td>
+                  <td class="num">Rp 4,8 jt</td>
+                  <td><span class="badge status-new">Baru</span></td>
+                  <td><div class="progress"><i style="width:10%"></i></div></td>
+                  <td>24 Okt</td>
+                  <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO-2610-015"><span data-icon="chevron-right"></span></a></td>
+                </tr>
+
+                <tr data-po-row data-po-status="dikirim">
+                  <td><a class="link-strong nowrap" href="po-detail.html">PO-2610-014</a><span class="sub">PO customer: MJ/MM/080</span></td>
+                  <td><div class="entity"><span class="avatar avatar-sm kolam">MJ</span><div><strong>Kelompok Tani Mina Jaya</strong><span class="sub">Demak</span></div></div></td>
+                  <td><span class="badge badge-kolam">Kolam</span></td>
+                  <td>8.000 ekor bibit<span class="sub">Ukuran 5–7 cm</span></td>
+                  <td class="num">Rp 6,4 jt</td>
+                  <td><span class="badge status-shipped">Dikirim</span></td>
+                  <td><div class="progress"><i style="width:90%"></i></div></td>
+                  <td>Hari ini</td>
+                  <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO-2610-014"><span data-icon="chevron-right"></span></a></td>
+                </tr>
+
+                <tr data-po-row data-po-status="siap">
+                  <td><a class="link-strong nowrap" href="po-detail.html">PO-2610-013</a><span class="sub">PO customer: MBG/SM/077</span></td>
+                  <td><div class="entity"><span class="avatar avatar-sm mbg">SM</span><div><strong>Dapur MBG Sehat Mandiri</strong><span class="sub">Kendal</span></div></div></td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>120 kg siap masak<span class="sub">Sudah QC</span></td>
+                  <td class="num">Rp 3,1 jt</td>
+                  <td><span class="badge status-late">Terlambat</span></td>
+                  <td><div class="progress red"><i style="width:75%"></i></div></td>
+                  <td>20 Okt</td>
+                  <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO-2610-013"><span data-icon="chevron-right"></span></a></td>
+                </tr>
+
+                <tr data-po-row data-po-status="baru">
+                  <td><a class="link-strong nowrap" href="po-detail.html">PO-2610-012</a><span class="sub">PO customer: SPPG/PDG/065</span></td>
+                  <td><div class="entity"><span class="avatar avatar-sm mbg">SP</span><div><strong>SPPG Pedurungan</strong><span class="sub">Semarang</span></div></div></td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>150 kg siap masak<span class="sub">Perlu konfirmasi jadwal</span></td>
+                  <td class="num">Rp 3,9 jt</td>
+                  <td><span class="badge status-new">Baru</span></td>
+                  <td><div class="progress"><i style="width:5%"></i></div></td>
+                  <td>25 Okt</td>
+                  <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO-2610-012"><span data-icon="chevron-right"></span></a></td>
+                </tr>
+
+                <tr data-po-row data-po-status="selesai">
+                  <td><a class="link-strong nowrap" href="po-detail.html">PO-2610-011</a><span class="sub">PO customer: MBG/NUS/1018</span></td>
+                  <td><div class="entity"><span class="avatar avatar-sm mbg">MB</span><div><strong>Dapur MBG Nusantara 03</strong><span class="sub">Semarang</span></div></div></td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>120 kg fillet<span class="sub">80 kg siap masak</span></td>
+                  <td class="num">Rp 7,8 jt</td>
+                  <td><span class="badge status-done">Selesai</span></td>
+                  <td><div class="progress"><i style="width:100%"></i></div></td>
+                  <td>14 Okt</td>
+                  <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO-2610-011"><span data-icon="chevron-right"></span></a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="empty-state hidden" id="poEmpty">
+            <div class="empty-icon"><span data-icon="package"></span></div>
+            <h3>Tidak ada PO di status ini</h3>
+            <p>PO yang sesuai filter akan muncul di sini.</p>
+          </div>
+
+          <div class="pagination">
+            <span>Menampilkan 8 dari 14 PO</span>
+            <div class="pagination-pages">
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn" aria-label="Halaman berikutnya"><span data-icon="chevron-right"></span></button>
+            </div>
+          </div>
+        </section>
+
+        <div class="grid grid-1-1">
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h2>Antrean pengiriman hari ini</h2>
+                <p>Rabu, 21 Oktober 2026 · 2 pengiriman</p>
+              </div>
+              <a class="link" href="po-detail.html">Buka jadwal</a>
+            </div>
+            <div class="card-body stack-sm">
+              <div class="delivery-card">
+                <span class="delivery-icon"><span data-icon="truck"></span></span>
+                <div class="delivery-main">
+                  <strong>PO-2610-017 · SPPG Kec. Tembalang</strong>
+                  <span>200 kg siap masak · Driver Pak Yanto · Berangkat 05.30</span>
+                  <div class="delivery-progress">
+                    <div class="progress amber"><i style="width:75%"></i></div>
+                    <div class="delivery-labels"><span>QC selesai</span><span>Menunggu berangkat</span><span>Diterima</span></div>
+                  </div>
+                </div>
+                <span class="badge status-ready">Siap</span>
+              </div>
+              <div class="delivery-card">
+                <span class="delivery-icon"><span data-icon="truck"></span></span>
+                <div class="delivery-main">
+                  <strong>PO-2610-014 · Kelompok Tani Mina Jaya</strong>
+                  <span>8.000 ekor bibit · Driver Pak Slamet · Berangkat 07.00</span>
+                  <div class="delivery-progress">
+                    <div class="progress"><i style="width:90%"></i></div>
+                    <div class="delivery-labels"><span>Grading</span><span>Dalam perjalanan</span><span>Diterima</span></div>
+                  </div>
+                </div>
+                <span class="badge status-shipped">Dikirim</span>
+              </div>
+              <div class="delivery-card">
+                <span class="delivery-icon" style="background:var(--red-soft);color:var(--red)"><span data-icon="alert"></span></span>
+                <div class="delivery-main">
+                  <strong>PO-2610-013 · Dapur MBG Sehat Mandiri</strong>
+                  <span>120 kg siap masak · Terlambat 1 hari · Belum ada driver</span>
+                </div>
+                <button class="btn btn-danger btn-sm" data-toast="Tindakan: tugaskan driver dan hubungi pelanggan.">Tangani</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h2>PO perlu tindakan</h2>
+                <p>Prioritas berdasarkan SLA dan tanggal kirim</p>
+              </div>
+              <span class="badge badge-danger">2 terlambat</span>
+            </div>
+            <div class="card-body">
+              <div class="list-row">
+                <span class="dot red"></span>
+                <div class="list-row-main"><strong>PO-2610-013 · Dapur MBG Sehat Mandiri</strong><span>Terlambat 1 hari · siap kirim, driver belum ditugaskan</span></div>
+                <button class="btn btn-secondary btn-sm" data-toast="Detail PO-2610-013 dibuka.">Tinjau</button>
+              </div>
+              <div class="list-row">
+                <span class="dot red"></span>
+                <div class="list-row-main"><strong>PO-2610-015 · Dapur MBG Ceria Banyumanik</strong><span>Baru masuk 50 menit lalu · konfirmasi stok fillet</span></div>
+                <button class="btn btn-secondary btn-sm" data-toast="Detail PO-2610-015 dibuka.">Tinjau</button>
+              </div>
+              <div class="list-row">
+                <span class="dot amber"></span>
+                <div class="list-row-main"><strong>PO-2610-012 · SPPG Pedurungan</strong><span>Baru masuk 2 jam lalu · perlu konfirmasi jadwal kirim</span></div>
+                <button class="btn btn-secondary btn-sm" data-toast="Detail PO-2610-012 dibuka.">Tinjau</button>
+              </div>
+              <div class="list-row">
+                <span class="dot blue"></span>
+                <div class="list-row-main"><strong>PO-2610-018 · Dapur MBG Nusantara 03</strong><span>Produksi 45% · QC dijadwalkan besok pagi</span></div>
+                <button class="btn btn-secondary btn-sm" data-toast="Detail PO-2610-018 dibuka.">Tinjau</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="poModal">
+    <div class="modal modal-lg">
+      <div class="modal-head">
+        <div>
+          <h2>Terima PO baru</h2>
+          <p>Unggah PO customer atau input manual. Validasi otomatis terhadap quotation.</p>
+        </div>
+        <button class="icon-btn" data-modal-close aria-label="Tutup"><span data-icon="x"></span></button>
+      </div>
+      <form data-demo-form="PO baru diterima dan masuk antrean konfirmasi.">
+        <div class="modal-body">
+          <div class="upload-zone mb-2">
+            <span data-icon="upload"></span>
+            <strong>Unggah PO customer (PDF / foto)</strong>
+            <span>Klik atau seret file ke sini · maksimal 10 MB</span>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="poCustomer">Pelanggan</label>
+              <select class="form-select" id="poCustomer">
+                <option>Dapur MBG Nusantara 03</option>
+                <option>Dapur MBG Ceria Banyumanik</option>
+                <option>SPPG Pedurungan</option>
+                <option>Kolam Pak Harto</option>
+                <option>Kelompok Tani Mina Jaya</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="poNumber">No. PO customer</label>
+              <input class="input" id="poNumber" type="text" placeholder="MBG/NUS/1025" required>
+            </div>
+            <div class="field">
+              <label for="poQuotation">Referensi quotation</label>
+              <select class="form-select" id="poQuotation">
+                <option>QUO/2610/0142 · Rp 6,16 jt</option>
+                <option>QUO/2610/0141 · Rp 5,20 jt</option>
+                <option>Tanpa quotation</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="poDate">Tanggal kirim diminta</label>
+              <input class="input" id="poDate" type="date" value="2026-10-23">
+            </div>
+            <div class="field">
+              <label for="poSegment">Segmen</label>
+              <select class="form-select" id="poSegment">
+                <option>Dapur MBG</option>
+                <option>Kolam Pembesaran</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="poValue">Nilai PO</label>
+              <input class="input" id="poValue" type="text" placeholder="Rp 6.160.500">
+            </div>
+          </div>
+
+          <div class="field mt-2">
+            <label for="poNote">Catatan</label>
+            <textarea class="textarea" id="poNote" placeholder="Instruksi khusus, jadwal, atau permintaan pelanggan..."></textarea>
+          </div>
+
+          <div class="info-strip mt-2" style="font-size:10.5px">
+            <span data-icon="alert-circle"></span>
+            <span>Setelah disimpan, PO masuk status <strong>Diterima</strong> dan harus dikonfirmasi maksimal 4 jam kerja.</span>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Batal</button>
+          <button class="btn btn-primary" type="submit"><span data-icon="check"></span> Simpan PO</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+- Berkomunikasi dalam Bahasa Indonesia informal (sapaan santai seperti "gaes", "aku"); jawaban sebaiknya juga Bahasa Indonesia dan lugas, bukan formal-kaku. Confidence: 0.8
+- Meminta dokumen spesifikasi desain (`design.md`) sebagai acuan sebelum/selagi implementasi, bukan langsung kode aplikasi. Confidence: 0.7
+- Menyukai visualisasi desain antarmuka berupa mockup HTML statis multi-halaman (beberapa halaman terpisah) untuk bagian-bagian penting UI, bukan satu file monolitik. Confidence: 0.7
+- Menghargai asisten yang mengonfirmasi pemahaman kebutuhan dan menanyakan data/input tambahan yang masih diperlukan sebelum mengeksekusi. Confidence: 0.6
+- Mengharapkan tanggal/jam memakai waktu lokal Indonesia (Asia/Jakarta / WIB), bukan UTC: jadwal yang diisi "tanggal 23 jam 01.00" harus dianggap "hari ini" oleh sistem pada hari itu. Confidence: 0.65
+- Mengharapkan data yang diinput di satu modul langsung konsisten tampil di modul lain (mis. jadwal follow-up dari halaman pelanggan muncul di dashboard), dan menguji sendiri fitur lalu melaporkan ketidakcocokan sebagai bug. Confidence: 0.6
+- Ingin identitas visual proyek konsisten dan ber-branding: aset logo yang disediakan sendiri (mis. `kebunkode.jpg`) dipakai sebagai favicon/apple-touch-icon di seluruh aplikasi, halaman `prototype/`, sampai dokumen bisnis (surat penawaran, panduan). Confidence: 0.7
+- Peduli kerapian UI: elemen yang tumpang tindih / tampak tidak proporsional (mis. pagination) dianggap bug dan harus dibuat rapi serta proporsional, bukan sekadar "jalan". Confidence: 0.65
+- Menyukai ikon/avatar default yang konsisten per peran pengguna (avatar ikon user dengan warna sesuai role) alih-alih inisial teks. Confidence: 0.55
+- Antarmuka aplikasi berbahasa Indonesia (locale `id`, label tombol/teks Indonesia), jadi locale & terjemahan bawaan framework perlu dilengkapi. Confidence: 0.6
+- Ingin sistem nyata dibangun dengan stack **Laravel + React** (bukan sekadar mockup HTML statis); setelah desain disetujui, lanjut ke implementasi aplikasi yang bisa dijalankan. Confidence: 0.75
+- Deliverable non-aplikasi (mockup, surat penawaran, panduan) diminta dalam bentuk **HTML mandiri** yang bisa dibuka langsung di browser tanpa server/format berat ("dalam bentuk html saja"). Confidence: 0.75
+- Ingin dokumentasi pengguna berbentuk panduan **interaktif** (navigasi modul, pencarian, screenshot bisa diklik/diperbesar, checklist progres) dan memakai screenshot asli aplikasi, bukan teks kering. Confidence: 0.65
+- Tidak masalah bila asisten mengisi hal yang belum ia ketahui (mis. skema harga sewa bulanan) dengan **contoh/referensi yang wajar dan rapi**, karena ia akan menyesuaikan sendiri — jadi beri default yang masuk akal, jangan menunggu spesifikasi lengkap. Confidence: 0.75
+- Menyerahkan detail keputusan UI kepada asisten ("terserah"): penempatan kontrol (sidebar vs topbar), bentuk ikon vs tombol teks, dsb. dipilih sendiri asalkan fungsinya jelas dan mudah ditemukan. Confidence: 0.6
+- Saat aplikasi akan dipublish sebagai **demo**, ia ingin demo-nya bisa dicoba tanpa hambatan: daftar akun demo + password ditampilkan langsung di halaman login (dengan tombol isi otomatis), dan dokumen (surat penawaran, panduan) ditautkan dari aplikasi serta disajikan sebagai halaman publik yang bisa dibuka langsung. Confidence: 0.7
+- Peduli kesiapan produksi/keamanan stack sebelum publish: menanyakan sendiri isu versi runtime yang sedang ramai (mis. patch keamanan PHP), dan menghargai jawaban berisi versi minimum aman + checklist go-live. Confidence: 0.6
+- Bila permintaannya sudah jelas, ia ingin asisten **langsung mengeksekusi** ("jika mengerti maka langsung kerjakan") — cukup konfirmasi singkat, bukan banyak pertanyaan klarifikasi. Confidence: 0.65

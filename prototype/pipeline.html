@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipeline Lead · Saung Lele CRM</title>
+  <meta name="description" content="Pipeline lead Saung Lele: kanban, next action, nilai peluang, dan alasan kalah.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="kebunkode.jpg">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="pipeline">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" data-sidebar-toggle aria-label="Buka menu"><span data-icon="menu"></span></button>
+        <div class="topbar-search">
+          <span data-icon="search"></span>
+          <input type="text" placeholder="Cari pelanggan, PO, atau quotation..." aria-label="Pencarian global">
+        </div>
+        <div class="topbar-actions">
+          <span class="topbar-date"><span data-icon="calendar"></span> Rabu, 21 Oktober 2026</span>
+          <button class="icon-btn has-dot" aria-label="Notifikasi"><span data-icon="bell"></span></button>
+          <div class="user-chip">
+            <span class="avatar avatar-sm">SL</span>
+            <div><strong>Saung Lele</strong><span>Pemilik</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="page-head">
+          <div>
+            <div class="breadcrumb">
+              <a href="index.html">Beranda</a>
+              <span data-icon="chevron-right"></span>
+              <span>Pipeline Lead</span>
+            </div>
+            <h1>Pipeline Lead</h1>
+            <p>18 lead aktif · Rp 84,5 jt · 3 lead belum disentuh lebih dari 7 hari.</p>
+          </div>
+          <div class="page-actions">
+            <div class="segmented">
+              <button class="active">Semua</button>
+              <button>Dapur MBG</button>
+              <button>Kolam</button>
+            </div>
+            <button class="btn btn-primary" data-modal-open="leadModal"><span data-icon="plus"></span> Tambah Lead</button>
+          </div>
+        </div>
+
+        <div class="kpi-grid cols-4">
+          <div class="kpi-card">
+            <div class="kpi-top"><span class="kpi-icon tone-blue"><span data-icon="target"></span></span><span class="trend up">+3</span></div>
+            <div class="kpi-value">18</div>
+            <div class="kpi-label">Lead aktif</div>
+            <div class="kpi-foot"><span>9 Dapur MBG · 9 kolam</span></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top"><span class="kpi-icon tone-teal"><span data-icon="cash"></span></span><span class="trend up">+12,4%</span></div>
+            <div class="kpi-value">Rp 84,5 jt</div>
+            <div class="kpi-label">Nilai pipeline</div>
+            <div class="kpi-foot"><span>Rata-rata Rp 4,7 jt/lead</span></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top"><span class="kpi-icon tone-green"><span data-icon="trending-up"></span></span><span class="trend up">+4 pts</span></div>
+            <div class="kpi-value">32%</div>
+            <div class="kpi-label">Win rate</div>
+            <div class="kpi-foot"><span>6 menang bulan ini</span></div>
+          </div>
+          <div class="kpi-card accent">
+            <div class="kpi-top"><span class="kpi-icon tone-amber"><span data-icon="clock"></span></span><span class="badge badge-warning">3 terlambat</span></div>
+            <div class="kpi-value">4,2 jam</div>
+            <div class="kpi-label">Rata-rata respons pertama</div>
+            <div class="kpi-foot"><span>Target &lt; 24 jam</span></div>
+          </div>
+        </div>
+
+        <div class="insight-banner">
+          <span data-icon="alert"></span>
+          <span><strong>3 lead belum dihubungi lebih dari 7 hari.</strong> Dua di antaranya dari segmen Dapur MBG dengan nilai Rp 16,8 jt.</span>
+          <button class="btn btn-amber btn-sm" data-toast="Lead tanpa kontak 7+ hari difilter.">Lihat lead</button>
+        </div>
+
+        <div class="row-between mb-1">
+          <span class="text-xs muted">Geser board ke kanan untuk melihat seluruh tahap →</span>
+          <span class="text-xs muted">5 tahap · 18 lead · Rp 84,5 jt</span>
+        </div>
+
+        <div class="kanban mb-3">
+          <div class="kanban-col">
+            <div class="kanban-head">
+              <h3>Lead Baru</h3>
+              <span class="kanban-count">4</span>
+              <span class="kanban-value">Rp 12 jt</span>
+            </div>
+            <div class="kanban-list">
+              <article class="lead-card">
+                <div class="lead-top">
+                  <span class="badge badge-mbg">Dapur MBG</span>
+                  <button class="icon-btn sm" data-toast="Menu lead: pindah tahap, tugaskan, arsipkan." aria-label="Aksi lead"><span data-icon="more-horizontal"></span></button>
+                </div>
+                <h4><a href="customer-detail.html">Dapur MBG Ngaliyan</a></h4>
+                <p class="sub"><span data-icon="map-pin"></span> Semarang · 900 porsi/hari</p>
+                <div class="lead-value">Rp 7,2 jt <span>estimasi</span></div>
+                <div class="lead-foot">
+                  <span class="chip chip-warning"><span data-icon="clock"></span> Hubungi hari ini</span>
+                  <span class="avatar avatar-xs">R</span>
+                </div>
+              </article>
+
+              <article class="lead-card">
+                <div class="lead-top">
+                  <span class="badge badge-kolam">Kolam</span>
+                  <button class="icon-btn sm" data-toast="Menu lead: pindah tahap, tugaskan, arsipkan." aria-label="Aksi lead"><span data-icon="more-horizontal"></span></button>
+                </div>
+                <h4><a href="customer-detail.html">Kolam Mas Budi</a></h4>
+                <p class="sub"><span data-icon="map-pin"></span> Genuk · 4 kolam</p>
+                <div class="lead-value">Rp 4,8 jt <span>estimasi</span></div>
+                <div class="lead-foot">
+                  <span class="chip"><span data-icon="calendar"></span> Besok, 10.00</span>
+                  <span class="avatar avatar-xs">D</span>
+                </div>
+              </article>
+
+              <button class="lead-add" data-modal-open="leadModal"><span data-icon="plus"></span> Tambah lead</button>
+            </div>
+          </div>
+
+          <div class="kanban-col">
+            <div class="kanban-head">
+              <h3>Dihubungi</h3>
+              <span class="kanban-count">5</span>
+              <span class="kanban-value">Rp 16 jt</span>
+            </div>
+            <div class="kanban-list">
+              <article class="lead-card">
+                <div class="lead-top">
+                  <span class="badge badge-mbg">Dapur MBG</span>
+                  <button class="icon-btn sm" data-toast="Menu lead: pindah tahap, tugaskan, arsipkan." aria-label="Aksi lead"><span data-icon="more-horizontal"></span></button>
+                </div>
+                <h4><a href="customer-detail.html">SPPG Mijen</a></h4>
+                <p class="sub"><span data-icon="map-pin"></span> Semarang · 1.100 porsi/hari</p>
+                <div class="lead-value">Rp 9,6 jt <span>estimasi</span></div>
+                <div class="lead-foot">
+                  <span class="chip chip-danger"><span data-icon="alert-circle"></span> Terlambat 1 hari</span>
+                  <span class="avatar avatar-xs">R</span>
+                </div>
+              </article>
+
+              <article class="lead-card">
+                <div class="lead-top">
+                  <span class="badge badge-kolam">Kolam</span>
+                  <button class="icon-btn sm" data-toast="Menu lead: pindah tahap, tugaskan, arsipkan." aria-label="Aksi lead"><span data-icon="more-horizontal"></span></button>
+                </div>
+                <h4><a href="customer-detail.html">Kolam Bu Rini</a></h4>
+                <p class="sub"><span data-icon="map-pin"></span> Salatiga · 3 kolam</p>
+                <div class="lead-value">Rp 5,4 jt <span>estimasi</span></div>
+                <div class="lead-foot">
+                  <span class="chip chip-info"><span data-icon="calendar"></span> Hari ini, 15.00</span>
+                  <span class="avatar avatar-xs">D</span>
+                </div>
+              </article>
+
+              <article class="lead-card">
+                <div class="lead-top">
+                  <span class="badge badge-mbg">Dapur MBG</span>
+                  <button class="icon-btn sm" data-toast="Menu lead: pindah tahap, tugaskan, arsipkan." aria-label="Aksi lead"><span data-icon="more-horizontal"></span></button>
+                </div>
+                <h4><a href="customer-detail.html">Dapur MBG Tlogosari</a></h4>
+                <p class="sub"><span data-icon="map-pin"></span> Semarang · 700 porsi/hari</p>
+                <div class="lead-value">Rp 3,4 jt <span>estimasi</span></div>
+                <div class="lead-foot">
+                  <span class="chip"><span data-icon="calendar"></span> 24 Okt</span>
+                  <span class="avatar avatar-xs">R</span>
+                </div>
+              </article>
+
+              <button class="lead-add" data-toast="2 lead lainnya di tahap Dihubungi."><span data-icon="list"></span> 2 lead lainnya</button>
+            </div>
+          </div>
+
+          <div class="kanban-col">
+            <div class="kanban-head">
+              <h3>Sample / Survey</h3>
+              <span class="kanban-count">3</span>
+              <span class="kanban-value">Rp 18 jt</span>
+            </div>
+            <div class="kanban-list">
+              <article class="lead-card">
+                <div class="lead-top">
+                  <span class="badge badge-mbg">Dapur MBG</span>
+                  <button class="icon-btn sm" data-toast="Menu lead: pindah tahap, tugaskan, arsipkan." aria-label="Aksi lead"><span data-icon="more-horizontal"></span></button>
+                </div>
+                <h4><a href="customer-detail.html">Dapur MBG Pedurungan</a></h4>
+                <p class="sub"><span data-icon="map-pin"></span> Semarang · sample fillet</p>
+                <div class="lead-value">Rp 12,4 jt <span>estimasi</span></div>
+                <div class="lead-foot">
+                  <span class="chip chip-info"><span data-icon="phone"></span> Evaluasi sample</span>
+                  <span class="avatar avatar-xs">R</span>
+                </div>
+              </article>
+
+              <article class="lead-card">
+                <div class="lead-top">
+                  <span class="badge badge-kolam">Kolam</span>
+                  <button class="icon-btn sm" data-toast="Menu lead: pindah tahap, tugaskan, arsipkan." aria-label="Aksi lead"><span data-icon="more-horizontal"></span></button>
+                </div>
+                <h4><a href="customer-detail.html">Kolam Pak Slamet</a></h4>
+                <p class="sub"><span data-icon="map-pin"></span> Boyolali · survey 6 kolam</p>
+                <div class="lead-value">Rp 6,2 jt <span>estimasi</span></div>
+                <div class="lead-foot">
+                  <span class="chip"><span data-icon="calendar"></span> 23 Okt, survey</span>
+                  <span class="avatar avatar-xs">D</span>
+                </div>
+              </article>
+
+              <button class="lead-add" data-toast="1 lead lainnya di tahap Sample / Survey."><span data-icon="list"></span> 1 lead lainnya</button>
+            </div>
+          </div>
+
+          <div class="kanban-col">
+            <div class="kanban-head">
+              <h3>Penawaran</h3>
+              <span class="kanban-count">4</span>
+              <span class="kanban-value">Rp 24 jt</span>
+            </div>
+            <div class="kanban-list">
+              <article class="lead-card">
+                <div class="lead-top">
+                  <span class="badge badge-mbg">Dapur MBG</span>
+                  <button class="icon-btn sm" data-toast="Menu lead: pindah tahap, tugaskan, arsipkan." aria-label="Aksi lead"><span data-icon="more-horizontal"></span></button>
+                </div>
+                <h4><a href="customer-detail.html">Dapur MBG Nusantara 04</a></h4>
+                <p class="sub"><span data-icon="map-pin"></span> Semarang · 1.000 porsi/hari</p>
+                <div class="lead-value">Rp 10,8 jt <span>estimasi</span></div>
+                <div class="lead-foot">
+                  <span class="chip chip-danger"><span data-icon="clock"></span> Follow-up H+2</span>
+                  <span class="avatar avatar-xs">R</span>
+                </div>
+              </article>
+
+              <article class="lead-card">
+                <div class="lead-top">
+                  <span class="badge badge-kolam">Kolam</span>
+                  <button class="icon-btn sm" data-toast="Menu lead: pindah tahap, tugaskan, arsipkan." aria-label="Aksi lead"><span data-icon="more-horizontal"></span></button>
+                </div>
+                <h4><a href="customer-detail.html">Kelompok Tani Sido Makmur</a></h4>
+                <p class="sub"><span data-icon="map-pin"></span> Demak · 18 anggota</p>
+                <div class="lead-value">Rp 8,4 jt <span>estimasi</span></div>
+                <div class="lead-foot">
+                  <span class="chip chip-warning"><span data-icon="clock"></span> Hari ini, 16.00</span>
+                  <span class="avatar avatar-xs">D</span>
+                </div>
+              </article>
+
+              <button class="lead-add" data-toast="2 lead lainnya di tahap Penawaran."><span data-icon="list"></span> 2 lead lainnya</button>
+            </div>
+          </div>
+
+          <div class="kanban-col">
+            <div class="kanban-head">
+              <h3>Negosiasi</h3>
+              <span class="kanban-count">2</span>
+              <span class="kanban-value">Rp 14,5 jt</span>
+            </div>
+            <div class="kanban-list">
+              <article class="lead-card">
+                <div class="lead-top">
+                  <span class="badge badge-mbg">Dapur MBG</span>
+                  <button class="icon-btn sm" data-toast="Menu lead: pindah tahap, tugaskan, arsipkan." aria-label="Aksi lead"><span data-icon="more-horizontal"></span></button>
+                </div>
+                <h4><a href="customer-detail.html">SPPG Kec. Tembalang</a></h4>
+                <p class="sub"><span data-icon="map-pin"></span> Semarang · 1.200 porsi/hari</p>
+                <div class="lead-value">Rp 9,6 jt <span>estimasi</span></div>
+                <div class="lead-foot">
+                  <span class="chip chip-info"><span data-icon="phone"></span> Negosiasi harga</span>
+                  <span class="avatar avatar-xs">R</span>
+                </div>
+              </article>
+
+              <article class="lead-card">
+                <div class="lead-top">
+                  <span class="badge badge-kolam">Kolam</span>
+                  <button class="icon-btn sm" data-toast="Menu lead: pindah tahap, tugaskan, arsipkan." aria-label="Aksi lead"><span data-icon="more-horizontal"></span></button>
+                </div>
+                <h4><a href="customer-detail.html">Kolam Barokah</a></h4>
+                <p class="sub"><span data-icon="map-pin"></span> Kendal · 8 kolam</p>
+                <div class="lead-value">Rp 4,9 jt <span>estimasi</span></div>
+                <div class="lead-foot">
+                  <span class="chip"><span data-icon="calendar"></span> 22 Okt, penawaran ulang</span>
+                  <span class="avatar avatar-xs">D</span>
+                </div>
+              </article>
+
+              <div class="info-strip" style="margin-top:4px;font-size:10px;padding:9px 10px">
+                <span data-icon="sparkles"></span>
+                <span><strong>Tips:</strong> catat objeksi harga di catatan sebelum menutup.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-1-1">
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h2>Alasan kalah bulan ini</h2>
+                <p>12 lead kalah · pilih alasan saat menutup lead</p>
+              </div>
+              <span class="badge badge-neutral">Okt 2026</span>
+            </div>
+            <div class="hbar-list">
+              <div class="hbar bad"><span>Harga</span><div class="hbar-bar"><i style="width:42%"></i></div><strong>42%</strong></div>
+              <div class="hbar warn"><span>Stok</span><div class="hbar-bar"><i style="width:25%"></i></div><strong>25%</strong></div>
+              <div class="hbar blue"><span>Lokasi / ongkir</span><div class="hbar-bar"><i style="width:18%"></i></div><strong>18%</strong></div>
+              <div class="hbar"><span>Kualitas</span><div class="hbar-bar"><i style="width:9%"></i></div><strong>9%</strong></div>
+              <div class="hbar"><span>Tidak respons</span><div class="hbar-bar"><i style="width:6%"></i></div><strong>6%</strong></div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h2>Sumber lead &amp; konversi</h2>
+                <p>Lead yang masuk 90 hari terakhir</p>
+              </div>
+              <a class="link" href="reports.html">Laporan</a>
+            </div>
+            <div class="hbar-list">
+              <div class="hbar"><span>Referensi</span><div class="hbar-bar"><i style="width:78%"></i></div><strong>48%</strong></div>
+              <div class="hbar blue"><span>WhatsApp</span><div class="hbar-bar"><i style="width:54%"></i></div><strong>31%</strong></div>
+              <div class="hbar warn"><span>Kunjungan lapangan</span><div class="hbar-bar"><i style="width:38%"></i></div><strong>22%</strong></div>
+              <div class="hbar"><span>Instagram</span><div class="hbar-bar"><i style="width:24%"></i></div><strong>12%</strong></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="leadModal">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <h2>Tambah lead baru</h2>
+          <p>Setiap lead wajib punya next action agar tidak menggantung.</p>
+        </div>
+        <button class="icon-btn" data-modal-close aria-label="Tutup"><span data-icon="x"></span></button>
+      </div>
+      <form data-demo-form="Lead baru ditambahkan ke pipeline tahap Lead Baru.">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="field">
+              <label for="leadName">Nama lead / usaha</label>
+              <input class="input" id="leadName" type="text" placeholder="Contoh: Dapur MBG Ngaliyan" required>
+            </div>
+            <div class="field">
+              <label for="leadSegment">Segmen</label>
+              <select class="form-select" id="leadSegment">
+                <option>Dapur MBG</option>
+                <option>Kolam Pembesaran</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="leadPic">PIC</label>
+              <input class="input" id="leadPic" type="text" placeholder="Nama PIC" required>
+            </div>
+            <div class="field">
+              <label for="leadPhone">WhatsApp</label>
+              <input class="input" id="leadPhone" type="tel" placeholder="08xx-xxxx-xxxx" required>
+            </div>
+            <div class="field">
+              <label for="leadValue">Estimasi nilai</label>
+              <input class="input" id="leadValue" type="text" placeholder="Rp 7.200.000">
+            </div>
+            <div class="field">
+              <label for="leadSource">Sumber</label>
+              <select class="form-select" id="leadSource">
+                <option>Referensi</option>
+                <option>WhatsApp</option>
+                <option>Kunjungan lapangan</option>
+                <option>Instagram</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="leadFollow">Follow-up pertama</label>
+              <input class="input" id="leadFollow" type="date" value="2026-10-22">
+            </div>
+            <div class="field">
+              <label for="leadOwner">Penanggung jawab</label>
+              <select class="form-select" id="leadOwner">
+                <option>Rizky</option>
+                <option>Dina</option>
+                <option>Admin</option>
+              </select>
+            </div>
+          </div>
+          <div class="field mt-2">
+            <label for="leadNote">Catatan kebutuhan</label>
+            <textarea class="textarea" id="leadNote" placeholder="Kebutuhan awal, volume, atau konteks penting..."></textarea>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Batal</button>
+          <button class="btn btn-primary" type="submit"><span data-icon="plus"></span> Simpan lead</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

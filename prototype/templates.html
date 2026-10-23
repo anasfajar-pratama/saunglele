@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template Pesan · Saung Lele CRM</title>
+  <meta name="description" content="Template pesan WhatsApp Saung Lele per kategori dengan pratinjau dan personalisasi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="kebunkode.jpg">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="templates">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" data-sidebar-toggle aria-label="Buka menu"><span data-icon="menu"></span></button>
+        <div class="topbar-search">
+          <span data-icon="search"></span>
+          <input type="text" placeholder="Cari pelanggan, PO, atau quotation..." aria-label="Pencarian global">
+        </div>
+        <div class="topbar-actions">
+          <span class="topbar-date"><span data-icon="calendar"></span> Rabu, 21 Oktober 2026</span>
+          <button class="icon-btn has-dot" aria-label="Notifikasi"><span data-icon="bell"></span></button>
+          <div class="user-chip">
+            <span class="avatar avatar-sm">SL</span>
+            <div><strong>Saung Lele</strong><span>Pemilik</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="page-head">
+          <div>
+            <div class="breadcrumb">
+              <a href="index.html">Beranda</a>
+              <span data-icon="chevron-right"></span>
+              <span>Template Pesan</span>
+            </div>
+            <h1>Template Pesan</h1>
+            <p>9 kategori · 33 template · pesan konsisten, tetap personal.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" data-toast="WhatsApp Web dibuka di tab baru (demo)."><span data-icon="external"></span> Buka WhatsApp</button>
+            <button class="btn btn-primary" data-modal-open="templateModal"><span data-icon="plus"></span> Template Baru</button>
+          </div>
+        </div>
+
+        <div class="info-strip mb-2" style="background:#e8f5f1;border-color:#c4e8df;color:var(--brand-ink)">
+          <span data-icon="whatsapp"></span>
+          <span><strong>Mode klik-untuk-chat aktif.</strong> Pesan diisi otomatis dari template. Setelah dikirim, tandai “Terkirim” agar tercatat di timeline pelanggan.</span>
+          <a href="../design.md" style="color:var(--brand)">Pelajari</a>
+        </div>
+
+        <div class="template-layout">
+          <aside class="card category-panel">
+            <div class="card-head" style="padding-bottom:10px">
+              <div>
+                <h2>Kategori</h2>
+                <p>Pilih konteks pesan</p>
+              </div>
+            </div>
+            <div class="category-list">
+              <button class="category-item active" data-template-category="all">
+                <span data-icon="layers"></span> Semua <span class="count">33</span>
+              </button>
+              <button class="category-item" data-template-category="followup">
+                <span data-icon="message"></span> Follow-up <span class="count">6</span>
+              </button>
+              <button class="category-item" data-template-category="penawaran">
+                <span data-icon="sparkles"></span> Penawaran <span class="count">4</span>
+              </button>
+              <button class="category-item" data-template-category="quotation">
+                <span data-icon="file"></span> Quotation <span class="count">3</span>
+              </button>
+              <button class="category-item" data-template-category="po">
+                <span data-icon="package"></span> Konfirmasi PO <span class="count">5</span>
+              </button>
+              <button class="category-item" data-template-category="pengiriman">
+                <span data-icon="truck"></span> Pengiriman <span class="count">4</span>
+              </button>
+              <button class="category-item" data-template-category="buyback">
+                <span data-icon="refresh"></span> Buyback <span class="count">3</span>
+              </button>
+              <button class="category-item" data-template-category="pembayaran">
+                <span data-icon="cash"></span> Pembayaran <span class="count">2</span>
+              </button>
+              <button class="category-item" data-template-category="retensi">
+                <span data-icon="star"></span> Ucapan &amp; retensi <span class="count">4</span>
+              </button>
+              <button class="category-item" data-template-category="winback">
+                <span data-icon="trending-up"></span> Win-back <span class="count">2</span>
+              </button>
+            </div>
+            <div class="card-foot">
+              <div class="template-note">
+                <span data-icon="sparkles"></span>
+                <span>Gunakan variabel seperti <span class="var-chip">{{nama}}</span> agar pesan tetap personal.</span>
+              </div>
+            </div>
+          </aside>
+
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h2>Daftar template</h2>
+                <p>9 contoh dari 33 template · klik untuk melihat pratinjau</p>
+              </div>
+              <div class="search-field" style="max-width:190px;min-width:150px;height:32px">
+                <span data-icon="search"></span>
+                <input type="search" id="templateSearch" placeholder="Cari template..." aria-label="Cari template">
+              </div>
+            </div>
+
+            <div class="template-list mt-2">
+              <article class="template-item" data-template-item data-category="followup" data-template-name="Follow-up quotation" data-vars="{{nama}},{{no_quotation}},{{produk}}" data-preview="Selamat pagi Bapak Ahmad, saya Rizky dari Saung Lele. Quotation QUO/2610/0142 untuk fillet lele 250 g sudah saya kirimkan. Apakah ada yang ingin disesuaikan sebelum kami siapkan jadwal kirim? Terima kasih.">
+                <div class="template-title">
+                  <strong>Follow-up quotation</strong>
+                  <span class="badge badge-mbg">Dapur MBG</span>
+                  <span class="badge badge-neutral">Dipakai 42×</span>
+                </div>
+                <p>Selamat pagi Bapak/Ibu {{nama}}, quotation {{no_quotation}} untuk {{produk}} sudah kami kirimkan. Apakah ada yang ingin disesuaikan?</p>
+                <div class="template-meta">
+                  <span class="var-chip">{{nama}}</span>
+                  <span class="var-chip">{{no_quotation}}</span>
+                  <span class="var-chip">{{produk}}</span>
+                  <button class="btn btn-secondary btn-sm" style="margin-left:auto">Gunakan</button>
+                </div>
+              </article>
+
+              <article class="template-item" data-template-item data-category="followup" data-template-name="Follow-up setelah sample" data-vars="{{nama}},{{produk}}" data-preview="Selamat pagi Bapak Ahmad, sample fillet lele 250 g sudah kami kirim kemarin. Bagaimana hasil evaluasi untuk menu Dapur MBG Nusantara 03? Kami siap menyesuaikan ukuran atau volume.">
+                <div class="template-title">
+                  <strong>Follow-up setelah sample</strong>
+                  <span class="badge badge-mbg">Dapur MBG</span>
+                  <span class="badge badge-neutral">Dipakai 18×</span>
+                </div>
+                <p>Selamat pagi Bapak/Ibu {{nama}}, sample {{produk}} sudah kami kirim. Bagaimana hasil evaluasinya?</p>
+                <div class="template-meta">
+                  <span class="var-chip">{{nama}}</span>
+                  <span class="var-chip">{{produk}}</span>
+                  <button class="btn btn-secondary btn-sm" style="margin-left:auto">Gunakan</button>
+                </div>
+              </article>
+
+              <article class="template-item" data-template-item data-category="followup" data-template-name="Follow-up mingguan mitra kolam" data-vars="{{nama}},{{nama_usaha}}" data-preview="Halo Pak Harto, bagaimana kondisi kolam di Ungaran? Kami ingin memastikan pertumbuhan ikan tetap sesuai target. Apakah bisa sampling bersama minggu ini?">
+                <div class="template-title">
+                  <strong>Follow-up mingguan mitra kolam</strong>
+                  <span class="badge badge-kolam">Kolam</span>
+                  <span class="badge badge-neutral">Dipakai 26×</span>
+                </div>
+                <p>Halo Bapak {{nama}}, bagaimana kondisi kolam di {{nama_usaha}}? Apakah bisa sampling bersama minggu ini?</p>
+                <div class="template-meta">
+                  <span class="var-chip">{{nama}}</span>
+                  <span class="var-chip">{{nama_usaha}}</span>
+                  <button class="btn btn-secondary btn-sm" style="margin-left:auto">Gunakan</button>
+                </div>
+              </article>
+
+              <article class="template-item" data-template-item data-category="penawaran" data-template-name="Penawaran bibit siklus baru" data-vars="{{nama}},{{qty}},{{harga}}" data-preview="Halo Pak Harto, untuk siklus berikutnya kami siapkan bibit lele 3–5 cm dengan harga Rp 550/ekor. Minimal 10.000 ekor. Apakah Bapak ingin mengunci kuota untuk tebar bulan depan?">
+                <div class="template-title">
+                  <strong>Penawaran bibit siklus baru</strong>
+                  <span class="badge badge-kolam">Kolam</span>
+                  <span class="badge badge-neutral">Dipakai 14×</span>
+                </div>
+                <p>Halo Bapak {{nama}}, kami siapkan bibit lele {{qty}} dengan harga {{harga}}. Apakah ingin mengunci kuota tebar bulan depan?</p>
+                <div class="template-meta">
+                  <span class="var-chip">{{nama}}</span>
+                  <span class="var-chip">{{qty}}</span>
+                  <span class="var-chip">{{harga}}</span>
+                  <button class="btn btn-secondary btn-sm" style="margin-left:auto">Gunakan</button>
+                </div>
+              </article>
+
+              <article class="template-item" data-template-item data-category="quotation" data-template-name="Quotation terkirim" data-vars="{{nama}},{{no_quotation}},{{produk}},{{harga}},{{tanggal}}" data-preview="Selamat pagi Bapak Ahmad, quotation QUO/2610/0142 sudah kami kirim. Total Rp 6.160.500 untuk 80 kg fillet dan 60 kg ikan siap masak. Berlaku sampai 28 Oktober. Apakah sudah sesuai?">
+                <div class="template-title">
+                  <strong>Quotation terkirim</strong>
+                  <span class="badge badge-mbg">Dapur MBG</span>
+                  <span class="badge badge-neutral">Dipakai 31×</span>
+                </div>
+                <p>Selamat pagi Bapak/Ibu {{nama}}, quotation {{no_quotation}} sudah kami kirim. Total {{harga}} untuk {{produk}}. Berlaku sampai {{tanggal}}.</p>
+                <div class="template-meta">
+                  <span class="var-chip">{{nama}}</span>
+                  <span class="var-chip">{{no_quotation}}</span>
+                  <span class="var-chip">{{harga}}</span>
+                  <button class="btn btn-secondary btn-sm" style="margin-left:auto">Gunakan</button>
+                </div>
+              </article>
+
+              <article class="template-item" data-template-item data-category="po" data-template-name="Konfirmasi PO diterima" data-vars="{{nama}},{{no_po}},{{produk}},{{tanggal_kirim}}" data-preview="Terima kasih Bapak Ahmad, PO MBG/NUS/1024 sudah kami terima dan konfirmasi. Pesanan 80 kg fillet + 60 kg siap masak dijadwalkan kirim 23 Oktober pukul 06.00. Tim kami akan update progresnya.">
+                <div class="template-title">
+                  <strong>Konfirmasi PO diterima</strong>
+                  <span class="badge badge-mbg">Dapur MBG</span>
+                  <span class="badge badge-kolam">Kolam</span>
+                  <span class="badge badge-neutral">Dipakai 27×</span>
+                </div>
+                <p>Terima kasih Bapak/Ibu {{nama}}, PO {{no_po}} sudah kami terima. Pesanan {{produk}} dijadwalkan kirim {{tanggal_kirim}}.</p>
+                <div class="template-meta">
+                  <span class="var-chip">{{nama}}</span>
+                  <span class="var-chip">{{no_po}}</span>
+                  <span class="var-chip">{{tanggal_kirim}}</span>
+                  <button class="btn btn-secondary btn-sm" style="margin-left:auto">Gunakan</button>
+                </div>
+              </article>
+
+              <article class="template-item" data-template-item data-category="pengiriman" data-template-name="Update pengiriman" data-vars="{{nama}},{{no_po}},{{jam}}" data-preview="Bapak Ahmad, pesanan PO-2610-018 sedang dalam perjalanan ke Dapur MBG Nusantara 03. Estimasi tiba pukul 06.30. Driver: Pak Yanto · 0812-7777-1212. Mohon siapkan tim penerima.">
+                <div class="template-title">
+                  <strong>Update pengiriman</strong>
+                  <span class="badge badge-mbg">Dapur MBG</span>
+                  <span class="badge badge-neutral">Dipakai 38×</span>
+                </div>
+                <p>Bapak/Ibu {{nama}}, pesanan {{no_po}} sedang dalam perjalanan. Estimasi tiba pukul {{jam}}. Mohon siapkan tim penerima.</p>
+                <div class="template-meta">
+                  <span class="var-chip">{{nama}}</span>
+                  <span class="var-chip">{{no_po}}</span>
+                  <span class="var-chip">{{jam}}</span>
+                  <button class="btn btn-secondary btn-sm" style="margin-left:auto">Gunakan</button>
+                </div>
+              </article>
+
+              <article class="template-item" data-template-item data-category="buyback" data-template-name="Jadwal buyback" data-vars="{{nama}},{{tanggal}},{{berat}}" data-preview="Halo Pak Harto, berdasarkan sampling terakhir, ikan di kolam Bapak sudah mendekati ukuran panen. Kami ingin menjadwalkan buyback pada 28 Oktober. Apakah hari itu cocok? Kami akan bawa tim timbang dan grading.">
+                <div class="template-title">
+                  <strong>Jadwal buyback</strong>
+                  <span class="badge badge-kolam">Kolam</span>
+                  <span class="badge badge-neutral">Dipakai 12×</span>
+                </div>
+                <p>Halo Bapak {{nama}}, ikan di kolam sudah mendekati ukuran panen. Kami ingin menjadwalkan buyback pada {{tanggal}}.</p>
+                <div class="template-meta">
+                  <span class="var-chip">{{nama}}</span>
+                  <span class="var-chip">{{tanggal}}</span>
+                  <span class="var-chip">{{berat}}</span>
+                  <button class="btn btn-secondary btn-sm" style="margin-left:auto">Gunakan</button>
+                </div>
+              </article>
+
+              <article class="template-item" data-template-item data-category="retensi" data-template-name="Ucapan terima kasih" data-vars="{{nama}},{{nama_usaha}}" data-preview="Terima kasih Bapak Ahmad sudah menjadi mitra Saung Lele. Kami senang bisa mendukung kebutuhan protein untuk Dapur MBG Nusantara 03. Jika ada kebutuhan mendadak, tim kami siap membantu.">
+                <div class="template-title">
+                  <strong>Ucapan terima kasih</strong>
+                  <span class="badge badge-mbg">Dapur MBG</span>
+                  <span class="badge badge-kolam">Kolam</span>
+                  <span class="badge badge-neutral">Dipakai 20×</span>
+                </div>
+                <p>Terima kasih Bapak/Ibu {{nama}} sudah menjadi mitra Saung Lele. Kami siap membantu kebutuhan {{nama_usaha}}.</p>
+                <div class="template-meta">
+                  <span class="var-chip">{{nama}}</span>
+                  <span class="var-chip">{{nama_usaha}}</span>
+                  <button class="btn btn-secondary btn-sm" style="margin-left:auto">Gunakan</button>
+                </div>
+              </article>
+
+              <article class="template-item" data-template-item data-category="winback" data-template-name="Win-back 60 hari" data-vars="{{nama}},{{produk}}" data-preview="Halo Bapak Ahmad, sudah 60 hari sejak order terakhir. Kami ingin memastikan kebutuhan fillet dan ikan siap masak Bapak masih berjalan. Apakah ada menu baru yang bisa kami bantu?">
+                <div class="template-title">
+                  <strong>Win-back 60 hari</strong>
+                  <span class="badge badge-mbg">Dapur MBG</span>
+                  <span class="badge badge-neutral">Dipakai 8×</span>
+                </div>
+                <p>Halo Bapak/Ibu {{nama}}, sudah 60 hari sejak order terakhir. Kami ingin memastikan kebutuhan {{produk}} masih berjalan.</p>
+                <div class="template-meta">
+                  <span class="var-chip">{{nama}}</span>
+                  <span class="var-chip">{{produk}}</span>
+                  <button class="btn btn-secondary btn-sm" style="margin-left:auto">Gunakan</button>
+                </div>
+              </article>
+
+              <div class="empty-state hidden" id="templateEmpty">
+                <div class="empty-icon"><span data-icon="message"></span></div>
+                <h3>Belum ada template di kategori ini</h3>
+                <p>Tambahkan template baru agar tim bisa mengirim pesan dengan konsisten.</p>
+                <button class="btn btn-primary btn-sm" data-modal-open="templateModal"><span data-icon="plus"></span> Template Baru</button>
+              </div>
+            </div>
+          </section>
+
+          <aside class="stack">
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Pratinjau WhatsApp</h2>
+                  <p id="waTemplateName">Follow-up quotation</p>
+                </div>
+                <span class="badge badge-success">Online</span>
+              </div>
+              <div class="card-body">
+                <div class="phone">
+                  <div class="phone-screen">
+                    <div class="phone-head">
+                      <span class="avatar">MB</span>
+                      <div><strong>Dapur MBG Nusantara 03</strong><span>online</span></div>
+                      <button class="icon-btn" aria-label="Menu"><span data-icon="more-horizontal"></span></button>
+                    </div>
+                    <div class="phone-body">
+                      <span class="wa-date">Hari ini</span>
+                      <div class="wa-bubble">Selamat pagi, ada update untuk pesanan fillet minggu ini?</div>
+                      <div class="wa-bubble out" id="waBubble">Selamat pagi Bapak Ahmad, saya Rizky dari Saung Lele. Quotation QUO/2610/0142 untuk fillet lele 250 g sudah saya kirimkan. Apakah ada yang ingin disesuaikan sebelum kami siapkan jadwal kirim? Terima kasih.<span class="wa-time">09.05 <span class="tick">✓✓</span></span></div>
+                    </div>
+                    <div class="phone-foot">
+                      <div class="phone-input">Ketik pesan...</div>
+                      <button class="phone-send" aria-label="Kirim"><span data-icon="send"></span></button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="phone-vars" id="waVars">
+                  <span class="var-chip">{{nama}}</span>
+                  <span class="var-chip">{{no_quotation}}</span>
+                  <span class="var-chip">{{produk}}</span>
+                </div>
+
+                <div class="field mt-2">
+                  <label for="waMessage">Pesan (bisa diedit)</label>
+                  <textarea class="textarea" id="waMessage" style="min-height:110px">Selamat pagi Bapak Ahmad, saya Rizky dari Saung Lele. Quotation QUO/2610/0142 untuk fillet lele 250 g sudah saya kirimkan. Apakah ada yang ingin disesuaikan sebelum kami siapkan jadwal kirim? Terima kasih.</textarea>
+                </div>
+
+                <div class="field mt-2">
+                  <label for="waCustomer">Kirim ke</label>
+                  <select class="form-select" id="waCustomer">
+                    <option>Dapur MBG Nusantara 03</option>
+                    <option>SPPG Kec. Tembalang</option>
+                    <option>Kolam Pak Harto</option>
+                    <option>Kelompok Tani Mina Jaya</option>
+                  </select>
+                </div>
+
+                <div class="stack-sm mt-2">
+                  <button class="btn btn-wa btn-block" data-toast="WhatsApp dibuka dengan pesan terisi (mode demo)."><span data-icon="whatsapp"></span> Kirim via WhatsApp</button>
+                  <div class="row">
+                    <button class="btn btn-secondary btn-sm" style="flex:1" data-copy-target="#waMessage"><span data-icon="copy"></span> Salin</button>
+                    <button class="btn btn-secondary btn-sm" style="flex:1" data-toast="Pesan ditandai terkirim dan dicatat ke timeline pelanggan."><span data-icon="check"></span> Tandai terkirim</button>
+                  </div>
+                </div>
+
+                <div class="template-note mt-2">
+                  <span data-icon="alert-circle"></span>
+                  <span>Hanya kirim ke pelanggan yang sudah opt-in. Jam tenang 20.00–08.00. Semua pesan tercatat di timeline.</span>
+                </div>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="templateModal">
+    <div class="modal modal-lg">
+      <div class="modal-head">
+        <div>
+          <h2>Template pesan baru</h2>
+          <p>Buat pesan yang bisa dipakai ulang dengan variabel personal.</p>
+        </div>
+        <button class="icon-btn" data-modal-close aria-label="Tutup"><span data-icon="x"></span></button>
+      </div>
+      <form data-demo-form="Template baru disimpan dan siap digunakan.">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="field">
+              <label for="templateName">Nama template</label>
+              <input class="input" id="templateName" type="text" placeholder="Contoh: Follow-up quotation" required>
+            </div>
+            <div class="field">
+              <label for="templateCategory">Kategori</label>
+              <select class="form-select" id="templateCategory">
+                <option>Follow-up</option>
+                <option>Penawaran</option>
+                <option>Quotation</option>
+                <option>Konfirmasi PO</option>
+                <option>Pengiriman</option>
+                <option>Buyback</option>
+                <option>Pembayaran</option>
+                <option>Ucapan &amp; retensi</option>
+                <option>Win-back</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="templateSegment">Segmen</label>
+              <select class="form-select" id="templateSegment">
+                <option>Semua segmen</option>
+                <option>Dapur MBG</option>
+                <option>Kolam Pembesaran</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="templateStatus">Status</label>
+              <select class="form-select" id="templateStatus">
+                <option>Aktif</option>
+                <option>Draft</option>
+              </select>
+            </div>
+          </div>
+          <div class="field mt-2">
+            <label for="templateBody">Isi pesan</label>
+            <textarea class="textarea" id="templateBody" style="min-height:130px" placeholder="Selamat pagi Bapak/Ibu {{nama}}, ..." required></textarea>
+          </div>
+          <div class="form-note mt-1">Variabel tersedia: {{nama}}, {{nama_usaha}}, {{produk}}, {{qty}}, {{harga}}, {{tanggal_kirim}}, {{no_po}}, {{no_quotation}}, {{nama_sales}}, {{link_quotation}}</div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Batal</button>
+          <button class="btn btn-primary" type="submit"><span data-icon="check"></span> Simpan template</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

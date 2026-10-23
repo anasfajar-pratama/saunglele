@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pelanggan · Saung Lele CRM</title>
+  <meta name="description" content="Daftar pelanggan Saung Lele dengan filter segmen, health score, dan follow-up berikutnya.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="kebunkode.jpg">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="customers">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" data-sidebar-toggle aria-label="Buka menu"><span data-icon="menu"></span></button>
+        <div class="topbar-search">
+          <span data-icon="search"></span>
+          <input type="text" placeholder="Cari pelanggan, PO, atau quotation..." aria-label="Pencarian global">
+        </div>
+        <div class="topbar-actions">
+          <span class="topbar-date"><span data-icon="calendar"></span> Rabu, 21 Oktober 2026</span>
+          <button class="icon-btn has-dot" aria-label="Notifikasi"><span data-icon="bell"></span></button>
+          <div class="user-chip">
+            <span class="avatar avatar-sm">SL</span>
+            <div><strong>Saung Lele</strong><span>Pemilik</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="page-head">
+          <div>
+            <div class="breadcrumb">
+              <a href="index.html">Beranda</a>
+              <span data-icon="chevron-right"></span>
+              <span>Pelanggan</span>
+            </div>
+            <h1>Pelanggan</h1>
+            <p>126 pelanggan di dua segmen. 17 perlu perhatian, 10 berisiko churn.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" data-toast="Panduan import CSV/Excel dibuka. Kolom wajib: nama, segmen, WhatsApp, kota."><span data-icon="upload"></span> Import</button>
+            <button class="btn btn-primary" data-modal-open="customerModal"><span data-icon="plus"></span> Tambah Pelanggan</button>
+          </div>
+        </div>
+
+        <div class="segment-summary">
+          <button class="segment-pill active" data-segment-filter="all">
+            <span class="icon tone-teal"><span data-icon="users"></span></span>
+            <div><strong>126</strong><span>Semua pelanggan</span></div>
+            <span class="chev" data-icon="chevron-right"></span>
+          </button>
+          <button class="segment-pill" data-segment-filter="mbg">
+            <span class="icon tone-blue"><span data-icon="utensils"></span></span>
+            <div><strong>48</strong><span>Dapur MBG</span></div>
+            <span class="chev" data-icon="chevron-right"></span>
+          </button>
+          <button class="segment-pill" data-segment-filter="kolam">
+            <span class="icon tone-green"><span data-icon="sprout"></span></span>
+            <div><strong>78</strong><span>Kolam pembesaran</span></div>
+            <span class="chev" data-icon="chevron-right"></span>
+          </button>
+          <button class="segment-pill" data-segment-filter="berisiko">
+            <span class="icon tone-red"><span data-icon="alert"></span></span>
+            <div><strong>10</strong><span>Berisiko churn</span></div>
+            <span class="chev" data-icon="chevron-right"></span>
+          </button>
+        </div>
+
+        <div class="insight-banner">
+          <span data-icon="alert"></span>
+          <span><strong>17 pelanggan belum order lebih dari 60 hari.</strong> Nilai historis mereka Rp 21,4 jt. Prioritaskan 6 yang belum dihubungi.</span>
+          <button class="btn btn-amber btn-sm" data-toast="Daftar 17 pelanggan berisiko difilter.">Lihat daftar berisiko</button>
+        </div>
+
+        <section class="card">
+          <div class="toolbar">
+            <div class="search-field">
+              <span data-icon="search"></span>
+              <input type="search" id="customerSearch" placeholder="Cari nama, PIC, atau kota..." aria-label="Cari pelanggan">
+            </div>
+            <select class="select" id="customerStatus" aria-label="Filter kesehatan">
+              <option value="all">Semua kesehatan</option>
+              <option value="aman">Aman</option>
+              <option value="perhatian">Perlu perhatian</option>
+              <option value="berisiko">Berisiko</option>
+            </select>
+            <select class="select" aria-label="Filter pemilik">
+              <option>Semua pemilik</option>
+              <option>Rizky</option>
+              <option>Dina</option>
+              <option>Admin</option>
+            </select>
+            <button class="btn btn-secondary btn-sm" data-toast="Filter lanjutan dibuka."><span data-icon="filter"></span> Filter</button>
+            <span class="text-xs muted" id="customerShown" style="margin-left:auto"></span>
+            <button class="btn btn-ghost btn-sm" data-toast="Data pelanggan diekspor ke CSV."><span data-icon="download"></span> Ekspor</button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Pelanggan</th>
+                  <th>Segmen</th>
+                  <th>PIC / WhatsApp</th>
+                  <th class="num">LTV</th>
+                  <th>Order terakhir</th>
+                  <th>Kesehatan</th>
+                  <th>Follow-up berikutnya</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-customer-row data-segment="mbg" data-health="berisiko">
+                  <td>
+                    <div class="entity">
+                      <span class="avatar mbg">MB</span>
+                      <div>
+                        <a class="link-strong" href="customer-detail.html">Dapur MBG Nusantara 03</a>
+                        <span class="sub">Semarang · sejak Jan 2025</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>Ahmad Fauzi<span class="sub">0812-3456-7890</span></td>
+                  <td class="num">Rp 42,6 jt</td>
+                  <td>34 hari lalu</td>
+                  <td>
+                    <div class="health">
+                      <span class="health-bar"><i style="width:58%;background:var(--red)"></i></span>
+                      <span class="health-score">58</span>
+                      <span class="badge badge-danger">Berisiko</span>
+                    </div>
+                  </td>
+                  <td><span class="chip chip-danger"><span data-icon="clock"></span> Terlambat 2 hari</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span></a>
+                    <a class="icon-btn sm" href="customer-detail.html" aria-label="Detail pelanggan"><span data-icon="chevron-right"></span></a>
+                  </td>
+                </tr>
+
+                <tr data-customer-row data-segment="mbg" data-health="aman">
+                  <td>
+                    <div class="entity">
+                      <span class="avatar mbg">ST</span>
+                      <div>
+                        <a class="link-strong" href="customer-detail.html">SPPG Kec. Tembalang</a>
+                        <span class="sub">Semarang · sejak Mar 2025</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>Nur Aini<span class="sub">0813-2211-8899</span></td>
+                  <td class="num">Rp 28,4 jt</td>
+                  <td>2 hari lalu</td>
+                  <td>
+                    <div class="health">
+                      <span class="health-bar"><i style="width:88%;background:var(--green)"></i></span>
+                      <span class="health-score">88</span>
+                      <span class="badge badge-success">Aman</span>
+                    </div>
+                  </td>
+                  <td><span class="chip chip-info"><span data-icon="clock"></span> Hari ini, 09.00</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span></a>
+                    <a class="icon-btn sm" href="customer-detail.html" aria-label="Detail pelanggan"><span data-icon="chevron-right"></span></a>
+                  </td>
+                </tr>
+
+                <tr data-customer-row data-segment="kolam" data-health="perhatian">
+                  <td>
+                    <div class="entity">
+                      <span class="avatar kolam">PH</span>
+                      <div>
+                        <a class="link-strong" href="customer-detail.html">Kolam Pak Harto</a>
+                        <span class="sub">Ungaran · mitra sejak Agu 2025</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-kolam">Kolam</span></td>
+                  <td>Harto Wijaya<span class="sub">0857-1122-3344</span></td>
+                  <td class="num">Rp 36,1 jt</td>
+                  <td>12 hari lalu</td>
+                  <td>
+                    <div class="health">
+                      <span class="health-bar"><i style="width:76%;background:var(--accent)"></i></span>
+                      <span class="health-score">76</span>
+                      <span class="badge badge-warning">Perhatian</span>
+                    </div>
+                  </td>
+                  <td><span class="chip chip-warning"><span data-icon="clock"></span> Hari ini, 10.30</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span></a>
+                    <a class="icon-btn sm" href="customer-detail.html" aria-label="Detail pelanggan"><span data-icon="chevron-right"></span></a>
+                  </td>
+                </tr>
+
+                <tr data-customer-row data-segment="mbg" data-health="aman">
+                  <td>
+                    <div class="entity">
+                      <span class="avatar mbg">CB</span>
+                      <div>
+                        <a class="link-strong" href="customer-detail.html">Dapur MBG Ceria Banyumanik</a>
+                        <span class="sub">Semarang · sejak Feb 2025</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>Rina Wati<span class="sub">0812-9988-7766</span></td>
+                  <td class="num">Rp 19,8 jt</td>
+                  <td>5 hari lalu</td>
+                  <td>
+                    <div class="health">
+                      <span class="health-bar"><i style="width:84%;background:var(--green)"></i></span>
+                      <span class="health-score">84</span>
+                      <span class="badge badge-success">Aman</span>
+                    </div>
+                  </td>
+                  <td><span class="chip"><span data-icon="calendar"></span> Besok, 08.30</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span></a>
+                    <a class="icon-btn sm" href="customer-detail.html" aria-label="Detail pelanggan"><span data-icon="chevron-right"></span></a>
+                  </td>
+                </tr>
+
+                <tr data-customer-row data-segment="kolam" data-health="perhatian">
+                  <td>
+                    <div class="entity">
+                      <span class="avatar kolam">MJ</span>
+                      <div>
+                        <a class="link-strong" href="customer-detail.html">Kelompok Tani Mina Jaya</a>
+                        <span class="sub">Demak · 14 anggota</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-kolam">Kolam</span></td>
+                  <td>Sugeng Riyadi<span class="sub">0856-4433-2211</span></td>
+                  <td class="num">Rp 31,2 jt</td>
+                  <td>18 hari lalu</td>
+                  <td>
+                    <div class="health">
+                      <span class="health-bar"><i style="width:69%;background:var(--accent)"></i></span>
+                      <span class="health-score">69</span>
+                      <span class="badge badge-warning">Perhatian</span>
+                    </div>
+                  </td>
+                  <td><span class="chip chip-info"><span data-icon="clock"></span> Hari ini, 13.00</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span></a>
+                    <a class="icon-btn sm" href="customer-detail.html" aria-label="Detail pelanggan"><span data-icon="chevron-right"></span></a>
+                  </td>
+                </tr>
+
+                <tr data-customer-row data-segment="mbg" data-health="perhatian">
+                  <td>
+                    <div class="entity">
+                      <span class="avatar mbg">SP</span>
+                      <div>
+                        <a class="link-strong" href="customer-detail.html">SPPG Pedurungan</a>
+                        <span class="sub">Semarang · sejak Apr 2025</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>Yuliana Sari<span class="sub">0813-5566-7788</span></td>
+                  <td class="num">Rp 24,7 jt</td>
+                  <td>41 hari lalu</td>
+                  <td>
+                    <div class="health">
+                      <span class="health-bar"><i style="width:61%;background:var(--accent)"></i></span>
+                      <span class="health-score">61</span>
+                      <span class="badge badge-warning">Perhatian</span>
+                    </div>
+                  </td>
+                  <td><span class="chip chip-danger"><span data-icon="clock"></span> Terlambat 5 hari</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span></a>
+                    <a class="icon-btn sm" href="customer-detail.html" aria-label="Detail pelanggan"><span data-icon="chevron-right"></span></a>
+                  </td>
+                </tr>
+
+                <tr data-customer-row data-segment="kolam" data-health="aman">
+                  <td>
+                    <div class="entity">
+                      <span class="avatar kolam">BE</span>
+                      <div>
+                        <a class="link-strong" href="customer-detail.html">Kolam Bu Endang</a>
+                        <span class="sub">Salatiga · 6 kolam</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-kolam">Kolam</span></td>
+                  <td>Endang Lestari<span class="sub">0858-7788-9900</span></td>
+                  <td class="num">Rp 22,5 jt</td>
+                  <td>9 hari lalu</td>
+                  <td>
+                    <div class="health">
+                      <span class="health-bar"><i style="width:91%;background:var(--green)"></i></span>
+                      <span class="health-score">91</span>
+                      <span class="badge badge-success">Aman</span>
+                    </div>
+                  </td>
+                  <td><span class="chip"><span data-icon="calendar"></span> 28 Okt 2026</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span></a>
+                    <a class="icon-btn sm" href="customer-detail.html" aria-label="Detail pelanggan"><span data-icon="chevron-right"></span></a>
+                  </td>
+                </tr>
+
+                <tr data-customer-row data-segment="kolam" data-health="berisiko">
+                  <td>
+                    <div class="entity">
+                      <span class="avatar kolam">BF</span>
+                      <div>
+                        <a class="link-strong" href="customer-detail.html">Barokah Fish Farm</a>
+                        <span class="sub">Kendal · 8 kolam</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-kolam">Kolam</span></td>
+                  <td>Imam Barokah<span class="sub">0857-9090-1122</span></td>
+                  <td class="num">Rp 18,9 jt</td>
+                  <td>63 hari lalu</td>
+                  <td>
+                    <div class="health">
+                      <span class="health-bar"><i style="width:48%;background:var(--red)"></i></span>
+                      <span class="health-score">48</span>
+                      <span class="badge badge-danger">Berisiko</span>
+                    </div>
+                  </td>
+                  <td><span class="chip chip-danger"><span data-icon="alert-circle"></span> Belum dijadwalkan</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span></a>
+                    <a class="icon-btn sm" href="customer-detail.html" aria-label="Detail pelanggan"><span data-icon="chevron-right"></span></a>
+                  </td>
+                </tr>
+
+                <tr data-customer-row data-segment="mbg" data-health="perhatian">
+                  <td>
+                    <div class="entity">
+                      <span class="avatar mbg">SM</span>
+                      <div>
+                        <a class="link-strong" href="customer-detail.html">Dapur MBG Sehat Mandiri</a>
+                        <span class="sub">Kendal · sejak Jun 2025</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td>Siti Aminah<span class="sub">0812-1010-2020</span></td>
+                  <td class="num">Rp 16,4 jt</td>
+                  <td>22 hari lalu</td>
+                  <td>
+                    <div class="health">
+                      <span class="health-bar"><i style="width:72%;background:var(--accent)"></i></span>
+                      <span class="health-score">72</span>
+                      <span class="badge badge-warning">Perhatian</span>
+                    </div>
+                  </td>
+                  <td><span class="chip"><span data-icon="calendar"></span> 23 Okt 2026</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span></a>
+                    <a class="icon-btn sm" href="customer-detail.html" aria-label="Detail pelanggan"><span data-icon="chevron-right"></span></a>
+                  </td>
+                </tr>
+
+                <tr data-customer-row data-segment="kolam" data-health="aman">
+                  <td>
+                    <div class="entity">
+                      <span class="avatar kolam">TL</span>
+                      <div>
+                        <a class="link-strong" href="customer-detail.html">Tani Lele Makmur</a>
+                        <span class="sub">Boyolali · 5 kolam</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-kolam">Kolam</span></td>
+                  <td>Joko Purnomo<span class="sub">0856-3434-5656</span></td>
+                  <td class="num">Rp 12,8 jt</td>
+                  <td>7 hari lalu</td>
+                  <td>
+                    <div class="health">
+                      <span class="health-bar"><i style="width:83%;background:var(--green)"></i></span>
+                      <span class="health-score">83</span>
+                      <span class="badge badge-success">Aman</span>
+                    </div>
+                  </td>
+                  <td><span class="chip"><span data-icon="calendar"></span> 25 Okt 2026</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span></a>
+                    <a class="icon-btn sm" href="customer-detail.html" aria-label="Detail pelanggan"><span data-icon="chevron-right"></span></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <span id="customerPaginationText">Menampilkan 10 dari 126 pelanggan</span>
+            <div class="pagination-pages">
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <span class="page-btn muted">…</span>
+              <button class="page-btn">13</button>
+              <button class="page-btn" aria-label="Halaman berikutnya"><span data-icon="chevron-right"></span></button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="customerModal">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <h2>Tambah pelanggan baru</h2>
+          <p>Simpan profil dan langsung jadwalkan follow-up pertama.</p>
+        </div>
+        <button class="icon-btn" data-modal-close aria-label="Tutup"><span data-icon="x"></span></button>
+      </div>
+      <form data-demo-form="Pelanggan baru disimpan. Follow-up pertama dijadwalkan besok.">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="field">
+              <label for="newName">Nama usaha / pelanggan</label>
+              <input class="input" id="newName" type="text" placeholder="Contoh: Dapur MBG Nusantara 04" required>
+            </div>
+            <div class="field">
+              <label for="newSegment">Segmen</label>
+              <select class="form-select" id="newSegment">
+                <option>Dapur MBG</option>
+                <option>Kolam Pembesaran</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="newPic">Nama PIC</label>
+              <input class="input" id="newPic" type="text" placeholder="Nama penanggung jawab" required>
+            </div>
+            <div class="field">
+              <label for="newPhone">Nomor WhatsApp</label>
+              <input class="input" id="newPhone" type="tel" placeholder="08xx-xxxx-xxxx" required>
+            </div>
+            <div class="field">
+              <label for="newCity">Kota / kabupaten</label>
+              <input class="input" id="newCity" type="text" placeholder="Semarang">
+            </div>
+            <div class="field">
+              <label for="newSource">Sumber lead</label>
+              <select class="form-select" id="newSource">
+                <option>Referensi</option>
+                <option>WhatsApp</option>
+                <option>Kunjungan lapangan</option>
+                <option>Instagram</option>
+                <option>Lainnya</option>
+              </select>
+            </div>
+          </div>
+          <div class="field mt-2">
+            <label for="newNote">Catatan awal</label>
+            <textarea class="textarea" id="newNote" placeholder="Kebutuhan, volume, atau konteks penting..."></textarea>
+          </div>
+          <label class="check-row mt-2">
+            <input type="checkbox" checked>
+            <span>Buat follow-up otomatis 24 jam setelah pelanggan disimpan</span>
+          </label>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Batal</button>
+          <button class="btn btn-primary" type="submit"><span data-icon="check"></span> Simpan pelanggan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

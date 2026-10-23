@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laporan · Saung Lele CRM</title>
+  <meta name="description" content="Laporan retensi pelanggan, follow-up, pipeline, delivery, dan buyback Saung Lele.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="kebunkode.jpg">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="reports">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" data-sidebar-toggle aria-label="Buka menu"><span data-icon="menu"></span></button>
+        <div class="topbar-search">
+          <span data-icon="search"></span>
+          <input type="text" placeholder="Cari pelanggan, PO, atau quotation..." aria-label="Pencarian global">
+        </div>
+        <div class="topbar-actions">
+          <span class="topbar-date"><span data-icon="calendar"></span> Rabu, 21 Oktober 2026</span>
+          <button class="icon-btn has-dot" aria-label="Notifikasi"><span data-icon="bell"></span></button>
+          <div class="user-chip">
+            <span class="avatar avatar-sm">SL</span>
+            <div><strong>Saung Lele</strong><span>Pemilik</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="page-head">
+          <div>
+            <div class="breadcrumb">
+              <a href="index.html">Beranda</a>
+              <span data-icon="chevron-right"></span>
+              <span>Laporan</span>
+            </div>
+            <h1>Laporan</h1>
+            <p>Retensi, follow-up, pipeline, dan operasi dalam satu tampilan.</p>
+          </div>
+          <div class="page-actions">
+            <select class="select" aria-label="Rentang tanggal">
+              <option>1–21 Okt 2026</option>
+              <option>September 2026</option>
+              <option>Agustus 2026</option>
+              <option>90 hari terakhir</option>
+            </select>
+            <button class="btn btn-secondary" data-toast="Laporan bulan ini diekspor ke PDF."><span data-icon="download"></span> Ekspor PDF</button>
+          </div>
+        </div>
+
+        <div class="report-hero">
+          <span class="kpi-icon tone-green" style="background:rgba(255,255,255,.14);color:#8ff0db"><span data-icon="trending-up"></span></span>
+          <div>
+            <strong>Retensi membaik, follow-up masih bisa ditingkatkan.</strong>
+            <span>Repeat order naik 5,2 pts. 6 pelanggan berisiko belum dihubungi lebih dari 30 hari.</span>
+          </div>
+          <button class="btn btn-secondary btn-sm" data-toast="Rekomendasi: fokus win-back 6 pelanggan berisiko dan kejar compliance follow-up 95%.">Lihat rekomendasi</button>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-top"><span class="kpi-icon tone-teal"><span data-icon="refresh"></span></span><span class="trend up">+5,2 pts</span></div>
+            <div class="kpi-value">68%</div>
+            <div class="kpi-label">Repeat order rate</div>
+            <div class="kpi-foot"><span>Target 70%</span></div>
+          </div>
+          <div class="kpi-card accent">
+            <div class="kpi-top"><span class="kpi-icon tone-amber"><span data-icon="calendar-check"></span></span><span class="badge badge-warning">Target 95%</span></div>
+            <div class="kpi-value">92%</div>
+            <div class="kpi-label">Follow-up compliance</div>
+            <div class="kpi-foot"><span>23 dari 25 tugas selesai</span></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top"><span class="kpi-icon tone-red"><span data-icon="alert"></span></span><span class="trend up">-2 pts</span></div>
+            <div class="kpi-value">8%</div>
+            <div class="kpi-label">Churn rate</div>
+            <div class="kpi-foot"><span>10 dari 126 pelanggan</span></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top"><span class="kpi-icon tone-blue"><span data-icon="truck"></span></span><span class="trend up">+4 pts</span></div>
+            <div class="kpi-value">92%</div>
+            <div class="kpi-label">On-time delivery</div>
+            <div class="kpi-foot"><span>23 dari 25 pengiriman</span></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top"><span class="kpi-icon tone-green"><span data-icon="cash"></span></span><span class="trend up">+12%</span></div>
+            <div class="kpi-value">Rp 79,8 jt</div>
+            <div class="kpi-label">Nilai repeat order</div>
+            <div class="kpi-foot"><span>62% dari total revenue</span></div>
+          </div>
+        </div>
+
+        <div class="grid grid-2-1 mb-2">
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h2>Retensi &amp; repeat order</h2>
+                <p>6 bulan terakhir · pelanggan aktif vs repeat order</p>
+              </div>
+              <span class="badge badge-success">Tren positif</span>
+            </div>
+            <div class="bar-chart">
+              <div class="bar-col">
+                <div class="bar-pair"><span class="bar" style="height:58%"></span><span class="bar alt" style="height:42%"></span></div>
+                <span class="bar-label">Mei</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar-pair"><span class="bar" style="height:61%"></span><span class="bar alt" style="height:45%"></span></div>
+                <span class="bar-label">Jun</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar-pair"><span class="bar" style="height:63%"></span><span class="bar alt" style="height:48%"></span></div>
+                <span class="bar-label">Jul</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar-pair"><span class="bar" style="height:65%"></span><span class="bar alt" style="height:52%"></span></div>
+                <span class="bar-label">Agu</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar-pair"><span class="bar" style="height:67%"></span><span class="bar alt" style="height:55%"></span></div>
+                <span class="bar-label">Sep</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar-pair"><span class="bar" style="height:68%"></span><span class="bar alt" style="height:58%"></span></div>
+                <span class="bar-label">Okt</span>
+              </div>
+            </div>
+            <div class="chart-legend">
+              <span><i style="background:#0e7a6b"></i> Pelanggan aktif (%)</span>
+              <span><i style="background:#cfe3dd"></i> Repeat order (%)</span>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h2>Kesehatan pelanggan</h2>
+                <p>Skor gabungan recency, frequency, monetary, engagement</p>
+              </div>
+              <a class="icon-btn sm" href="customers.html" aria-label="Buka pelanggan"><span data-icon="arrow-up-right"></span></a>
+            </div>
+            <div class="donut-wrap">
+              <div class="donut" role="img" aria-label="78 persen aman, 14 persen perlu perhatian, 8 persen berisiko">
+                <div class="donut-center"><strong>78%</strong><span>Aman</span></div>
+              </div>
+              <div class="legend">
+                <div class="legend-row"><span class="legend-dot" style="background:#0e7a6b"></span> Aman <strong>98</strong></div>
+                <div class="legend-row"><span class="legend-dot" style="background:#e9963e"></span> Perhatian <strong>18</strong></div>
+                <div class="legend-row"><span class="legend-dot" style="background:#dc2626"></span> Berisiko <strong>10</strong></div>
+              </div>
+            </div>
+            <div class="card-foot">
+              <div class="row-between text-xs">
+                <span class="muted">Rata-rata skor</span>
+                <strong>82 / 100</strong>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="grid grid-3 mb-2">
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h2>Kepatuhan follow-up</h2>
+                <p>Per sales · target 95%</p>
+              </div>
+            </div>
+            <div class="hbar-list">
+              <div class="hbar"><span>Rizky</span><div class="hbar-bar"><i style="width:96%"></i></div><strong>96%</strong></div>
+              <div class="hbar warn"><span>Dina</span><div class="hbar-bar"><i style="width:91%"></i></div><strong>91%</strong></div>
+              <div class="hbar warn"><span>Admin</span><div class="hbar-bar"><i style="width:88%"></i></div><strong>88%</strong></div>
+              <div class="hbar bad"><span>Belum ditugaskan</span><div class="hbar-bar"><i style="width:64%"></i></div><strong>64%</strong></div>
+            </div>
+            <div class="card-foot">
+              <div class="row-between text-xs">
+                <span class="muted">Rata-rata tim</span>
+                <strong style="color:var(--brand)">92%</strong>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h2>Sumber lead &amp; konversi</h2>
+                <p>90 hari terakhir</p>
+              </div>
+            </div>
+            <div class="hbar-list">
+              <div class="hbar"><span>Referensi</span><div class="hbar-bar"><i style="width:78%"></i></div><strong>48%</strong></div>
+              <div class="hbar blue"><span>WhatsApp</span><div class="hbar-bar"><i style="width:54%"></i></div><strong>31%</strong></div>
+              <div class="hbar warn"><span>Kunjungan</span><div class="hbar-bar"><i style="width:38%"></i></div><strong>22%</strong></div>
+              <div class="hbar bad"><span>Instagram</span><div class="hbar-bar"><i style="width:20%"></i></div><strong>12%</strong></div>
+            </div>
+            <div class="card-foot">
+              <div class="row-between text-xs">
+                <span class="muted">Sumber terbaik</span>
+                <strong>Referensi · 48%</strong>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h2>Alasan kalah</h2>
+                <p>12 lead kalah bulan ini</p>
+              </div>
+            </div>
+            <div class="hbar-list">
+              <div class="hbar bad"><span>Harga</span><div class="hbar-bar"><i style="width:42%"></i></div><strong>42%</strong></div>
+              <div class="hbar warn"><span>Stok</span><div class="hbar-bar"><i style="width:25%"></i></div><strong>25%</strong></div>
+              <div class="hbar blue"><span>Lokasi / ongkir</span><div class="hbar-bar"><i style="width:18%"></i></div><strong>18%</strong></div>
+              <div class="hbar"><span>Kualitas</span><div class="hbar-bar"><i style="width:9%"></i></div><strong>9%</strong></div>
+            </div>
+            <div class="card-foot">
+              <div class="row-between text-xs">
+                <span class="muted">Insight</span>
+                <strong>Perkuat value, bukan diskon</strong>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="grid grid-2-1 mb-2">
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h2>On-time delivery</h2>
+                <p>Persentase pengiriman tepat waktu · 6 bulan</p>
+              </div>
+              <span class="badge badge-success">92% bulan ini</span>
+            </div>
+            <div class="bar-chart">
+              <div class="bar-col"><span class="bar" style="height:88%"></span><span class="bar-label">Mei</span></div>
+              <div class="bar-col"><span class="bar" style="height:90%"></span><span class="bar-label">Jun</span></div>
+              <div class="bar-col"><span class="bar" style="height:91%"></span><span class="bar-label">Jul</span></div>
+              <div class="bar-col"><span class="bar" style="height:89%"></span><span class="bar-label">Agu</span></div>
+              <div class="bar-col"><span class="bar" style="height:93%"></span><span class="bar-label">Sep</span></div>
+              <div class="bar-col"><span class="bar" style="height:92%"></span><span class="bar-label">Okt</span></div>
+            </div>
+            <div class="card-foot">
+              <div class="row-between text-xs">
+                <span class="muted">Rata-rata cycle time PO</span>
+                <strong>2,4 hari</strong>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h2>Performa buyback</h2>
+                <p>23 siklus aktif · 5 panen bulan ini</p>
+              </div>
+              <a class="link" href="buyback.html">Detail</a>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item"><span>Survival rate</span><strong>86%</strong></div>
+                <div class="info-item"><span>ABW rata-rata</span><strong>178 g</strong></div>
+                <div class="info-item"><span>Durasi siklus</span><strong>82 hari</strong></div>
+                <div class="info-item"><span>Estimasi margin</span><strong>18%</strong></div>
+              </div>
+              <div class="divider"></div>
+              <div class="pref-list">
+                <div class="pref-row"><span>Nilai buyback bulan ini</span><strong>Rp 92,4 jt</strong></div>
+                <div class="pref-row"><span>Harga rata-rata</span><strong>Rp 22.000/kg</strong></div>
+                <div class="pref-row"><span>Mitra berisiko</span><strong>3 mitra</strong></div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section class="card">
+          <div class="card-head">
+            <div>
+              <h2>Pelanggan berisiko churn</h2>
+              <p>10 pelanggan · 6 belum dihubungi lebih dari 30 hari</p>
+            </div>
+            <a class="link" href="customers.html">Lihat semua</a>
+          </div>
+          <div class="table-wrap mt-2">
+            <table class="table table-compact">
+              <thead>
+                <tr><th>Pelanggan</th><th>Segmen</th><th>Health score</th><th>Order terakhir</th><th class="num">Nilai historis</th><th>Aksi</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="entity"><span class="avatar avatar-sm mbg">MB</span><div><strong>Dapur MBG Nusantara 03</strong><span class="sub">Semarang</span></div></div></td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td><div class="health"><span class="health-bar"><i style="width:58%;background:var(--red)"></i></span><span class="health-score">58</span><span class="badge badge-danger">Berisiko</span></div></td>
+                  <td>34 hari lalu</td>
+                  <td class="num">Rp 42,6 jt</td>
+                  <td class="cell-actions"><a class="btn btn-amber btn-sm" href="templates.html"><span data-icon="whatsapp"></span> Win-back</a></td>
+                </tr>
+                <tr>
+                  <td><div class="entity"><span class="avatar avatar-sm kolam">BF</span><div><strong>Barokah Fish Farm</strong><span class="sub">Kendal</span></div></div></td>
+                  <td><span class="badge badge-kolam">Kolam</span></td>
+                  <td><div class="health"><span class="health-bar"><i style="width:48%;background:var(--red)"></i></span><span class="health-score">48</span><span class="badge badge-danger">Berisiko</span></div></td>
+                  <td>63 hari lalu</td>
+                  <td class="num">Rp 18,9 jt</td>
+                  <td class="cell-actions"><a class="btn btn-amber btn-sm" href="templates.html"><span data-icon="whatsapp"></span> Win-back</a></td>
+                </tr>
+                <tr>
+                  <td><div class="entity"><span class="avatar avatar-sm mbg">SP</span><div><strong>SPPG Pedurungan</strong><span class="sub">Semarang</span></div></div></td>
+                  <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                  <td><div class="health"><span class="health-bar"><i style="width:61%;background:var(--accent)"></i></span><span class="health-score">61</span><span class="badge badge-warning">Perhatian</span></div></td>
+                  <td>41 hari lalu</td>
+                  <td class="num">Rp 24,7 jt</td>
+                  <td class="cell-actions"><a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span> Hubungi</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

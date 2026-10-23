@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quotation · Saung Lele CRM</title>
+  <meta name="description" content="Buat quotation Saung Lele untuk Dapur MBG dan Kolam Pembesaran dengan perhitungan otomatis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="kebunkode.jpg">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="quotations">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" data-sidebar-toggle aria-label="Buka menu"><span data-icon="menu"></span></button>
+        <div class="topbar-search">
+          <span data-icon="search"></span>
+          <input type="text" placeholder="Cari pelanggan, PO, atau quotation..." aria-label="Pencarian global">
+        </div>
+        <div class="topbar-actions">
+          <span class="topbar-date"><span data-icon="calendar"></span> Rabu, 21 Oktober 2026</span>
+          <button class="icon-btn has-dot" aria-label="Notifikasi"><span data-icon="bell"></span></button>
+          <div class="user-chip">
+            <span class="avatar avatar-sm">SL</span>
+            <div><strong>Saung Lele</strong><span>Pemilik</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="page-head">
+          <div>
+            <div class="breadcrumb">
+              <a href="index.html">Beranda</a>
+              <span data-icon="chevron-right"></span>
+              <span>Quotation</span>
+            </div>
+            <h1>Quotation</h1>
+            <p>Buat penawaran sesuai segmen. Harga, item, dan termin dalam satu dokumen.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" data-toast="Draft quotation baru dibuat."><span data-icon="plus"></span> Quotation Baru</button>
+            <button class="btn btn-primary" data-modal-open="quotationPreviewModal"><span data-icon="eye"></span> Preview PDF</button>
+          </div>
+        </div>
+
+        <div class="quote-layout">
+          <div class="stack">
+            <section class="card">
+              <div class="quote-customer">
+                <span class="avatar mbg">MB</span>
+                <div class="entity">
+                  <div>
+                    <strong>Dapur MBG Nusantara 03</strong>
+                    <span class="sub">Semarang · PIC Ahmad Fauzi · 0812-3456-7890</span>
+                  </div>
+                </div>
+                <span class="badge badge-mbg">Dapur MBG</span>
+                <span class="badge badge-success">Health 58</span>
+                <button class="btn btn-secondary btn-sm" style="margin-left:auto" data-toast="Pilih pelanggan lain dari daftar."><span data-icon="refresh"></span> Ganti</button>
+              </div>
+
+              <div class="quote-meta">
+                <div class="field">
+                  <span class="field-label">Nomor quotation</span>
+                  <input class="input" type="text" value="QUO/2610/0142" readonly>
+                  <span class="sub">Otomatis</span>
+                </div>
+                <div class="field">
+                  <span class="field-label">Tanggal</span>
+                  <input class="input" type="text" value="21 Okt 2026" readonly>
+                  <span class="sub">Hari ini</span>
+                </div>
+                <div class="field">
+                  <span class="field-label">Berlaku sampai</span>
+                  <input class="input" type="text" value="28 Okt 2026" readonly>
+                  <span class="sub">7 hari</span>
+                </div>
+                <div class="field">
+                  <span class="field-label">Sales</span>
+                  <input class="input" type="text" value="Rizky" readonly>
+                  <span class="sub">Pemilik akun</span>
+                </div>
+              </div>
+
+              <div class="product-head">
+                <div class="row-between">
+                  <span>Tambah produk cepat</span>
+                  <div class="segmented">
+                    <button class="active" data-product-tab="mbg">Dapur MBG</button>
+                    <button data-product-tab="kolam">Kolam Pembesaran</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="product-grid" data-product-group="mbg">
+                <button class="product-card" data-add-product data-name="Lele Siap Masak Bersih" data-price="26000" data-unit="kg">
+                  <strong>Lele Siap Masak Bersih</strong>
+                  <span>250–300 g/ekor · per kg</span>
+                  <span class="price">Rp 26.000 / kg</span>
+                </button>
+                <button class="product-card" data-add-product data-name="Fillet Lele" data-price="48000" data-unit="kg">
+                  <strong>Fillet Lele</strong>
+                  <span>200–250 g/pcs · per kg</span>
+                  <span class="price">Rp 48.000 / kg</span>
+                </button>
+                <button class="product-card" data-add-product data-name="Lele Siap Masak Premium" data-price="29000" data-unit="kg">
+                  <strong>Lele Siap Masak Premium</strong>
+                  <span>300–400 g/ekor · per kg</span>
+                  <span class="price">Rp 29.000 / kg</span>
+                </button>
+              </div>
+
+              <div class="product-grid hidden" data-product-group="kolam">
+                <button class="product-card" data-add-product data-name="Bibit Lele 2-3 cm" data-price="350" data-unit="ekor">
+                  <strong>Bibit Lele 2–3 cm</strong>
+                  <span>Min. 10.000 ekor · per ekor</span>
+                  <span class="price">Rp 350 / ekor</span>
+                </button>
+                <button class="product-card" data-add-product data-name="Bibit Lele 3-5 cm" data-price="550" data-unit="ekor">
+                  <strong>Bibit Lele 3–5 cm</strong>
+                  <span>Min. 10.000 ekor · per ekor</span>
+                  <span class="price">Rp 550 / ekor</span>
+                </button>
+                <button class="product-card" data-add-product data-name="Bibit Lele 5-7 cm" data-price="800" data-unit="ekor">
+                  <strong>Bibit Lele 5–7 cm</strong>
+                  <span>Min. 5.000 ekor · per ekor</span>
+                  <span class="price">Rp 800 / ekor</span>
+                </button>
+              </div>
+
+              <div class="table-wrap mt-2">
+                <table class="line-table" id="quoteTable">
+                  <thead>
+                    <tr>
+                      <th>Produk</th>
+                      <th>Qty</th>
+                      <th>Harga (Rp)</th>
+                      <th>Diskon (Rp)</th>
+                      <th style="text-align:right">Subtotal</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="quoteItems">
+                    <tr>
+                      <td>
+                        <select class="line-input product-select" aria-label="Produk">
+                          <option value="Lele Siap Masak Bersih" data-price="26000" data-unit="kg">Lele Siap Masak Bersih — 250–300 g</option>
+                          <option value="Fillet Lele" data-price="48000" data-unit="kg" selected>Fillet Lele — 200–250 g</option>
+                          <option value="Lele Siap Masak Premium" data-price="29000" data-unit="kg">Lele Siap Masak Premium — 300–400 g</option>
+                          <option value="Bibit Lele 2-3 cm" data-price="350" data-unit="ekor">Bibit Lele 2–3 cm</option>
+                          <option value="Bibit Lele 3-5 cm" data-price="550" data-unit="ekor">Bibit Lele 3–5 cm</option>
+                          <option value="Bibit Lele 5-7 cm" data-price="800" data-unit="ekor">Bibit Lele 5–7 cm</option>
+                        </select>
+                      </td>
+                      <td>
+                        <div class="row" style="flex-wrap:nowrap;gap:5px">
+                          <input class="line-input qty qty-input" type="number" value="80" min="1" aria-label="Jumlah">
+                          <span class="text-xs muted qty-unit">kg</span>
+                        </div>
+                      </td>
+                      <td><input class="line-input money price-input" type="number" value="48000" step="500" aria-label="Harga satuan"></td>
+                      <td><input class="line-input money discount-input" type="number" value="0" step="1000" aria-label="Diskon"></td>
+                      <td class="line-total">Rp 3.840.000</td>
+                      <td><button class="line-remove" aria-label="Hapus item"><span data-icon="trash"></span></button></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <select class="line-input product-select" aria-label="Produk">
+                          <option value="Lele Siap Masak Bersih" data-price="26000" data-unit="kg" selected>Lele Siap Masak Bersih — 250–300 g</option>
+                          <option value="Fillet Lele" data-price="48000" data-unit="kg">Fillet Lele — 200–250 g</option>
+                          <option value="Lele Siap Masak Premium" data-price="29000" data-unit="kg">Lele Siap Masak Premium — 300–400 g</option>
+                          <option value="Bibit Lele 2-3 cm" data-price="350" data-unit="ekor">Bibit Lele 2–3 cm</option>
+                          <option value="Bibit Lele 3-5 cm" data-price="550" data-unit="ekor">Bibit Lele 3–5 cm</option>
+                          <option value="Bibit Lele 5-7 cm" data-price="800" data-unit="ekor">Bibit Lele 5–7 cm</option>
+                        </select>
+                      </td>
+                      <td>
+                        <div class="row" style="flex-wrap:nowrap;gap:5px">
+                          <input class="line-input qty qty-input" type="number" value="60" min="1" aria-label="Jumlah">
+                          <span class="text-xs muted qty-unit">kg</span>
+                        </div>
+                      </td>
+                      <td><input class="line-input money price-input" type="number" value="26000" step="500" aria-label="Harga satuan"></td>
+                      <td><input class="line-input money discount-input" type="number" value="0" step="1000" aria-label="Diskon"></td>
+                      <td class="line-total">Rp 1.560.000</td>
+                      <td><button class="line-remove" aria-label="Hapus item"><span data-icon="trash"></span></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="quote-foot">
+                <span class="text-xs muted">Klik produk di atas untuk menambah baris. Harga dan total dihitung otomatis.</span>
+                <span class="text-xs muted" id="sumItems" style="margin-left:auto">2 item</span>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Quotation terbaru</h2>
+                  <p>5 quotation terakhir · pantau masa berlaku dan follow-up</p>
+                </div>
+                <a class="link" href="purchase-orders.html">Buat PO dari quotation</a>
+              </div>
+              <div class="table-wrap mt-2">
+                <table class="table">
+                  <thead>
+                    <tr><th>Nomor</th><th>Pelanggan</th><th>Segmen</th><th>Tanggal</th><th class="num">Nilai</th><th>Status</th><th>Berlaku s.d.</th><th></th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><a class="link-strong" href="#quoteTable">QUO/2610/0142</a></td>
+                      <td>Dapur MBG Nusantara 03</td>
+                      <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                      <td>21 Okt 2026</td>
+                      <td class="num">Rp 6,16 jt</td>
+                      <td><span class="badge status-shipped">Terkirim</span></td>
+                      <td>28 Okt 2026</td>
+                      <td class="cell-actions"><button class="icon-btn sm" data-toast="Quotation dibuka." aria-label="Buka quotation"><span data-icon="chevron-right"></span></button></td>
+                    </tr>
+                    <tr>
+                      <td><a class="link-strong" href="#quoteTable">QUO/2610/0141</a></td>
+                      <td>SPPG Kec. Tembalang</td>
+                      <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                      <td>20 Okt 2026</td>
+                      <td class="num">Rp 5,20 jt</td>
+                      <td><span class="badge status-shipped">Terkirim</span></td>
+                      <td>27 Okt 2026</td>
+                      <td class="cell-actions"><button class="icon-btn sm" data-toast="Quotation dibuka." aria-label="Buka quotation"><span data-icon="chevron-right"></span></button></td>
+                    </tr>
+                    <tr>
+                      <td><a class="link-strong" href="#quoteTable">QUO/2610/0140</a></td>
+                      <td>Kolam Pak Harto</td>
+                      <td><span class="badge badge-kolam">Kolam</span></td>
+                      <td>19 Okt 2026</td>
+                      <td class="num">Rp 6,60 jt</td>
+                      <td><span class="badge status-done">Diterima</span></td>
+                      <td>2 Nov 2026</td>
+                      <td class="cell-actions"><button class="icon-btn sm" data-toast="Quotation dibuka." aria-label="Buka quotation"><span data-icon="chevron-right"></span></button></td>
+                    </tr>
+                    <tr>
+                      <td><a class="link-strong" href="#quoteTable">QUO/2610/0139</a></td>
+                      <td>Dapur MBG Pedurungan</td>
+                      <td><span class="badge badge-mbg">Dapur MBG</span></td>
+                      <td>18 Okt 2026</td>
+                      <td class="num">Rp 12,4 jt</td>
+                      <td><span class="badge status-production">Negosiasi</span></td>
+                      <td>25 Okt 2026</td>
+                      <td class="cell-actions"><button class="icon-btn sm" data-toast="Quotation dibuka." aria-label="Buka quotation"><span data-icon="chevron-right"></span></button></td>
+                    </tr>
+                    <tr>
+                      <td><a class="link-strong" href="#quoteTable">QUO/2610/0138</a></td>
+                      <td>Kelompok Tani Mina Jaya</td>
+                      <td><span class="badge badge-kolam">Kolam</span></td>
+                      <td>17 Okt 2026</td>
+                      <td class="num">Rp 6,40 jt</td>
+                      <td><span class="badge status-late">Kedaluwarsa</span></td>
+                      <td>24 Okt 2026</td>
+                      <td class="cell-actions"><button class="icon-btn sm" data-toast="Quotation dibuka." aria-label="Buka quotation"><span data-icon="chevron-right"></span></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <aside class="summary">
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Ringkasan quotation</h2>
+                  <p>Perhitungan otomatis</p>
+                </div>
+                <span class="badge badge-neutral">Draft</span>
+              </div>
+              <div class="summary-body">
+                <div class="summary-row"><span>Subtotal</span><strong id="sumSubtotal">Rp 5.400.000</strong></div>
+                <div class="summary-row"><span>Diskon item</span><strong id="sumDiscount">- Rp 0</strong></div>
+                <div class="summary-row">
+                  <span>Ongkir</span>
+                  <input class="input" id="shippingInput" type="number" value="150000" step="10000" style="width:110px;padding:4px 7px;text-align:right;font-size:10.5px" aria-label="Ongkir">
+                </div>
+                <div class="summary-row"><span>PPN 11%</span><strong id="sumTax">Rp 610.500</strong></div>
+                <div class="summary-total"><span>Total</span><span id="sumTotal">Rp 6.160.500</span></div>
+                <div class="form-note mt-2">Harga sudah termasuk kemasan. Pajak dihitung dari subtotal setelah diskon + ongkir.</div>
+              </div>
+
+              <div class="summary-actions">
+                <button class="btn btn-secondary btn-block" data-toast="Draft quotation disimpan."><span data-icon="check"></span> Simpan draft</button>
+                <button class="btn btn-wa btn-block" data-toast="Quotation dikirim via WhatsApp dan dicatat ke timeline."><span data-icon="whatsapp"></span> Kirim via WhatsApp</button>
+                <div class="row">
+                  <button class="btn btn-secondary btn-sm" style="flex:1" data-modal-open="quotationPreviewModal"><span data-icon="eye"></span> Preview</button>
+                  <button class="btn btn-secondary btn-sm" style="flex:1" data-toast="PDF quotation diunduh."><span data-icon="download"></span> PDF</button>
+                </div>
+              </div>
+
+              <div class="quote-terms">
+                <h4>Syarat &amp; ketentuan</h4>
+                <ul>
+                  <li>Berlaku 7 hari sejak tanggal quotation.</li>
+                  <li>Pembayaran 14 hari setelah invoice.</li>
+                  <li>Pengiriman Selasa &amp; Jumat, pukul 05.00–07.00.</li>
+                  <li>Minimum order 50 kg untuk produk konsumsi.</li>
+                  <li>Harga dapat berubah bila volume berubah.</li>
+                </ul>
+              </div>
+
+              <div class="card-body">
+                <div class="field">
+                  <label for="quoteNote">Catatan untuk pelanggan</label>
+                  <textarea class="textarea" id="quoteNote" style="min-height:80px">Terima kasih atas kepercayaan Bapak Ahmad. Kami siap menyesuaikan ukuran fillet sesuai kebutuhan menu.</textarea>
+                </div>
+                <div class="info-strip mt-2" style="font-size:10.5px">
+                  <span data-icon="check-circle"></span>
+                  <span>Diskon 0% · tidak memerlukan approval pemilik.</span>
+                </div>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="quotationPreviewModal">
+    <div class="modal modal-lg">
+      <div class="modal-head">
+        <div>
+          <h2>Pratinjau quotation</h2>
+          <p>QUO/2610/0142 · Dapur MBG Nusantara 03</p>
+        </div>
+        <button class="icon-btn" data-modal-close aria-label="Tutup"><span data-icon="x"></span></button>
+      </div>
+      <div class="modal-body" style="background:#f4f6f3">
+        <div class="doc-preview">
+          <div class="doc-preview-head">
+            <div class="doc-brand">
+              <span class="brand-mark" style="width:34px;height:34px;border-radius:10px"><span data-icon="fish"></span></span>
+              <div>
+                <strong>Saung Lele</strong>
+                <span>Ternak &amp; Jual Beli Lele · Semarang</span>
+              </div>
+            </div>
+            <div class="doc-title">
+              <strong>QUOTATION</strong>
+              <span>QUO/2610/0142</span>
+            </div>
+          </div>
+
+          <div class="doc-meta-grid">
+            <div>
+              <span class="eyebrow">Kepada</span>
+              <strong>Dapur MBG Nusantara 03</strong>
+              <p>Jl. Nusantara Raya No. 12, Semarang<br>PIC: Ahmad Fauzi · 0812-3456-7890</p>
+            </div>
+            <div>
+              <span class="eyebrow">Detail</span>
+              <p>Tanggal: 21 Oktober 2026<br>Berlaku sampai: 28 Oktober 2026<br>Sales: Rizky</p>
+            </div>
+          </div>
+
+          <table class="doc-table">
+            <thead>
+              <tr><th>Produk</th><th>Qty</th><th>Harga</th><th>Subtotal</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Fillet Lele — 200–250 g</td><td>80 kg</td><td>Rp 48.000</td><td>Rp 3.840.000</td></tr>
+              <tr><td>Lele Siap Masak Bersih — 250–300 g</td><td>60 kg</td><td>Rp 26.000</td><td>Rp 1.560.000</td></tr>
+            </tbody>
+          </table>
+
+          <div class="doc-totals">
+            <div><span>Subtotal</span><strong>Rp 5.400.000</strong></div>
+            <div><span>Ongkir</span><strong>Rp 150.000</strong></div>
+            <div><span>PPN 11%</span><strong>Rp 610.500</strong></div>
+            <div class="total"><span>Total</span><strong id="docTotal">Rp 6.160.500</strong></div>
+          </div>
+
+          <div class="doc-terms">
+            <strong>Syarat &amp; ketentuan</strong>
+            <p>Berlaku 7 hari. Pembayaran 14 hari setelah invoice. Pengiriman Selasa &amp; Jumat pukul 05.00–07.00. Minimum order 50 kg untuk produk konsumsi.</p>
+          </div>
+
+          <div class="doc-sign">
+            <div><span>Hormat kami,</span><strong>Rizky</strong><span>Sales Saung Lele</span></div>
+            <div><span>Disetujui oleh,</span><strong>________________</strong><span>Dapur MBG Nusantara 03</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-secondary" data-modal-close>Tutup</button>
+        <button class="btn btn-primary" data-toast="PDF quotation diunduh."><span data-icon="download"></span> Unduh PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dapur MBG Nusantara 03 · Saung Lele CRM</title>
+  <meta name="description" content="Profil pelanggan, timeline interaksi, follow-up, quotation, dan PO Dapur MBG Nusantara 03.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="kebunkode.jpg">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="customers">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" data-sidebar-toggle aria-label="Buka menu"><span data-icon="menu"></span></button>
+        <div class="topbar-search">
+          <span data-icon="search"></span>
+          <input type="text" placeholder="Cari pelanggan, PO, atau quotation..." aria-label="Pencarian global">
+        </div>
+        <div class="topbar-actions">
+          <span class="topbar-date"><span data-icon="calendar"></span> Rabu, 21 Oktober 2026</span>
+          <button class="icon-btn has-dot" aria-label="Notifikasi"><span data-icon="bell"></span></button>
+          <div class="user-chip">
+            <span class="avatar avatar-sm">SL</span>
+            <div><strong>Saung Lele</strong><span>Pemilik</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="breadcrumb mb-2">
+          <a href="index.html">Beranda</a>
+          <span data-icon="chevron-right"></span>
+          <a href="customers.html">Pelanggan</a>
+          <span data-icon="chevron-right"></span>
+          <span>Dapur MBG Nusantara 03</span>
+        </div>
+
+        <section class="profile-hero mb-2">
+          <div class="profile-main">
+            <span class="avatar avatar-lg mbg">MB</span>
+            <div class="profile-info">
+              <div class="profile-name">
+                <h1>Dapur MBG Nusantara 03</h1>
+                <span class="badge badge-mbg">Dapur MBG</span>
+                <span class="badge badge-success">Pelanggan aktif</span>
+                <span class="badge badge-danger"><span data-icon="alert"></span> Health 58</span>
+              </div>
+              <div class="profile-meta">
+                <span><span data-icon="map-pin"></span> Semarang, Jawa Tengah</span>
+                <span><span data-icon="user"></span> Ahmad Fauzi · Kepala Dapur</span>
+                <span><span data-icon="phone"></span> 0812-3456-7890</span>
+                <span><span data-icon="user"></span> Sales: Rizky</span>
+                <span><span data-icon="calendar"></span> Pelanggan sejak Jan 2025</span>
+              </div>
+            </div>
+            <div class="profile-actions">
+              <a class="btn btn-wa" href="templates.html"><span data-icon="whatsapp"></span> WhatsApp</a>
+              <a class="btn btn-secondary" href="quotations.html"><span data-icon="file"></span> Buat Quotation</a>
+              <a class="btn btn-secondary" href="#noteForm"><span data-icon="plus"></span> Catat Follow-up</a>
+              <button class="icon-btn" data-toast="Menu lainnya: edit profil, arsipkan, ekspor data." aria-label="Aksi lainnya"><span data-icon="more-horizontal"></span></button>
+            </div>
+          </div>
+
+          <div class="profile-stats">
+            <div class="profile-stat"><strong>Rp 42,6 jt</strong><span>Lifetime value</span></div>
+            <div class="profile-stat"><strong>18</strong><span>Total order</span></div>
+            <div class="profile-stat"><strong>6×</strong><span>Repeat order</span></div>
+            <div class="profile-stat"><strong>Rp 2,4 jt</strong><span>Rata-rata order</span></div>
+          </div>
+        </section>
+
+        <div class="alert alert-warning mb-2">
+          <span data-icon="alert"></span>
+          <div>
+            <strong>34 hari tanpa order.</strong> Pola biasanya 2× per minggu. Health score turun dari 76 ke 58.
+            <span class="muted">Terakhir dihubungi 19 Okt — follow-up terlambat 2 hari.</span>
+          </div>
+          <button class="btn btn-amber btn-sm" data-toast="Kampanye win-back dijadwalkan. Template disiapkan di WhatsApp.">Jadwalkan win-back</button>
+        </div>
+
+        <div class="grid grid-2-1">
+          <section class="card" data-tabs>
+            <div class="tabs">
+              <button class="tab active" data-tab="overview">Ringkasan</button>
+              <button class="tab" data-tab="timeline">Timeline</button>
+              <button class="tab" data-tab="quotes">Quotation <span class="count">3</span></button>
+              <button class="tab" data-tab="orders">PO <span class="count">5</span></button>
+              <button class="tab" data-tab="buyback">Buyback <span class="count">0</span></button>
+              <button class="tab" data-tab="docs">Dokumen <span class="count">4</span></button>
+            </div>
+
+            <div class="tab-panel active" data-panel="overview">
+              <div class="card-head">
+                <div>
+                  <h2>Catat interaksi &amp; jadwalkan follow-up</h2>
+                  <p>Setiap catatan bisa langsung menjadi pengingat. Tidak ada janji yang hilang.</p>
+                </div>
+              </div>
+
+              <form class="card-body" id="noteForm">
+                <div class="segmented mb-2">
+                  <button type="button" data-note-type="Telepon"><span data-icon="phone"></span> Telepon</button>
+                  <button type="button" data-note-type="WhatsApp"><span data-icon="whatsapp"></span> WhatsApp</button>
+                  <button type="button" data-note-type="Kunjungan"><span data-icon="map-pin"></span> Kunjungan</button>
+                  <button type="button" class="active" data-note-type="Catatan"><span data-icon="edit"></span> Catatan</button>
+                </div>
+
+                <div class="field">
+                  <label for="noteText">Apa yang terjadi?</label>
+                  <textarea class="textarea" id="noteText" placeholder="Contoh: PIC minta sample fillet ukuran 250 g. Mereka akan evaluasi untuk menu minggu depan."></textarea>
+                </div>
+
+                <div class="form-grid form-grid-3 mt-2">
+                  <div class="field">
+                    <label for="followDate">Follow-up berikutnya</label>
+                    <input class="input" id="followDate" type="date" value="2026-10-23">
+                  </div>
+                  <div class="field">
+                    <label for="followTime">Waktu</label>
+                    <input class="input" id="followTime" type="time" value="09:00">
+                  </div>
+                  <div class="field">
+                    <label for="followPriority">Prioritas</label>
+                    <select class="form-select" id="followPriority">
+                      <option>Tinggi</option>
+                      <option selected>Normal</option>
+                      <option>Rendah</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row-between mt-2">
+                  <span class="form-note">Pengingat akan muncul di dashboard dan dikirim ke Rizky.</span>
+                  <div class="row">
+                    <button class="btn btn-ghost" type="button" data-toast="Catatan disimpan tanpa pengingat.">Simpan saja</button>
+                    <button class="btn btn-primary" type="submit"><span data-icon="calendar-check"></span> Simpan &amp; ingatkan</button>
+                  </div>
+                </div>
+              </form>
+
+              <div class="divider" style="margin:0"></div>
+
+              <div class="card-head" style="padding-top:16px">
+                <div>
+                  <h2>Timeline terbaru</h2>
+                  <p>Semua interaksi, dokumen, dan perubahan status</p>
+                </div>
+                <button class="link" data-tab-link="timeline" type="button">Lihat lengkap</button>
+              </div>
+
+              <div class="timeline mt-2" id="timelineList">
+                <div class="timeline-item">
+                  <span class="timeline-dot amber"><span data-icon="edit"></span></span>
+                  <div class="timeline-head">
+                    <strong>Catatan follow-up</strong>
+                    <time>19 Okt 2026, 14.20 · Rizky</time>
+                    <span class="chip chip-danger">Terlambat 2 hari</span>
+                  </div>
+                  <div class="timeline-body">PIC minta sample fillet 250 g untuk evaluasi menu. Janji kirim sample Selasa, 20 Okt. Belum ada balasan setelah sample.</div>
+                  <div class="timeline-card"><strong>Next action:</strong> Konfirmasi kebutuhan fillet minggu depan — minta spesifikasi ukuran dan jadwal kirim.</div>
+                </div>
+
+                <div class="timeline-item">
+                  <span class="timeline-dot"><span data-icon="whatsapp"></span></span>
+                  <div class="timeline-head">
+                    <strong>WhatsApp terkirim</strong>
+                    <time>17 Okt 2026, 09.05 · Rizky</time>
+                  </div>
+                  <div class="timeline-body">Template “Konfirmasi jadwal kirim” — pelanggan membaca dan membalas “OK, Selasa pagi ya”.</div>
+                </div>
+
+                <div class="timeline-item">
+                  <span class="timeline-dot purple"><span data-icon="package"></span></span>
+                  <div class="timeline-head">
+                    <strong>PO-2610-011 selesai</strong>
+                    <time>14 Okt 2026, 16.40 · Admin</time>
+                  </div>
+                  <div class="timeline-body">120 kg fillet + 80 kg siap masak diterima. Bukti delivery dan invoice lengkap.</div>
+                </div>
+
+                <div class="timeline-item">
+                  <span class="timeline-dot"><span data-icon="file-check"></span></span>
+                  <div class="timeline-head">
+                    <strong>Quotation diterima</strong>
+                    <time>10 Okt 2026, 11.12 · Rizky</time>
+                  </div>
+                  <div class="timeline-body">QUO/2610/0132 · Rp 5,76 jt · diterima via WhatsApp, dilanjutkan menjadi PO.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-panel" data-panel="timeline">
+              <div class="card-head">
+                <div>
+                  <h2>Timeline lengkap</h2>
+                  <p>Riwayat hubungan dengan Dapur MBG Nusantara 03</p>
+                </div>
+                <button class="btn btn-secondary btn-sm" data-toast="Timeline diekspor ke PDF."><span data-icon="download"></span> Ekspor</button>
+              </div>
+              <div class="timeline mt-2">
+                <div class="timeline-item">
+                  <span class="timeline-dot amber"><span data-icon="edit"></span></span>
+                  <div class="timeline-head"><strong>Catatan follow-up</strong><time>19 Okt 2026, 14.20 · Rizky</time></div>
+                  <div class="timeline-body">PIC minta sample fillet 250 g. Janji kirim sample Selasa, 20 Okt.</div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-dot"><span data-icon="whatsapp"></span></span>
+                  <div class="timeline-head"><strong>WhatsApp terkirim</strong><time>17 Okt 2026, 09.05 · Rizky</time></div>
+                  <div class="timeline-body">Konfirmasi jadwal kirim. Dibalas “OK, Selasa pagi ya”.</div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-dot purple"><span data-icon="package"></span></span>
+                  <div class="timeline-head"><strong>PO-2610-011 selesai</strong><time>14 Okt 2026, 16.40 · Admin</time></div>
+                  <div class="timeline-body">120 kg fillet + 80 kg siap masak diterima.</div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-dot"><span data-icon="file-check"></span></span>
+                  <div class="timeline-head"><strong>Quotation diterima</strong><time>10 Okt 2026, 11.12 · Rizky</time></div>
+                  <div class="timeline-body">QUO/2610/0132 · Rp 5,76 jt.</div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-dot blue"><span data-icon="phone"></span></span>
+                  <div class="timeline-head"><strong>Telepon evaluasi kualitas</strong><time>2 Okt 2026, 10.30 · Rizky</time></div>
+                  <div class="timeline-body">Kualitas fillet dinilai baik. PIC meminta harga khusus untuk volume 150 kg/minggu.</div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-dot"><span data-icon="package"></span></span>
+                  <div class="timeline-head"><strong>PO-2609-094 selesai</strong><time>26 Sep 2026, 15.10 · Admin</time></div>
+                  <div class="timeline-body">100 kg siap masak diterima. Pembayaran lunas 30 Sep.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-panel" data-panel="quotes">
+              <div class="card-head">
+                <div>
+                  <h2>Quotation pelanggan</h2>
+                  <p>3 quotation · 1 masih berjalan</p>
+                </div>
+                <a class="btn btn-primary btn-sm" href="quotations.html"><span data-icon="plus"></span> Quotation Baru</a>
+              </div>
+              <div class="table-wrap mt-2">
+                <table class="table">
+                  <thead>
+                    <tr><th>Nomor</th><th>Tanggal</th><th>Item</th><th class="num">Nilai</th><th>Status</th><th>Berlaku s.d.</th><th></th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><a class="link-strong" href="quotations.html">QUO/2610/0142</a></td>
+                      <td>21 Okt 2026</td>
+                      <td>80 kg fillet<span class="sub">60 kg siap masak</span></td>
+                      <td class="num">Rp 6,16 jt</td>
+                      <td><span class="badge status-shipped">Terkirim</span></td>
+                      <td>28 Okt 2026</td>
+                      <td class="cell-actions"><a class="icon-btn sm" href="quotations.html" aria-label="Buka quotation"><span data-icon="chevron-right"></span></a></td>
+                    </tr>
+                    <tr>
+                      <td><a class="link-strong" href="quotations.html">QUO/2610/0132</a></td>
+                      <td>10 Okt 2026</td>
+                      <td>120 kg fillet</td>
+                      <td class="num">Rp 5,76 jt</td>
+                      <td><span class="badge status-done">Diterima</span></td>
+                      <td>17 Okt 2026</td>
+                      <td class="cell-actions"><a class="icon-btn sm" href="quotations.html" aria-label="Buka quotation"><span data-icon="chevron-right"></span></a></td>
+                    </tr>
+                    <tr>
+                      <td><a class="link-strong" href="quotations.html">QUO/2609/0118</a></td>
+                      <td>22 Sep 2026</td>
+                      <td>100 kg siap masak</td>
+                      <td class="num">Rp 2,60 jt</td>
+                      <td><span class="badge status-done">Diterima</span></td>
+                      <td>29 Sep 2026</td>
+                      <td class="cell-actions"><a class="icon-btn sm" href="quotations.html" aria-label="Buka quotation"><span data-icon="chevron-right"></span></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tab-panel" data-panel="orders">
+              <div class="card-head">
+                <div>
+                  <h2>PO pelanggan</h2>
+                  <p>5 PO · 1 sedang diproduksi</p>
+                </div>
+                <a class="btn btn-primary btn-sm" href="purchase-orders.html"><span data-icon="plus"></span> Terima PO</a>
+              </div>
+              <div class="table-wrap mt-2">
+                <table class="table">
+                  <thead>
+                    <tr><th>No. PO</th><th>Item</th><th class="num">Nilai</th><th>Status</th><th>Kirim</th><th></th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><a class="link-strong" href="po-detail.html">PO-2610-018</a><span class="sub">21 Okt 2026</span></td>
+                      <td>80 kg fillet · 60 kg siap masak</td>
+                      <td class="num">Rp 6,16 jt</td>
+                      <td><span class="badge status-production">Produksi</span></td>
+                      <td>23 Okt 2026</td>
+                      <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO"><span data-icon="chevron-right"></span></a></td>
+                    </tr>
+                    <tr>
+                      <td><a class="link-strong" href="po-detail.html">PO-2610-011</a><span class="sub">12 Okt 2026</span></td>
+                      <td>120 kg fillet · 80 kg siap masak</td>
+                      <td class="num">Rp 7,8 jt</td>
+                      <td><span class="badge status-done">Selesai</span></td>
+                      <td>14 Okt 2026</td>
+                      <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO"><span data-icon="chevron-right"></span></a></td>
+                    </tr>
+                    <tr>
+                      <td><a class="link-strong" href="po-detail.html">PO-2609-094</a><span class="sub">24 Sep 2026</span></td>
+                      <td>100 kg siap masak</td>
+                      <td class="num">Rp 2,6 jt</td>
+                      <td><span class="badge status-done">Selesai</span></td>
+                      <td>26 Sep 2026</td>
+                      <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO"><span data-icon="chevron-right"></span></a></td>
+                    </tr>
+                    <tr>
+                      <td><a class="link-strong" href="po-detail.html">PO-2609-071</a><span class="sub">8 Sep 2026</span></td>
+                      <td>90 kg fillet</td>
+                      <td class="num">Rp 4,3 jt</td>
+                      <td><span class="badge status-done">Selesai</span></td>
+                      <td>10 Sep 2026</td>
+                      <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO"><span data-icon="chevron-right"></span></a></td>
+                    </tr>
+                    <tr>
+                      <td><a class="link-strong" href="po-detail.html">PO-2608-042</a><span class="sub">18 Agu 2026</span></td>
+                      <td>80 kg siap masak</td>
+                      <td class="num">Rp 2,1 jt</td>
+                      <td><span class="badge status-done">Selesai</span></td>
+                      <td>20 Agu 2026</td>
+                      <td class="cell-actions"><a class="icon-btn sm" href="po-detail.html" aria-label="Buka PO"><span data-icon="chevron-right"></span></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tab-panel" data-panel="buyback">
+              <div class="empty-state">
+                <div class="empty-icon"><span data-icon="sprout"></span></div>
+                <h3>Belum ada siklus buyback</h3>
+                <p>Buyback hanya berlaku untuk pelanggan segmen Kolam Pembesaran. Dapur MBG tidak memiliki siklus panen.</p>
+                <a class="btn btn-secondary btn-sm" href="buyback.html">Lihat modul buyback</a>
+              </div>
+            </div>
+
+            <div class="tab-panel" data-panel="docs">
+              <div class="card-head">
+                <div>
+                  <h2>Dokumen</h2>
+                  <p>4 dokumen tersimpan</p>
+                </div>
+                <button class="btn btn-secondary btn-sm" data-toast="Pilih file untuk diunggah."><span data-icon="upload"></span> Unggah</button>
+              </div>
+              <div class="card-body">
+                <div class="doc-list">
+                  <div class="doc-item">
+                    <span class="doc-icon"><span data-icon="file"></span></span>
+                    <div class="doc-main"><strong>PO Customer - MBG/NUS/1024.pdf</strong><span>Diunggah 21 Okt 2026 · 248 KB</span></div>
+                    <button class="icon-btn sm" data-toast="Dokumen dibuka." aria-label="Buka dokumen"><span data-icon="eye"></span></button>
+                  </div>
+                  <div class="doc-item">
+                    <span class="doc-icon"><span data-icon="file"></span></span>
+                    <div class="doc-main"><strong>Quotation QUO-2610-0142.pdf</strong><span>Dibuat 21 Okt 2026 · 180 KB</span></div>
+                    <button class="icon-btn sm" data-toast="Dokumen dibuka." aria-label="Buka dokumen"><span data-icon="eye"></span></button>
+                  </div>
+                  <div class="doc-item">
+                    <span class="doc-icon"><span data-icon="truck"></span></span>
+                    <div class="doc-main"><strong>Surat Jalan SJ-2610-017.pdf</strong><span>Dibuat 17 Okt 2026 · 152 KB</span></div>
+                    <button class="icon-btn sm" data-toast="Dokumen dibuka." aria-label="Buka dokumen"><span data-icon="eye"></span></button>
+                  </div>
+                  <div class="doc-item">
+                    <span class="doc-icon"><span data-icon="cash"></span></span>
+                    <div class="doc-main"><strong>Invoice INV-2610-011.pdf</strong><span>Dibuat 14 Okt 2026 · 164 KB</span></div>
+                    <button class="icon-btn sm" data-toast="Dokumen dibuka." aria-label="Buka dokumen"><span data-icon="eye"></span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="stack">
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Follow-up berikutnya</h2>
+                  <p>Terlambat 2 hari</p>
+                </div>
+                <span class="badge badge-danger">Prioritas tinggi</span>
+              </div>
+              <div class="card-body">
+                <div class="timeline-card" style="margin-top:0">
+                  <strong>Konfirmasi kebutuhan fillet minggu depan</strong>
+                  <div class="text-sm muted mt-1">Minta spesifikasi ukuran 250 g dan jadwal kirim. Tawarkan sample tambahan bila perlu.</div>
+                </div>
+                <div class="pref-list mt-2">
+                  <div class="pref-row"><span>Jatuh tempo</span><strong>19 Okt 2026, 09.00</strong></div>
+                  <div class="pref-row"><span>Penanggung jawab</span><strong>Rizky</strong></div>
+                  <div class="pref-row"><span>Sumber</span><strong>Catatan 19 Okt</strong></div>
+                </div>
+                <div class="row mt-2">
+                  <button class="btn btn-primary btn-sm" data-toast="Follow-up ditandai selesai. Catatan masuk ke timeline."><span data-icon="check"></span> Selesaikan</button>
+                  <button class="btn btn-secondary btn-sm" data-toast="Follow-up ditunda ke besok, 09.00."><span data-icon="clock"></span> Tunda</button>
+                  <a class="btn btn-wa btn-sm" href="templates.html"><span data-icon="whatsapp"></span> WA</a>
+                </div>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Preferensi pelanggan</h2>
+                  <p>Konteks untuk penawaran berikutnya</p>
+                </div>
+                <button class="icon-btn sm" data-toast="Edit preferensi pelanggan." aria-label="Edit preferensi"><span data-icon="edit"></span></button>
+              </div>
+              <div class="card-body">
+                <div class="pref-list">
+                  <div class="pref-row"><span>Produk favorit</span><strong>Fillet lele 250 g</strong></div>
+                  <div class="pref-row"><span>Volume rutin</span><strong>80–120 kg/minggu</strong></div>
+                  <div class="pref-row"><span>Jadwal kirim</span><strong>Selasa &amp; Jumat</strong></div>
+                  <div class="pref-row"><span>Termin bayar</span><strong>14 hari</strong></div>
+                  <div class="pref-row"><span>Harga</span><strong>Kategori MBG</strong></div>
+                  <div class="pref-row"><span>Alamat kirim</span><strong>Jl. Nusantara Raya No. 12, Semarang</strong></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Kontak PIC</h2>
+                  <p>2 kontak terdaftar</p>
+                </div>
+                <button class="icon-btn sm" data-toast="Tambah kontak PIC." aria-label="Tambah kontak"><span data-icon="plus"></span></button>
+              </div>
+              <div class="card-body">
+                <div class="contact-list">
+                  <div class="contact">
+                    <span class="avatar avatar-sm mbg">AF</span>
+                    <div class="contact-main"><strong>Ahmad Fauzi</strong><span>Kepala Dapur · PIC utama</span></div>
+                    <a class="btn btn-wa btn-sm" href="templates.html" aria-label="WhatsApp Ahmad"><span data-icon="whatsapp"></span></a>
+                  </div>
+                  <div class="contact">
+                    <span class="avatar avatar-sm">RW</span>
+                    <div class="contact-main"><strong>Rina Wati</strong><span>Admin &amp; pembelian</span></div>
+                    <a class="btn btn-wa btn-sm" href="templates.html" aria-label="WhatsApp Rina"><span data-icon="whatsapp"></span></a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Template cepat</h2>
+                  <p>Pilih pesan sesuai konteks</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="quick-templates">
+                  <a class="quick-template" href="templates.html"><span data-icon="message"></span> Follow-up quotation</a>
+                  <a class="quick-template" href="templates.html"><span data-icon="package"></span> Konfirmasi order</a>
+                  <a class="quick-template" href="templates.html"><span data-icon="truck"></span> Jadwal kirim</a>
+                  <a class="quick-template" href="templates.html"><span data-icon="star"></span> Ucapan terima kasih</a>
+                  <a class="quick-template" href="templates.html"><span data-icon="refresh"></span> Win-back</a>
+                </div>
+                <div class="template-note mt-2">
+                  <span data-icon="whatsapp"></span>
+                  <span>Mode saat ini: klik-untuk-chat. Setelah dikirim, pesan dapat ditandai dan tercatat ke timeline pelanggan.</span>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

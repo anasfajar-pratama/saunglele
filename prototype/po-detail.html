@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PO-2610-018 · Saung Lele CRM</title>
+  <meta name="description" content="Detail PO-2610-018 Saung Lele: progres produksi, pengiriman, dokumen, dan checklist.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="kebunkode.jpg">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="pos">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" data-sidebar-toggle aria-label="Buka menu"><span data-icon="menu"></span></button>
+        <div class="topbar-search">
+          <span data-icon="search"></span>
+          <input type="text" placeholder="Cari pelanggan, PO, atau quotation..." aria-label="Pencarian global">
+        </div>
+        <div class="topbar-actions">
+          <span class="topbar-date"><span data-icon="calendar"></span> Rabu, 21 Oktober 2026</span>
+          <button class="icon-btn has-dot" aria-label="Notifikasi"><span data-icon="bell"></span></button>
+          <div class="user-chip">
+            <span class="avatar avatar-sm">SL</span>
+            <div><strong>Saung Lele</strong><span>Pemilik</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="po-banner mb-2">
+          <div class="po-banner-row">
+            <div>
+              <div class="breadcrumb">
+                <a href="index.html">Beranda</a>
+                <span data-icon="chevron-right"></span>
+                <a href="purchase-orders.html">Pesanan (PO)</a>
+                <span data-icon="chevron-right"></span>
+                <span>PO-2610-018</span>
+              </div>
+              <h1>PO-2610-018</h1>
+              <p>Dapur MBG Nusantara 03 · 80 kg fillet + 60 kg ikan siap masak</p>
+              <div class="po-meta">
+                <span><span data-icon="package"></span> PO customer: MBG/NUS/1024</span>
+                <span><span data-icon="file"></span> Quotation: QUO/2610/0142</span>
+                <span><span data-icon="calendar"></span> Diterima 20 Okt 2026</span>
+                <span><span data-icon="truck"></span> Kirim 23 Okt 2026, 05.30</span>
+              </div>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-secondary" data-toast="Update progres dikirim ke pelanggan via WhatsApp."><span data-icon="whatsapp"></span> Kirim update</button>
+              <button class="btn btn-secondary" data-toast="Surat jalan disiapkan untuk dicetak."><span data-icon="clipboard"></span> Surat jalan</button>
+              <button class="btn btn-primary" data-modal-open="statusModal"><span data-icon="refresh"></span> Update status</button>
+            </div>
+          </div>
+        </section>
+
+        <div class="row-between mb-2">
+          <div class="row">
+            <span class="badge status-production" style="font-size:11px;padding:5px 11px">Dalam produksi</span>
+            <span class="badge badge-neutral">Prioritas normal</span>
+            <span class="chip"><span data-icon="clock"></span> Update terakhir 07.40</span>
+          </div>
+          <span class="text-xs muted">Nilai PO <strong style="color:var(--ink);font-size:12px">Rp 6.160.500</strong></span>
+        </div>
+
+        <section class="card mb-2">
+          <div class="stepper">
+            <div class="step done">
+              <span class="step-dot"><span data-icon="check"></span></span>
+              <span class="step-label">Diterima</span>
+              <span class="step-time">20 Okt · 08.12</span>
+            </div>
+            <div class="step done">
+              <span class="step-dot"><span data-icon="check"></span></span>
+              <span class="step-label">Dikonfirmasi</span>
+              <span class="step-time">20 Okt · 09.05</span>
+            </div>
+            <div class="step active">
+              <span class="step-dot">3</span>
+              <span class="step-label">Produksi</span>
+              <span class="step-time">21 Okt · 07.40</span>
+            </div>
+            <div class="step">
+              <span class="step-dot">4</span>
+              <span class="step-label">QC &amp; Packing</span>
+              <span class="step-time">Target 22 Okt</span>
+            </div>
+            <div class="step">
+              <span class="step-dot">5</span>
+              <span class="step-label">Siap Kirim</span>
+              <span class="step-time">Target 22 Okt</span>
+            </div>
+            <div class="step">
+              <span class="step-dot">6</span>
+              <span class="step-label">Dikirim</span>
+              <span class="step-time">23 Okt · 05.30</span>
+            </div>
+            <div class="step">
+              <span class="step-dot">7</span>
+              <span class="step-label">Diterima</span>
+              <span class="step-time">Estimasi 23 Okt</span>
+            </div>
+          </div>
+        </section>
+
+        <div class="grid grid-2-1">
+          <div class="stack">
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Item pesanan</h2>
+                  <p>2 item · sesuai quotation QUO/2610/0142</p>
+                </div>
+                <span class="badge badge-success">Stok tersedia</span>
+              </div>
+              <div class="table-wrap mt-2">
+                <table class="table table-compact">
+                  <thead>
+                    <tr><th>Produk</th><th>Qty</th><th class="num">Harga</th><th class="num">Subtotal</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Fillet Lele</strong><span class="sub">200–250 g/pcs · kemasan vacuum</span></td>
+                      <td>80 kg</td>
+                      <td class="num">Rp 48.000</td>
+                      <td class="num">Rp 3.840.000</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Lele Siap Masak Bersih</strong><span class="sub">250–300 g/ekor · sudah disiangi</span></td>
+                      <td>60 kg</td>
+                      <td class="num">Rp 26.000</td>
+                      <td class="num">Rp 1.560.000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-foot">
+                <div class="row-between text-sm">
+                  <span class="muted">Subtotal + ongkir + PPN 11%</span>
+                  <strong style="font-size:14px">Rp 6.160.500</strong>
+                </div>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Riwayat progres</h2>
+                  <p>Audit trail perubahan status PO</p>
+                </div>
+                <button class="icon-btn sm" data-toast="Riwayat lengkap dibuka." aria-label="Lihat riwayat"><span data-icon="arrow-up-right"></span></button>
+              </div>
+              <div class="timeline mt-2">
+                <div class="timeline-item">
+                  <span class="timeline-dot purple"><span data-icon="package"></span></span>
+                  <div class="timeline-head">
+                    <strong>Produksi dimulai</strong>
+                    <time>21 Okt 2026, 07.40 · Wati (Produksi)</time>
+                    <span class="badge status-production">Produksi</span>
+                  </div>
+                  <div class="timeline-body">Panen 140 kg, sortir grade A. Fillet 80 kg mulai diproses. Sisa 60 kg disiapkan sebagai ikan siap masak.</div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-dot"><span data-icon="check-circle"></span></span>
+                  <div class="timeline-head">
+                    <strong>PO dikonfirmasi</strong>
+                    <time>20 Okt 2026, 09.05 · Admin</time>
+                  </div>
+                  <div class="timeline-body">Stok fillet dan siap masak tersedia. Harga dan jadwal sesuai quotation. Konfirmasi dikirim ke pelanggan via WhatsApp.</div>
+                  <div class="timeline-card"><strong>Catatan:</strong> Pelanggan meminta fillet ukuran 200–250 g dan pengiriman sebelum pukul 07.00.</div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-dot blue"><span data-icon="inbox"></span></span>
+                  <div class="timeline-head">
+                    <strong>PO diterima</strong>
+                    <time>20 Okt 2026, 08.12 · Admin</time>
+                  </div>
+                  <div class="timeline-body">PO customer MBG/NUS/1024 diterima via WhatsApp. Dokumen PDF diunggah dan divalidasi terhadap quotation.</div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Pengiriman</h2>
+                  <p>Dijadwalkan 23 Oktober 2026 · 05.30</p>
+                </div>
+                <span class="badge badge-warning">Belum berangkat</span>
+              </div>
+              <div class="card-body">
+                <div class="delivery-card">
+                  <span class="delivery-icon"><span data-icon="truck"></span></span>
+                  <div class="delivery-main">
+                    <strong>Pickup B 9123 XYZ · Pak Yanto</strong>
+                    <span>0812-7777-1212 · Estimasi tiba 06.30 · 2 stop</span>
+                    <div class="delivery-progress">
+                      <div class="progress amber"><i style="width:25%"></i></div>
+                      <div class="delivery-labels"><span>Disiapkan</span><span>Berangkat</span><span>Dalam perjalanan</span><span>Diterima</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="info-grid mt-2">
+                  <div class="info-item"><span>Alamat kirim</span><strong>Jl. Nusantara Raya No. 12, Semarang</strong></div>
+                  <div class="info-item"><span>Penerima</span><strong>Ahmad Fauzi · 0812-3456-7890</strong></div>
+                  <div class="info-item"><span>Suhu fillet</span><strong>0–4°C · cold box</strong></div>
+                  <div class="info-item"><span>Dokumen</span><strong>Surat jalan + timbangan</strong></div>
+                </div>
+
+                <div class="row mt-2">
+                  <button class="btn btn-secondary btn-sm" data-toast="Jadwal pengiriman diubah."><span data-icon="calendar"></span> Ubah jadwal</button>
+                  <button class="btn btn-secondary btn-sm" data-toast="Driver dan kendaraan ditugaskan."><span data-icon="truck"></span> Tugaskan driver</button>
+                  <button class="btn btn-wa btn-sm" data-toast="Update pengiriman dikirim ke pelanggan."><span data-icon="whatsapp"></span> Kabari pelanggan</button>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="stack">
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Ringkasan</h2>
+                  <p>Informasi komersial PO</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="info-grid">
+                  <div class="info-item"><span>Nilai PO</span><strong>Rp 6.160.500</strong></div>
+                  <div class="info-item"><span>Pembayaran</span><strong>14 hari</strong></div>
+                  <div class="info-item"><span>Status bayar</span><strong>Belum ditagih</strong></div>
+                  <div class="info-item"><span>Sales</span><strong>Rizky</strong></div>
+                  <div class="info-item"><span>Quotation</span><strong>QUO/2610/0142</strong></div>
+                  <div class="info-item"><span>Dibuat</span><strong>20 Okt 2026</strong></div>
+                </div>
+                <div class="divider"></div>
+                <div class="pref-list">
+                  <div class="pref-row"><span>Segmen</span><strong>Dapur MBG</strong></div>
+                  <div class="pref-row"><span>Termin</span><strong>14 hari setelah invoice</strong></div>
+                  <div class="pref-row"><span>Catatan</span><strong>Kirim sebelum 07.00</strong></div>
+                </div>
+                <button class="btn btn-secondary btn-block mt-2" data-toast="Invoice draft dibuat dari PO ini."><span data-icon="file"></span> Buat invoice</button>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Checklist kesiapan</h2>
+                  <p>4 dari 6 selesai</p>
+                </div>
+                <span class="badge badge-warning">67%</span>
+              </div>
+              <div class="card-body">
+                <div class="checklist">
+                  <label class="check-item">
+                    <input type="checkbox" checked>
+                    <div><strong>Stok fillet 80 kg</strong><span>Tersedia · grade A</span></div>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" checked>
+                    <div><strong>Stok siap masak 60 kg</strong><span>Tersedia · sudah disiangi</span></div>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" checked>
+                    <div><strong>Bahan kemasan</strong><span>Vacuum + cold box</span></div>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" checked>
+                    <div><strong>Konfirmasi pelanggan</strong><span>Via WhatsApp 20 Okt</span></div>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox">
+                    <div><strong>QC &amp; packing</strong><span>Dijadwalkan 22 Okt pagi</span></div>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox">
+                    <div><strong>Surat jalan &amp; driver</strong><span>Belum ditugaskan</span></div>
+                  </label>
+                </div>
+                <div class="progress mt-2"><i style="width:67%"></i></div>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Dokumen</h2>
+                  <p>4 dokumen terkait PO</p>
+                </div>
+                <button class="icon-btn sm" data-toast="Unggah dokumen baru." aria-label="Unggah dokumen"><span data-icon="upload"></span></button>
+              </div>
+              <div class="card-body">
+                <div class="doc-list">
+                  <div class="doc-item">
+                    <span class="doc-icon"><span data-icon="file"></span></span>
+                    <div class="doc-main"><strong>PO Customer - MBG/NUS/1024.pdf</strong><span>248 KB · 20 Okt</span></div>
+                    <button class="icon-btn sm" data-toast="Dokumen dibuka." aria-label="Buka"><span data-icon="eye"></span></button>
+                  </div>
+                  <div class="doc-item">
+                    <span class="doc-icon"><span data-icon="file-check"></span></span>
+                    <div class="doc-main"><strong>Quotation QUO-2610-0142.pdf</strong><span>180 KB · 21 Okt</span></div>
+                    <button class="icon-btn sm" data-toast="Dokumen dibuka." aria-label="Buka"><span data-icon="eye"></span></button>
+                  </div>
+                  <div class="doc-item">
+                    <span class="doc-icon"><span data-icon="truck"></span></span>
+                    <div class="doc-main"><strong>Surat Jalan SJ-2610-018 (draft)</strong><span>Draft · belum dicetak</span></div>
+                    <button class="icon-btn sm" data-toast="Draft surat jalan dibuka." aria-label="Buka"><span data-icon="eye"></span></button>
+                  </div>
+                  <div class="doc-item">
+                    <span class="doc-icon"><span data-icon="cash"></span></span>
+                    <div class="doc-main"><strong>Invoice INV-2610-018 (draft)</strong><span>Draft · belum ditagih</span></div>
+                    <button class="icon-btn sm" data-toast="Draft invoice dibuka." aria-label="Buka"><span data-icon="eye"></span></button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Aksi cepat</h2>
+                  <p>Yang biasanya dibutuhkan di tahap ini</p>
+                </div>
+              </div>
+              <div class="card-body stack-sm">
+                <button class="btn btn-primary btn-block" data-modal-open="statusModal"><span data-icon="refresh"></span> Update status ke QC</button>
+                <button class="btn btn-secondary btn-block" data-toast="Tim produksi diberi notifikasi."><span data-icon="bell"></span> Ingatkan tim produksi</button>
+                <a class="btn btn-wa btn-block" href="templates.html"><span data-icon="whatsapp"></span> Buka template pesan</a>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="statusModal">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <h2>Update status PO</h2>
+          <p>PO-2610-018 · Dapur MBG Nusantara 03</p>
+        </div>
+        <button class="icon-btn" data-modal-close aria-label="Tutup"><span data-icon="x"></span></button>
+      </div>
+      <form data-demo-form="Status PO diperbarui menjadi QC &amp; Packing. Pelanggan menerima update WhatsApp.">
+        <div class="modal-body">
+          <div class="field">
+            <label for="poStatus">Status baru</label>
+            <select class="form-select" id="poStatus">
+              <option>QC &amp; Packing</option>
+              <option>Siap Kirim</option>
+              <option>Dikirim</option>
+              <option>Diterima</option>
+              <option>Selesai</option>
+            </select>
+          </div>
+          <div class="field mt-2">
+            <label for="poStatusNote">Catatan progres</label>
+            <textarea class="textarea" id="poStatusNote" placeholder="Contoh: QC selesai, fillet sudah dikemas vacuum dan siap masuk cold box."></textarea>
+          </div>
+          <div class="form-grid mt-2">
+            <div class="field">
+              <label for="poStatusTime">Waktu</label>
+              <input class="input" id="poStatusTime" type="datetime-local" value="2026-10-22T08:00">
+            </div>
+            <div class="field">
+              <label for="poStatusPic">Penanggung jawab</label>
+              <select class="form-select" id="poStatusPic">
+                <option>Wati (Produksi)</option>
+                <option>Admin</option>
+                <option>Rizky (Sales)</option>
+              </select>
+            </div>
+          </div>
+          <label class="check-row mt-2">
+            <input type="checkbox" checked>
+            <span>Kirim update otomatis ke pelanggan via WhatsApp</span>
+          </label>
+          <div class="info-strip mt-2" style="font-size:10.5px">
+            <span data-icon="alert-circle"></span>
+            <span>Status hanya bisa maju satu langkah. Untuk mundur, gunakan alasan dan persetujuan pemilik.</span>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Batal</button>
+          <button class="btn btn-primary" type="submit"><span data-icon="check"></span> Simpan status</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
