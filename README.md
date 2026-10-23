@@ -149,6 +149,89 @@ Demo publik harus dianggap sebagai lingkungan yang terekspos internet. Lakukan m
 
 ---
 
+## Deploy ke Hostinger
+
+### Dokumen root
+
+Arahkan domain/subdomain ke folder:
+
+```text
+domains/saunglele.kebunkode.com/saunglele/backend/public
+```
+
+Jangan arahkan ke folder `backend/` saja.
+
+### Build Vite
+
+Laravel `.gitignore` mengabaikan `/public/build`, jadi folder build **tidak ikut** jika deploy lewat Git. Pilih salah satu:
+
+**Opsi A — upload hasil build dari lokal (paling mudah)**
+
+```bash
+cd backend
+npm install --include=dev
+npm run build
+```
+
+Upload folder `backend/public/build` ke server:
+
+```text
+domains/saunglele.kebunkode.com/saunglele/backend/public/build
+```
+
+Pastikan file berikut ada:
+
+```text
+backend/public/build/manifest.json
+backend/public/build/assets/
+```
+
+Zip siap upload juga tersedia di root proyek: `build-hostinger.zip`. Ekstrak isinya ke `backend/public/` sehingga terbentuk `backend/public/build/`.
+
+**Opsi B — build di server via SSH**
+
+```bash
+cd ~/domains/saunglele.kebunkode.com/saunglele/backend
+npm ci --include=dev
+npm run build
+php artisan optimize:clear
+```
+
+### Setelah upload
+
+```bash
+cd ~/domains/saunglele.kebunkode.com/saunglele/backend
+rm -f public/hot
+php artisan optimize:clear
+```
+
+Pastikan permission:
+
+```text
+public/build       755 (file 644)
+storage            775
+bootstrap/cache    775
+```
+
+Jika memakai Git, build folder harus di-force add atau di-upload manual:
+
+```bash
+git add -f public/build
+git commit -m "Add production build assets"
+```
+
+### PHP di Hostinger
+
+Pilih **PHP 8.3.36+** atau **PHP 8.4.27+** di hPanel. Jangan publish dengan PHP 8.2.12 karena belum memiliki patch keamanan kritis Oktober 2026. Set juga:
+
+```env
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://saunglele.kebunkode.com
+```
+
+---
+
 ## Catatan Implementasi
 
 - **WhatsApp** memakai `wa.me` (klik-untuk-chat). Pesan dicatat ke tabel `messages` setelah dikirim.
