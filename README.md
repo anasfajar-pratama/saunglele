@@ -232,6 +232,41 @@ APP_URL=https://saunglele.kebunkode.com
 
 ---
 
+### Jika manifest 200 tetapi CSS/JS 404
+
+Cek:
+
+```text
+https://saunglele.kebunkode.com/build/manifest.json
+```
+
+- **404** → document root domain belum mengarah ke `backend/public`, atau folder build belum ada.
+- **200** → manifest terbaca. Berarti folder `assets` belum terunggah, terlipat di `build/build/assets`, atau permission-nya salah.
+
+Gunakan `build-hostinger-flat.zip` dari root proyek. Ekstrak isinya **langsung ke**:
+
+```text
+backend/public/build/
+```
+
+Sehingga isinya menjadi:
+
+```text
+backend/public/build/manifest.json
+backend/public/build/assets/app-C_GbbeKu.css
+```
+
+Jangan sampai menjadi `backend/public/build/build/assets/...`.
+
+Cek juga permission:
+
+```bash
+chmod 755 public/build public/build/assets
+chmod 644 public/build/manifest.json public/build/assets/*
+```
+
+---
+
 ## Catatan Implementasi
 
 - **WhatsApp** memakai `wa.me` (klik-untuk-chat). Pesan dicatat ke tabel `messages` setelah dikirim.

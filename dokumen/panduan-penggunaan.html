@@ -52,6 +52,10 @@
       <a class="guide-nav-link" href="#quotation"><span class="nav-dot"></span> Quotation</a>
       <a class="guide-nav-link" href="#po"><span class="nav-dot"></span> Pesanan (PO)</a>
 
+      <div class="guide-nav-label">Pengaturan</div>
+      <a class="guide-nav-link" href="#master"><span class="nav-dot"></span> Master Data</a>
+      <a class="guide-nav-link" href="#public-link"><span class="nav-dot"></span> Link publik</a>
+
       <div class="guide-nav-label">Kemitraan &amp; analitik</div>
       <a class="guide-nav-link" href="#buyback"><span class="nav-dot"></span> Buyback panen</a>
       <a class="guide-nav-link" href="#laporan"><span class="nav-dot"></span> Laporan</a>
@@ -65,7 +69,7 @@
         <strong>Progres belajar</strong>
         <span>Centang saat sudah dicoba</span>
         <div class="progress-track"><i data-progress-fill></i></div>
-        <div class="guide-progress-meta"><span data-progress-text>0 / 12</span><span data-progress-percent>0%</span></div>
+        <div class="guide-progress-meta"><span data-progress-text>0 / 16</span><span data-progress-percent>0%</span></div>
       </div>
     </aside>
 
@@ -73,12 +77,13 @@
       <section class="guide-hero">
         <span class="eyebrow">Panduan penggunaan</span>
         <h1>Saung Lele CRM, langkah demi langkah.</h1>
-        <p>Panduan ini membantu pemilik, sales, dan admin memahami alur kerja harian: dari follow-up pelanggan, quotation, PO, hingga buyback mitra kolam. Setiap gambar dapat diklik untuk diperbesar.</p>
+        <p>Panduan ini membantu pemilik, sales, dan admin memahami alur kerja harian: dari follow-up pelanggan, quotation, PO, hingga buyback mitra kolam. Termasuk pengelolaan Master Data dan link publik yang bisa dibuka pelanggan tanpa login. Setiap gambar dapat diklik untuk diperbesar.</p>
         <div class="hero-badges">
           <span class="badge">Pemilik</span>
           <span class="badge">Sales</span>
           <span class="badge">Admin Operasional</span>
           <span class="badge">Interaktif</span>
+          <span class="badge">Diperbarui 23 Okt 2026</span>
         </div>
       </section>
 
@@ -181,7 +186,7 @@
         <div class="step-list">
           <div class="step"><span class="step-number">1</span><div><strong>Cek follow-up hari ini</strong><span>Daftar diurutkan dari yang paling mendesak. Item merah berarti sudah terlambat.</span></div></div>
           <div class="step"><span class="step-number">2</span><div><strong>Klik tombol WA</strong><span>WhatsApp terbuka dengan pesan awal. Setelah dikirim, pesan dicatat ke timeline pelanggan.</span></div></div>
-          <div class="step"><span class="step-number">3</span><div><strong>Tandai selesai atau tunda</strong><span>Centang tugas jika sudah dihubungi. Gunakan halaman detail pelanggan untuk menunda satu hari.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Tandai selesai atau tunda</strong><span>Centang tugas untuk menyelesaikan cepat dari dashboard. Untuk menulis hasil dan menjadwalkan follow-up berikutnya, buka detail pelanggan lalu gunakan tombol Selesaikan/Tunda.</span></div></div>
           <div class="step"><span class="step-number">4</span><div><strong>Lihat panel “Akan datang”</strong><span>Jadwal beberapa hari ke depan tetap terlihat, tanpa mencampuri antrean hari ini.</span></div></div>
           <div class="step"><span class="step-number">5</span><div><strong>Periksa health & pipeline</strong><span>Health menunjukkan pelanggan yang perlu perhatian; pipeline menunjukkan peluang yang sedang berjalan.</span></div></div>
         </div>
@@ -233,14 +238,21 @@
         </figure>
         <div class="step-list">
           <div class="step"><span class="step-number">1</span><div><strong>Baca ringkasan profil</strong><span>Lihat segmen, PIC, WhatsApp, sales, health score, LTV, jumlah order, dan rata-rata order.</span></div></div>
-          <div class="step"><span class="step-number">2</span><div><strong>Catat interaksi</strong><span>Pilih jenis (catatan, telepon, WhatsApp, kunjungan), tulis hasil, lalu tentukan tanggal follow-up berikutnya.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Catat interaksi &amp; hasil</strong><span>Pilih jenis (catatan, telepon, WhatsApp, kunjungan), tulis apa yang terjadi, lalu isi <strong>Hasil / kesimpulan</strong>. Hasil ini tampil di timeline.</span></div></div>
           <div class="step"><span class="step-number">3</span><div><strong>Simpan &amp; ingatkan</strong><span>Sistem membuat follow-up baru dan menampilkannya di dashboard pada tanggal yang dipilih.</span></div></div>
-          <div class="step"><span class="step-number">4</span><div><strong>Gunakan tab</strong><span>Lihat timeline lengkap, quotation, PO, buyback, dan dokumen tanpa berpindah halaman.</span></div></div>
-          <div class="step"><span class="step-number">5</span><div><strong>Kirim template cepat</strong><span>Klik template yang sesuai. Pesan dibuka di WhatsApp dan dicatat ke timeline setelah dikirim.</span></div></div>
+          <div class="step"><span class="step-number">4</span><div><strong>Selesaikan atau tunda follow-up</strong><span>Klik Selesaikan/Tunda. Isi hasil follow-up; untuk Tunda pilih tanggal baru. Hasil otomatis masuk timeline.</span></div></div>
+          <div class="step"><span class="step-number">5</span><div><strong>Hubungkan ke follow-up berikutnya</strong><span>Saat menyelesaikan, isi tanggal follow-up berikutnya bila perlu. Pengingat baru dibuat dengan hasil terakhir sebagai catatan, lalu muncul di kartu Follow-up berikutnya.</span></div></div>
+          <div class="step"><span class="step-number">6</span><div><strong>Gunakan tab</strong><span>Lihat timeline lengkap, quotation, PO, buyback, dan dokumen tanpa berpindah halaman. Di tab Timeline ada tombol <strong>Catat hasil</strong>.</span></div></div>
+          <div class="step"><span class="step-number">7</span><div><strong>Kirim template cepat</strong><span>Klik template yang sesuai. Pesan dibuka di WhatsApp dan dicatat ke timeline setelah dikirim.</span></div></div>
         </div>
+        <figure class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>hasil follow-up</span></div>
+          <div class="shot-image"><img class="zoomable" src="screenshots/followup-result.png" alt="Modal hasil follow-up pada detail pelanggan"></div>
+          <figcaption>Modal Selesaikan follow-up: hasil wajib diisi, lalu opsional menjadwalkan follow-up berikutnya.</figcaption>
+        </figure>
         <div class="inline-note tip">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
-          <span>Jika Bapak/Ibu membuat jadwal tanggal 23 pukul 01.00, jadwal itu muncul di dashboard pada tanggal 23 (zona waktu Asia/Jakarta). Jika tanggalnya masih besok/lusa, lihat panel Akan datang.</span>
+          <span><strong>Follow-up berikutnya</strong> adalah follow-up berstatus terbuka dengan jatuh tempo paling dekat. Hasil Selesaikan/Tunda dan catatan interaksi masuk ke timeline yang sama, jadi riwayat dan pengingat tetap terhubung. Jika jadwal dibuat tanggal 23 pukul 01.00, jadwal muncul di dashboard tanggal 23 (zona waktu Asia/Jakarta).</span>
         </div>
       </section>
 
@@ -314,18 +326,27 @@
           <figure class="shot">
             <div class="shot-bar"><i></i><i></i><i></i><span>dokumen quotation</span></div>
             <div class="shot-image"><img class="zoomable" src="screenshots/quotation-detail.png" alt="Dokumen quotation Saung Lele CRM"></div>
-            <figcaption>Pratinjau dokumen, status, tombol kirim WhatsApp, dan cetak.</figcaption>
+            <figcaption>Pratinjau dokumen, status, tombol kirim WhatsApp, cetak, dan Salin link publik.</figcaption>
           </figure>
         </div>
+        <figure class="shot">
+          <div class="shot-bar"><i></i><i></i><i></i><span>daftar quotation</span></div>
+          <div class="shot-image"><img class="zoomable" src="screenshots/quotation-history.png" alt="Daftar quotation Saung Lele CRM"></div>
+          <figcaption>Halaman Daftar Quotation: pencarian, filter status, nilai diterima, serta aksi buka, edit, dan buat PO.</figcaption>
+        </figure>
         <div class="step-list">
           <div class="step"><span class="step-number">1</span><div><strong>Pilih pelanggan</strong><span>Segmen otomatis menentukan katalog produk yang ditampilkan.</span></div></div>
           <div class="step"><span class="step-number">2</span><div><strong>Tambahkan produk</strong><span>Klik kartu produk untuk menambah baris. Sesuaikan qty, harga, dan diskon.</span></div></div>
           <div class="step"><span class="step-number">3</span><div><strong>Atur ongkir &amp; pajak</strong><span>Subtotal, diskon, ongkir, PPN, dan total dihitung otomatis.</span></div></div>
-          <div class="step"><span class="step-number">4</span><div><strong>Simpan &amp; cetak</strong><span>Setelah disimpan, buka halaman quotation untuk kirim WhatsApp atau cetak PDF.</span></div></div>
+          <div class="step"><span class="step-number">4</span><div><strong>Simpan &amp; cetak</strong><span>Setelah disimpan, buka halaman quotation untuk kirim WhatsApp, salin link publik, atau cetak PDF.</span></div></div>
+          <div class="step"><span class="step-number">5</span><div><strong>Cek daftar quotation</strong><span>Tombol <strong>Daftar Quotation</strong> dan <strong>Daftar</strong> mengarah ke tabel Quotation terbaru di halaman yang sama. Klik <strong>Lihat semua</strong> untuk membuka halaman riwayat lengkap dengan pencarian dan filter status.</span></div></div>
+          <div class="step"><span class="step-number">6</span><div><strong>Edit quotation</strong><span>Klik Edit Quotation pada quotation berstatus draft, terkirim, revisi, ditolak, atau kedaluwarsa. Quotation yang sudah diterima atau sudah dipakai PO dikunci. Setelah disimpan, quotation non-draft menjadi <strong>Revisi</strong>.</span></div></div>
+          <div class="step"><span class="step-number">7</span><div><strong>Buat PO dari quotation</strong><span>Klik <strong>Buat PO dari quotation ini</strong>. Pelanggan, semua item, qty, harga, ongkir, pajak, termin, dan catatan langsung terisi di form PO. Item masih bisa disesuaikan sebelum disimpan.</span></div></div>
+          <div class="step"><span class="step-number">8</span><div><strong>Bagikan link publik</strong><span>Klik <strong>Salin link</strong> atau <strong>Kirim WhatsApp</strong>. Pesan WhatsApp otomatis menyertakan link quotation yang bisa dibuka pelanggan tanpa login.</span></div></div>
         </div>
         <div class="inline-note tip">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
-          <span>Masa berlaku default 7 hari. Untuk bibit, sesuaikan menjadi 14 hari bila diperlukan.</span>
+          <span>Masa berlaku default quotation 7 hari. Link publiknya berlaku 30 hari dan bisa dibuat ulang kapan saja dengan menekan Salin link. Untuk bibit, sesuaikan masa berlaku quotation menjadi 14 hari bila diperlukan.</span>
         </div>
       </section>
 
@@ -351,15 +372,86 @@
           </figure>
         </div>
         <div class="step-list">
-          <div class="step"><span class="step-number">1</span><div><strong>Terima PO</strong><span>Isi pelanggan, nomor PO customer, referensi quotation, tanggal kirim, dan item.</span></div></div>
+          <div class="step"><span class="step-number">1</span><div><strong>Terima PO</strong><span>Isi pelanggan, nomor PO customer, referensi quotation, tanggal kirim, dan item. Dari quotation, klik <strong>Buat PO dari quotation ini</strong> agar pelanggan, item, qty, harga, ongkir, pajak, dan termin terisi otomatis.</span></div></div>
           <div class="step"><span class="step-number">2</span><div><strong>Konfirmasi</strong><span>Validasi stok, harga, dan jadwal. Status berubah dari Diterima ke Dikonfirmasi.</span></div></div>
           <div class="step"><span class="step-number">3</span><div><strong>Produksi &amp; QC</strong><span>Update status Produksi, lalu Siap Kirim setelah QC dan packing selesai.</span></div></div>
           <div class="step"><span class="step-number">4</span><div><strong>Atur pengiriman</strong><span>Tambahkan driver, kendaraan, jadwal, dan catatan. Cetak surat jalan dari halaman PO.</span></div></div>
           <div class="step"><span class="step-number">5</span><div><strong>Konfirmasi diterima</strong><span>Setelah pelanggan menerima, update status Diterima/Selesai dan catat bukti.</span></div></div>
+          <div class="step"><span class="step-number">6</span><div><strong>Bagikan link PO</strong><span>Klik <strong>Salin link</strong> atau <strong>Kirim update</strong>. Pesan WhatsApp otomatis menyertakan link PO yang bisa dibuka pelanggan tanpa login.</span></div></div>
         </div>
         <div class="inline-note warn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
-          <span>Setiap perubahan status tercatat di riwayat. Pastikan update dilakukan berurutan agar laporan on-time delivery akurat.</span>
+          <span>Setiap perubahan status tercatat di riwayat. Pastikan update dilakukan berurutan agar laporan on-time delivery akurat. Link publik PO memakai token aman dan bukan halaman internal CRM.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="master">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Pengaturan</span>
+            <h2>Master Data: produk cepat &amp; template syarat</h2>
+            <p>Kelola data yang dipakai berulang agar quotation baru lebih cepat dibuat dan tetap konsisten.</p>
+          </div>
+          <span class="section-index">10</span>
+        </div>
+        <div class="shot-grid">
+          <figure class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><span>produk cepat</span></div>
+            <div class="shot-image"><img class="zoomable" src="screenshots/master-data.png" alt="Master Data produk cepat Saung Lele CRM"></div>
+            <figcaption>Daftar produk cepat: SKU, kategori, grade/ukuran, satuan, harga dasar, dan status aktif.</figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><span>syarat &amp; ketentuan</span></div>
+            <div class="shot-image"><img class="zoomable" src="screenshots/master-terms.png" alt="Master Data template syarat dan ketentuan Saung Lele CRM"></div>
+            <figcaption>Template syarat &amp; ketentuan. Tandai satu template sebagai default untuk quotation baru.</figcaption>
+          </figure>
+        </div>
+        <div class="step-list">
+          <div class="step"><span class="step-number">1</span><div><strong>Buka Pengaturan → Master Data</strong><span>Menu ini ada di sidebar paling bawah. Gunakan tab Produk Cepat atau Syarat &amp; Ketentuan.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Kelola produk cepat</strong><span>Tambah atau edit SKU, nama, kategori (ikan siap masak/fillet/bibit), grade, satuan, dan harga dasar. Produk aktif otomatis muncul sebagai kartu di builder quotation dan form PO.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Kelola template syarat</strong><span>Tambah atau edit template, lalu tandai <strong>Default</strong> agar otomatis dipakai saat membuat quotation baru. Hanya satu template yang bisa menjadi default.</span></div></div>
+          <div class="step"><span class="step-number">4</span><div><strong>Nonaktifkan yang tidak dipakai</strong><span>Produk atau template nonaktif tidak muncul di pilihan baru, tetapi data lama tetap tersimpan.</span></div></div>
+        </div>
+        <div class="inline-note tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>
+          <span>Perubahan harga atau template berlaku untuk dokumen baru. Quotation/PO yang sudah dibuat tetap memakai harga dan syarat yang tersimpan di dokumen tersebut.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="public-link">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Pengaturan</span>
+            <h2>Link publik: pelanggan lihat tanpa login</h2>
+            <p>Bagikan quotation dan PO lewat WhatsApp tanpa perlu melampirkan file PDF.</p>
+          </div>
+          <span class="section-index">11</span>
+        </div>
+        <div class="shot-grid">
+          <figure class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><span>quotation publik</span></div>
+            <div class="shot-image"><img class="zoomable" src="screenshots/quotation-public.png" alt="Halaman publik quotation Saung Lele"></div>
+            <figcaption>Quotation publik: branding Saung Lele, data pelanggan, item, total, syarat, dan tombol cetak.</figcaption>
+          </figure>
+          <figure class="shot">
+            <div class="shot-bar"><i></i><i></i><i></i><span>PO publik</span></div>
+            <div class="shot-image"><img class="zoomable" src="screenshots/po-public.png" alt="Halaman publik PO Saung Lele"></div>
+            <figcaption>PO publik: status, item, total, jadwal pengiriman, dan tombol cetak tanpa login.</figcaption>
+          </figure>
+        </div>
+        <div class="step-list">
+          <div class="step"><span class="step-number">1</span><div><strong>Buka quotation atau PO</strong><span>Gunakan tombol <strong>Salin link</strong> untuk mendapatkan tautan, atau langsung klik <strong>Kirim WhatsApp</strong> / <strong>Kirim update</strong>.</span></div></div>
+          <div class="step"><span class="step-number">2</span><div><strong>Link masuk ke pesan WhatsApp</strong><span>Pesan tetap memuat nomor, total/status, dan ditambah baris <strong>Lihat quotation</strong> atau <strong>Lihat PO</strong>. Pelanggan cukup klik link.</span></div></div>
+          <div class="step"><span class="step-number">3</span><div><strong>Pelanggan membuka tanpa login</strong><span>Halaman publik menampilkan dokumen resmi, bisa dicetak atau disimpan sebagai PDF dari browser. Tidak ada menu internal CRM.</span></div></div>
+          <div class="step"><span class="step-number">4</span><div><strong>Token diverifikasi server</strong><span>Link berisi token terenkripsi berisi jenis dokumen, ID, dan masa berlaku. Token palsu atau kedaluwarsa akan ditolak. Masa berlaku 30 hari; buat link baru dengan menekan Salin link lagi.</span></div></div>
+        </div>
+        <div class="inline-note warn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
+          <span>Link publik bersifat seperti kunci: siapa pun yang memegang link dapat membuka dokumen. Kirim hanya ke pelanggan atau pihak yang berkepentingan. Jangan meneruskan link ke grup umum.</span>
+        </div>
+        <div class="inline-note info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          <span>Saat demo lokal, link mengarah ke <code>127.0.0.1:8000</code>. Setelah dipasang di server, pastikan <code>APP_URL</code> memakai domain HTTPS, misalnya <code>https://saunglele.kebunkode.com</code>, agar link bisa dibuka dari HP pelanggan.</span>
         </div>
       </section>
 
@@ -370,7 +462,7 @@
             <h2>Buyback panen: dari bibit sampai pembayaran</h2>
             <p>Pantau pertumbuhan ikan mitra dan jadwalkan pembelian kembali.</p>
           </div>
-          <span class="section-index">10</span>
+          <span class="section-index">12</span>
         </div>
         <figure class="shot">
           <div class="shot-bar"><i></i><i></i><i></i><span>buyback panen</span></div>
@@ -396,7 +488,7 @@
             <h2>Laporan: lihat retensi dan operasi dalam satu pandangan</h2>
             <p>Gunakan laporan untuk keputusan mingguan, bukan sekadar arsip.</p>
           </div>
-          <span class="section-index">11</span>
+          <span class="section-index">13</span>
         </div>
         <figure class="shot">
           <div class="shot-bar"><i></i><i></i><i></i><span>laporan</span></div>
@@ -418,7 +510,7 @@
             <h2>Alur kerja harian yang disarankan</h2>
             <p>Lima ritual singkat agar CRM tidak menjadi pekerjaan tambahan.</p>
           </div>
-          <span class="section-index">12</span>
+          <span class="section-index">14</span>
         </div>
         <div class="workflow">
           <div class="workflow-step"><span class="wf-num">1</span><strong>Cek dashboard</strong><span>08.00</span></div>
@@ -445,10 +537,10 @@
             <h2>Checklist kesiapan Saung Lele</h2>
             <p>Centang satu per satu. Progres tersimpan di browser ini.</p>
           </div>
-          <span class="section-index">13</span>
+          <span class="section-index">15</span>
         </div>
         <div class="progress-track"><i data-progress-fill></i></div>
-        <div class="checklist-summary" style="margin-top:6px"><span data-progress-text>0 / 12</span> · <span data-progress-percent>0%</span> selesai</div>
+        <div class="checklist-summary" style="margin-top:6px"><span data-progress-text>0 / 16</span> · <span data-progress-percent>0%</span> selesai</div>
         <div class="checklist">
           <label class="check-row"><input class="learning-check" type="checkbox" data-key="paket"><span>Tentukan paket dan jumlah pengguna.</span></label>
           <label class="check-row"><input class="learning-check" type="checkbox" data-key="pelanggan"><span>Siapkan daftar pelanggan dan lead awal.</span></label>
@@ -462,6 +554,10 @@
           <label class="check-row"><input class="learning-check" type="checkbox" data-key="po"><span>Uji alur PO → status → jadwal pengiriman.</span></label>
           <label class="check-row"><input class="learning-check" type="checkbox" data-key="buyback"><span>Uji siklus buyback dan catat satu sampling.</span></label>
           <label class="check-row"><input class="learning-check" type="checkbox" data-key="laporan"><span>Review laporan minggu pertama dan tindak lanjuti pelanggan berisiko.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="master-produk"><span>Atur produk cepat, grade, satuan, dan harga di Master Data.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="master-syarat"><span>Siapkan template syarat &amp; ketentuan default.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="followup-hasil"><span>Uji Selesaikan/Tunda follow-up dan pastikan hasil masuk timeline.</span></label>
+          <label class="check-row"><input class="learning-check" type="checkbox" data-key="link-publik"><span>Uji link publik quotation/PO dan kirim lewat WhatsApp.</span></label>
         </div>
         <div class="checklist-actions">
           <span class="checklist-summary">Progres otomatis tersimpan di browser.</span>
@@ -476,7 +572,7 @@
             <h2>FAQ singkat</h2>
             <p>Hal yang paling sering ditanyakan saat evaluasi sistem.</p>
           </div>
-          <span class="section-index">14</span>
+          <span class="section-index">16</span>
         </div>
         <div class="faq-list">
           <details class="faq-item">
@@ -510,6 +606,22 @@
           <details class="faq-item">
             <summary>Apakah harga bisa disesuaikan?</summary>
             <p>Ya. Harga dalam surat penawaran adalah referensi. Paket, jumlah pengguna, dan cara pembayaran dapat didiskusikan.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Apakah pelanggan perlu login untuk melihat quotation/PO?</summary>
+            <p>Tidak. Klik <strong>Salin link</strong> atau kirim lewat WhatsApp. Link publik memakai token terenkripsi dan hanya menampilkan dokumen yang dimaksud, tanpa menu internal CRM.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Berapa lama link publik berlaku?</summary>
+            <p>Link publik berlaku 30 hari. Jika sudah kedaluwarsa, buka quotation/PO dan klik Salin link lagi untuk membuat tautan baru.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Apakah quotation bisa diedit?</summary>
+            <p>Bisa untuk quotation draft, terkirim, revisi, ditolak, atau kedaluwarsa. Quotation yang sudah diterima atau sudah dipakai PO dikunci agar tidak bentrok. Setelah disimpan, quotation non-draft menjadi <strong>Revisi</strong>.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Bagaimana hasil follow-up masuk ke timeline?</summary>
+            <p>Saat menekan Selesaikan atau Tunda, isi Hasil follow-up. Sistem menyimpan hasil itu sebagai entri timeline. Jika tanggal follow-up berikutnya diisi, pengingat baru otomatis dibuat dengan hasil terakhir sebagai catatan.</p>
           </details>
         </div>
       </section>
