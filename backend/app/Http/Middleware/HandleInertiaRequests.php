@@ -8,6 +8,7 @@ use App\Models\FollowUp;
 use App\Models\Invoice;
 use App\Models\Lead;
 use App\Models\PurchaseOrder;
+use App\Support\DocumentBranding;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -29,6 +30,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $user,
             ],
+            'documentBranding' => $user ? DocumentBranding::current() : null,
             'navCounts' => $user ? [
                 'customers' => Customer::whereIn('status', ['active', 'attention', 'risk'])->count(),
                 'leads' => Lead::active()->count(),

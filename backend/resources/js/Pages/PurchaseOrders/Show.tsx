@@ -6,7 +6,7 @@ import {
     statusBadgeClass,
     whatsappUrl,
 } from '@/lib/format';
-import { Head, Link, router, useForm } from '@inertiajs/react';
+import { Head, Link, router, useForm, usePage } from '@inertiajs/react';
 import { FormEvent, useState } from 'react';
 
 type Props = {
@@ -19,6 +19,11 @@ export default function PurchaseOrderShow({ order, steps, statusOptions }: Props
     const [showStatus, setShowStatus] = useState(false);
     const [showDelivery, setShowDelivery] = useState(false);
     const [copied, setCopied] = useState(false);
+    const branding = usePage<any>().props.documentBranding ?? {
+        title: 'Saung Lele Karawang',
+        subtitle: 'Ternak dan Jual Beli Lele - Karawang',
+        logo_url: '/kebunkode.jpg',
+    };
 
     const statusForm = useForm({
         status: order.status,
@@ -50,7 +55,7 @@ export default function PurchaseOrderShow({ order, steps, statusOptions }: Props
     }
 
     function sendUpdate() {
-        const message = `Bapak/Ibu ${order.customer.contact ?? order.customer.name}, update untuk PO ${order.number}: status saat ini ${order.status_label}. ${order.latest_delivery ? `Pengiriman dijadwalkan ${order.latest_delivery.scheduled_label} oleh ${order.latest_delivery.driver_name ?? 'tim Saung Lele'}.` : ''} Terima kasih.\n\nLihat PO: ${order.public_url}`;
+        const message = `Bapak/Ibu ${order.customer.contact ?? order.customer.name}, update untuk PO ${order.number}: status saat ini ${order.status_label}. ${order.latest_delivery ? `Pengiriman dijadwalkan ${order.latest_delivery.scheduled_label} oleh ${order.latest_delivery.driver_name ?? ('tim ' + branding.title)}.` : ''} Terima kasih.\n\nLihat PO: ${order.public_url}`;
         window.open(whatsappUrl(order.customer.phone, message), '_blank');
     }
 

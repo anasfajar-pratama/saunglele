@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-    <title>@yield('title', 'Dokumen Saung Lele')</title>
-    <link rel="icon" href="/kebunkode.jpg">
+    <title>@yield('title', 'Dokumen ' . $branding['title'])</title>
+    <link rel="icon" href="{{ $branding['logo_url'] }}">
     <style>
         :root {
             --ink: #17352f;
@@ -135,14 +135,14 @@
 <body>
     <header class="public-topbar">
         <div class="brand">
-            <img src="/kebunkode.jpg" alt="KebunKode">
+            <img src="{{ $branding['logo_url'] }}" alt="{{ $branding['title'] }}">
             <div>
-                <strong>Saung Lele</strong>
-                <span>Ternak &amp; Jual Beli Lele · Karawang</span>
+                <strong>{{ $branding['title'] }}</strong>
+                <span>{{ $branding['subtitle'] }}</span>
             </div>
         </div>
         <div class="top-actions">
-            <a href="https://wa.me/6285890982992" target="_blank" rel="noopener">Hubungi Saung Lele</a>
+            <a href="https://wa.me/6285890982992" target="_blank" rel="noopener">Hubungi {{ $branding['title'] }}</a>
             <button type="button" onclick="window.print()">Cetak / Simpan PDF</button>
         </div>
     </header>
@@ -154,7 +154,7 @@
     </main>
 
     <footer class="public-foot">
-        <span>Dokumen ini dibagikan melalui link aman Saung Lele CRM. Tidak perlu login.</span>
+        <span>Dokumen ini dibagikan melalui link aman {{ $branding['title'] }} CRM. Tidak perlu login.</span>
         <span class="security-note"><span class="security-dot"></span> Link berlaku sampai {{ $expiresAt->translatedFormat('d F Y') }}</span>
     </footer>
 </body>

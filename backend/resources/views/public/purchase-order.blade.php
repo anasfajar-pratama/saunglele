@@ -1,6 +1,6 @@
 @extends('public.layout')
 
-@section('title', 'Purchase Order ' . $purchaseOrder->number . ' · Saung Lele')
+@section('title', 'Purchase Order ' . $purchaseOrder->number . ' - ' . $branding['title'])
 
 @php
     $rp = fn ($value) => 'Rp ' . number_format((float) $value, 0, ',', '.');
@@ -78,7 +78,7 @@
             <h3>Jadwal pengiriman</h3>
             @foreach ($deliveries as $delivery)
                 <div>
-                    <span>{{ $delivery->scheduled_at?->translatedFormat('d F Y, H.i') ?? 'Belum dijadwalkan' }} · {{ $delivery->driver_name ?? 'Driver Saung Lele' }}</span>
+                    <span>{{ $delivery->scheduled_at?->translatedFormat('d F Y, H.i') ?? 'Belum dijadwalkan' }} · {{ $delivery->driver_name ?? 'Driver '.$branding['title'] }}</span>
                     <strong>{{ \App\Models\Delivery::STATUSES[$delivery->status] ?? $delivery->status }}</strong>
                 </div>
             @endforeach
@@ -95,8 +95,8 @@
     <div class="signatures">
         <div>
             <span>Disiapkan oleh,</span>
-            <strong>{{ $purchaseOrder->creator?->name ?? 'Saung Lele' }}</strong>
-            <em>Saung Lele</em>
+            <strong>{{ $purchaseOrder->creator?->name ?? $branding['title'] }}</strong>
+            <em>{{ $branding['title'] }}</em>
         </div>
         <div>
             <span>Diterima oleh,</span>

@@ -1,6 +1,6 @@
 @extends('public.layout')
 
-@section('title', 'Quotation ' . $quotation->number . ' · Saung Lele')
+@section('title', 'Quotation ' . $quotation->number . ' - ' . $branding['title'])
 
 @php
     $rp = fn ($value) => 'Rp ' . number_format((float) $value, 0, ',', '.');
@@ -35,7 +35,7 @@
             <p>
                 Tanggal: {{ $quotation->issued_at?->translatedFormat('d F Y') ?? '-' }}<br>
                 Berlaku sampai: {{ $quotation->valid_until?->translatedFormat('d F Y') ?? '-' }}<br>
-                Sales: {{ $quotation->creator?->name ?? 'Saung Lele' }}
+                Sales: {{ $quotation->creator?->name ?? $branding['title'] }}
             </p>
         </div>
     </div>
@@ -90,8 +90,8 @@
     <div class="signatures">
         <div>
             <span>Hormat kami,</span>
-            <strong>{{ $quotation->creator?->name ?? 'Saung Lele' }}</strong>
-            <em>Sales Saung Lele</em>
+            <strong>{{ $quotation->creator?->name ?? $branding['title'] }}</strong>
+            <em>Sales {{ $branding['title'] }}</em>
         </div>
         <div>
             <span>Disetujui oleh,</span>

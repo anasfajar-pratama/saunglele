@@ -25,6 +25,11 @@ type SharedProps = {
         success?: string;
         error?: string;
     };
+    documentBranding?: {
+        title: string;
+        subtitle: string;
+        logo_url: string;
+    } | null;
     todayLabel: string;
 };
 
@@ -98,6 +103,7 @@ export default function AuthenticatedLayout({
     const user = page.props.auth?.user;
     const counts = page.props.navCounts;
     const flash = page.props.flash;
+    const branding = page.props.documentBranding;
     const path = page.url.split('?')[0];
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [search, setSearch] = useState('');
@@ -130,7 +136,7 @@ export default function AuthenticatedLayout({
                         <Icon name="fish" />
                     </span>
                     <div>
-                        <span className="brand-name">Saung Lele</span>
+                        <span className="brand-name">{branding?.title ?? 'Saung Lele Karawang'}</span>
                         <span className="brand-sub">CRM Ternak &amp; Jual Beli</span>
                     </div>
                 </div>
@@ -138,8 +144,8 @@ export default function AuthenticatedLayout({
                 <div className="workspace">
                     <span className="workspace-dot" />
                     <div>
-                        <strong>Saung Lele</strong>
-                        <span>Cabang Utama · Semarang</span>
+                        <strong>{branding?.title ?? 'Saung Lele Karawang'}</strong>
+                        <span>Cabang Utama · Karawang</span>
                     </div>
                     <Icon name="chevron-down" />
                 </div>

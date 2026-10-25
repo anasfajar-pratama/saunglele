@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Icon from '@/Components/Icon';
 import { formatRupiah, statusBadgeClass, whatsappUrl } from '@/lib/format';
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
 type Props = {
@@ -10,13 +10,18 @@ type Props = {
 
 export default function QuotationShow({ quotation }: Props) {
     const [copied, setCopied] = useState(false);
+    const branding = usePage<any>().props.documentBranding ?? {
+        title: 'Saung Lele Karawang',
+        subtitle: 'Ternak dan Jual Beli Lele - Karawang',
+        logo_url: '/kebunkode.jpg',
+    };
 
     function updateStatus(status: string) {
         router.patch(route('quotations.status', quotation.id), { status }, { preserveScroll: true });
     }
 
     function sendWhatsapp() {
-        const message = `Halo Bapak/Ibu ${quotation.customer.contact ?? quotation.customer.name}, quotation ${quotation.number} dari Saung Lele dengan total ${formatRupiah(quotation.total, false)} sudah kami siapkan. Berlaku sampai ${quotation.valid_label}. Apakah ada yang ingin disesuaikan?\n\nLihat quotation: ${quotation.public_url}`;
+        const message = `Halo Bapak/Ibu ${quotation.customer.contact ?? quotation.customer.name}, quotation ${quotation.number} dari ${branding.title} dengan total ${formatRupiah(quotation.total, false)} sudah kami siapkan. Berlaku sampai ${quotation.valid_label}. Apakah ada yang ingin disesuaikan?\n\nLihat quotation: ${quotation.public_url}`;
         window.open(whatsappUrl(quotation.customer.phone, message), '_blank');
     }
 
@@ -71,8 +76,8 @@ export default function QuotationShow({ quotation }: Props) {
                 <div className="doc-preview">
                     <div className="doc-preview-head">
                         <div className="doc-brand">
-                            <span className="brand-mark" style={{ width: 34, height: 34, borderRadius: 10 }}><Icon name="fish" /></span>
-                            <div><strong>Saung Lele</strong><span>Ternak &amp; Jual Beli Lele · Semarang</span></div>
+                            <img src={branding.logo_url} alt={branding.title} style={{ width: 34, height: 34, borderRadius: 10, objectFit: 'cover', border: '1px solid #cfe4dc', background: '#fff' }} />
+                            <div><strong>{branding.title}</strong><span>{branding.subtitle}</span></div>
                         </div>
                         <div className="doc-title"><strong>QUOTATION</strong><span>{quotation.number}</span></div>
                     </div>
@@ -115,7 +120,7 @@ export default function QuotationShow({ quotation }: Props) {
                     <div className="doc-terms"><strong>Syarat &amp; ketentuan</strong><p>{quotation.terms}</p></div>
 
                     <div className="doc-sign">
-                        <div><span>Hormat kami,</span><strong>{quotation.sales ?? 'Saung Lele'}</strong><span>Sales Saung Lele</span></div>
+                        <div><span>Hormat kami,</span><strong>{quotation.sales ?? branding.title}</strong><span>Sales {branding.title}</span></div>
                         <div><span>Disetujui oleh,</span><strong>________________</strong><span>{quotation.customer.name}</span></div>
                     </div>
                 </div>

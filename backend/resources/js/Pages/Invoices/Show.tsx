@@ -2,7 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import CrmModal from '@/Components/CrmModal';
 import Icon from '@/Components/Icon';
 import { formatRupiah, statusBadgeClass, whatsappUrl } from '@/lib/format';
-import { Head, Link, router, useForm } from '@inertiajs/react';
+import { Head, Link, router, useForm, usePage } from '@inertiajs/react';
 import { FormEvent, useState } from 'react';
 
 type Props = {
@@ -19,6 +19,11 @@ export default function InvoiceShow({ invoice, paymentMethods }: Props) {
     const [copied, setCopied] = useState(false);
     const [paymentModal, setPaymentModal] = useState<{ mode: 'create' | 'edit'; payment?: any } | null>(null);
     const [deleteTarget, setDeleteTarget] = useState<any | null>(null);
+    const branding = usePage<any>().props.documentBranding ?? {
+        title: 'Saung Lele Karawang',
+        subtitle: 'Ternak dan Jual Beli Lele - Karawang',
+        logo_url: '/kebunkode.jpg',
+    };
 
     const isPaid = invoice.status === 'paid';
     const isCancelled = invoice.status === 'cancelled';
@@ -55,7 +60,7 @@ export default function InvoiceShow({ invoice, paymentMethods }: Props) {
         const payment = paidAmount > 0
             ? `total ${formatRupiah(invoice.total, false)}, sudah dibayar ${formatRupiah(paidAmount, false)}, sisa ${formatRupiah(remaining, false)}`
             : `total ${formatRupiah(invoice.total, false)}`;
-        const message = `Halo Bapak/Ibu ${invoice.customer.contact ?? invoice.customer.name}, invoice ${invoice.number} dari Saung Lele dengan ${payment} telah kami terbitkan. Jatuh tempo ${invoice.due_label}.${invoice.purchase_order ? ` Referensi PO ${invoice.purchase_order.number}.` : ''} Mohon cantumkan nomor invoice pada berita transfer.\n\nLihat invoice: ${invoice.public_url}`;
+        const message = `Halo Bapak/Ibu ${invoice.customer.contact ?? invoice.customer.name}, invoice ${invoice.number} dari ${branding.title} dengan ${payment} telah kami terbitkan. Jatuh tempo ${invoice.due_label}.${invoice.purchase_order ? ` Referensi PO ${invoice.purchase_order.number}.` : ''} Mohon cantumkan nomor invoice pada berita transfer.\n\nLihat invoice: ${invoice.public_url}`;
         window.open(whatsappUrl(invoice.customer.phone, message), '_blank');
     }
 
@@ -177,8 +182,8 @@ export default function InvoiceShow({ invoice, paymentMethods }: Props) {
                 <div className="doc-preview">
                     <div className="doc-preview-head">
                         <div className="doc-brand">
-                            <span className="brand-mark" style={{ width: 34, height: 34, borderRadius: 10 }}><Icon name="fish" /></span>
-                            <div><strong>Saung Lele</strong><span>Ternak &amp; Jual Beli Lele · Semarang</span></div>
+                            <img src={branding.logo_url} alt={branding.title} style={{ width: 34, height: 34, borderRadius: 10, objectFit: 'cover', border: '1px solid #cfe4dc', background: '#fff' }} />
+                            <div><strong>{branding.title}</strong><span>{branding.subtitle}</span></div>
                         </div>
                         <div className="doc-title"><strong>INVOICE</strong><span>{invoice.number}</span></div>
                     </div>
@@ -230,7 +235,7 @@ export default function InvoiceShow({ invoice, paymentMethods }: Props) {
                     {invoice.terms && <div className="doc-terms"><strong>Syarat &amp; ketentuan</strong><p>{invoice.terms}</p></div>}
 
                     <div className="doc-sign">
-                        <div><span>Hormat kami,</span><strong>{invoice.sales ?? 'Saung Lele'}</strong><span>Saung Lele</span></div>
+                        <div><span>Hormat kami,</span><strong>{invoice.sales ?? branding.title}</strong><span>{branding.title}</span></div>
                         <div><span>Diterima oleh,</span><strong>________________</strong><span>{invoice.customer.name}</span></div>
                     </div>
                 </div>

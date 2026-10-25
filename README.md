@@ -16,6 +16,7 @@ Implementasi CRM untuk usaha ternak dan jual beli lele, dibangun dari `design.md
 - **Quotation**: katalog produk per segmen, baris item dinamis, ongkir/PPN, riwayat, halaman cetak.
 - **PO**: terima PO, item, status 7 tahap, riwayat progres, jadwal pengiriman, surat jalan (print).
 - **Invoice**: tagihan dari PO atau item manual, nomor otomatis, DP/uang muka, toggle PPN, riwayat pembayaran (DP, cicilan, pelunasan), link publik 20 karakter, status draft/terkirim/lunas.
+- **Pengaturan dokumen**: judul, sub judul, dan logo dokumen PO/quotation/invoice dapat diubah dari halaman Profil.
 - **Buyback**: siklus mitra kolam, sampling, grafik ABW, jadwal buyback, estimasi biomassa.
 - **Laporan**: retensi, compliance follow-up, sumber lead, alasan kalah, on-time delivery, buyback, pelanggan berisiko.
 - **WhatsApp**: mode klik-untuk-chat (`wa.me`) dan pencatatan pesan ke timeline. Belum memakai WhatsApp Cloud API.
@@ -275,8 +276,9 @@ chmod 644 public/build/manifest.json public/build/assets/*
 - **Dashboard follow-up** menampilkan tugas hari ini/terlambat, plus panel **Akan datang** untuk jadwal beberapa hari ke depan.
 - **PDF** quotation/surat jalan menggunakan print browser (`window.print()`), belum library PDF server-side.
 - **Link publik** quotation, PO, dan invoice memakai token acak **20 karakter** di tabel `public_links` (berlaku 30 hari). Link lama berbasis enkripsi tetap bisa dibuka sampai kedaluwarsa.
-- **Invoice** dibuat dari halaman pelanggan, dari PO, atau manual. Setelah `git pull`, jalankan `php artisan migrate` untuk membuat tabel `invoices`, `invoice_items`, `invoice_payments`, dan `public_links`.
+- **Invoice** dibuat dari halaman pelanggan, dari PO, atau manual. Setelah `git pull`, jalankan `php artisan migrate` untuk membuat tabel `invoices`, `invoice_items`, `invoice_payments`, `document_settings`, dan `public_links`.
 - **Riwayat pembayaran invoice** disimpan di `invoice_payments` (DP awal, pembayaran, pelunasan). Total dibayar, sisa tagihan, dan status invoice dihitung ulang otomatis setiap ada pembayaran baru, edit, atau hapus.
+- **Branding dokumen** disimpan di `document_settings` dan dapat diubah dari halaman Profil. Logo diunggah ke `public/uploads/branding` (maks. 2 MB) lalu dipakai di link publik, judul/sub judul, dan preview dokumen PO/quotation/invoice.
 - **PO & delivery** dikelola manual; belum ada integrasi kurir atau inventory.
 - **Health score** dan repeat rate dihitung dari data transaksi yang ada.
 - Data demo mencakup 11 pelanggan, 17 lead, 100 follow-up (10 terbuka + 90 selesai), 6 siklus buyback, dan PO historis untuk laporan.

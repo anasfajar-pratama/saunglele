@@ -1,6 +1,6 @@
 @extends('public.layout')
 
-@section('title', 'Invoice ' . $invoice->number . ' · Saung Lele')
+@section('title', 'Invoice ' . $invoice->number . ' - ' . $branding['title'])
 
 @php
     $rp = fn ($value) => 'Rp ' . number_format((float) $value, 0, ',', '.');
@@ -44,7 +44,7 @@
                 Jatuh tempo: {{ $invoice->due_at?->translatedFormat('d F Y') ?? '-' }}<br>
                 Referensi PO: {{ $invoice->purchaseOrder?->number ?? '-' }}<br>
                 Referensi quotation: {{ $invoice->quotation?->number ?? '-' }}<br>
-                Sales: {{ $invoice->creator?->name ?? 'Saung Lele' }}
+                Sales: {{ $invoice->creator?->name ?? $branding['title'] }}
             </p>
         </div>
     </div>
@@ -118,7 +118,7 @@
     @elseif ($isOverdue)
         <div class="note-box">
             <strong>Status pembayaran</strong>
-            <p>Invoice ini melewati tanggal jatuh tempo. Mohon selesaikan pembayaran atau hubungi tim Saung Lele bila ada kendala.</p>
+            <p>Invoice ini melewati tanggal jatuh tempo. Mohon selesaikan pembayaran atau hubungi tim {{ $branding['title'] }} bila ada kendala.</p>
         </div>
     @endif
 
@@ -139,8 +139,8 @@
     <div class="signatures">
         <div>
             <span>Hormat kami,</span>
-            <strong>{{ $invoice->creator?->name ?? 'Saung Lele' }}</strong>
-            <em>Saung Lele</em>
+            <strong>{{ $invoice->creator?->name ?? $branding['title'] }}</strong>
+            <em>{{ $branding['title'] }}</em>
         </div>
         <div>
             <span>Diterima oleh,</span>
