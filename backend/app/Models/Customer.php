@@ -97,6 +97,11 @@ class Customer extends Model
         return $this->hasMany(PurchaseOrder::class)->latest('created_at');
     }
 
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class)->latest('issued_at');
+    }
+
     public function buybackCycles(): HasMany
     {
         return $this->hasMany(BuybackCycle::class)->latest('stocked_at');

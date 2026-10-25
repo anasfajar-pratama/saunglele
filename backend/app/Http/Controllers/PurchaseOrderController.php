@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Delivery;
+use App\Models\Invoice;
 use App\Models\PoStatusHistory;
 use App\Models\Product;
 use App\Models\PurchaseOrder;
@@ -256,6 +257,7 @@ class PurchaseOrderController extends Controller
             'items.product',
             'statusHistory.changedBy',
             'deliveries',
+            'invoices',
             'creator',
         ]);
 
@@ -345,6 +347,15 @@ class PurchaseOrderController extends Controller
                     'status' => $delivery->status,
                     'status_label' => Delivery::STATUSES[$delivery->status] ?? $delivery->status,
                     'notes' => $delivery->notes,
+                ]),
+                'invoices' => $purchaseOrder->invoices->map(fn (Invoice $invoice) => [
+                    'id' => $invoice->id,
+                    'number' => $invoice->number,
+                    'status' => $invoice->status,
+                    'status_label' => $invoice->status_label,
+                    'total' => (float) $invoice->total,
+                    'issued_label' => optional($invoice->issued_at)->translatedFormat('d M Y'),
+                    'due_label' => optional($invoice->due_at)->translatedFormat('d M Y'),
                 ]),
                 'latest_delivery' => $latestDelivery ? [
                     'id' => $latestDelivery->id,

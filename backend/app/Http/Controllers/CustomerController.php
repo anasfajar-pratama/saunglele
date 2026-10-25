@@ -7,10 +7,12 @@ use App\Models\Customer;
 use App\Models\CustomerProfile;
 use App\Models\FollowUp;
 use App\Models\Interaction;
+use App\Models\Invoice;
 use App\Models\Message;
 use App\Models\MessageTemplate;
 use App\Models\PurchaseOrder;
 use App\Models\Quotation;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -95,7 +97,7 @@ class CustomerController extends Controller
                 'kolam' => Customer::where('segment', 'kolam')->count(),
                 'risk' => Customer::where('health_score', '<', 60)->count(),
             ],
-            'owners' => \App\Models\User::orderBy('name')->get(['id', 'name']),
+            'owners' => User::orderBy('name')->get(['id', 'name']),
         ]);
     }
 
@@ -199,6 +201,8 @@ class CustomerController extends Controller
             'followUps.assignee',
             'quotations.items',
             'purchaseOrders.items.product',
+            'invoices.items',
+            'invoices.purchaseOrder',
             'buybackCycles.samplings',
             'messages.template',
         ]);
@@ -285,6 +289,7 @@ class CustomerController extends Controller
                     'items_summary' => $quotation->items->map(fn ($item) => $item->description)->implode(', '),
                 ]),
                 'purchase_orders' => $customer->purchaseOrders->map(fn (PurchaseOrder $po) => $this->mapPurchaseOrder($po)),
+                'invoices' => $customer->invoices->map(fn (Invoice $invoice) => $this->mapInvoice($invoice)),
                 'buyback_cycles' => $customer->buybackCycles->map(fn ($cycle) => $this->mapBuybackCycle($cycle)),
                 'messages' => $customer->messages->map(fn (Message $message) => [
                     'id' => $message->id,
@@ -296,7 +301,7 @@ class CustomerController extends Controller
                 ]),
             ],
             'templates' => $templates,
-            'users' => \App\Models\User::orderBy('name')->get(['id', 'name']),
+            'users' => User::orderBy('name')->get(['id', 'name']),
         ]);
     }
 
@@ -558,6 +563,34 @@ class CustomerController extends Controller
             'items_count' => $po->items->count(),
             'items_summary' => $po->items->map(fn ($item) => number_format((float) $item->qty, 0, ',', '.').' '.$item->unit.' '.(optional($item->product)->name ?? $item->description))->implode(' · '),
             'created_label' => $po->created_at->translatedFormat('d M Y'),
+        ];
+    }
+
+    private function mapInvoice(Invoice $invoice): array
+    {
+        return [
+            'id' => $invoice->id,
+            'number' => $invoice->number,
+            'purchase_order' => $invoice->purchaseOrder?->number,
+            'total' => (float) $invoice->total,
+            'down_payment' => (float) $invoice->down_payment,
+            'paid_amount' => (float) $invoice->paid_amount,
+            'remaining' => max(0, (float) $invoice->total - (float) $invoice->paid_amount),
+            'payment_status' => $invoice->payment_status,
+            'payment_status_label' => $invoice->payment_status_label,
+            'status' => $invoice->status,
+            'status_label' => $invoice->status_label,
+            'issued_at' => optional($invoice->issued_at)->toDateString(),
+            'issued_label' => optional($invoice->issued_at)->translatedFormat('d M Y'),
+            'due_at' => optional($invoice->due_at)->toDateString(),
+            'due_label' => optional($invoice->due_at)->translatedFormat('d M Y'),
+            'items_count' => $invoice->items->count(),
+            'items_summary' => $invoice->items->map(fn ($item) => $item->description)->implode(', '),
+            'is_overdue' => ! in_array($invoice->status, ['paid', 'cancelled'], true)
+                && $invoice->due_at
+                && $invoice->due_at->lt(today())
+                && ((float) $invoice->total - (float) $invoice->paid_amount) > 0,
+            'can_edit' => ! in_array($invoice->status, ['paid', 'cancelled'], true),
         ];
     }
 

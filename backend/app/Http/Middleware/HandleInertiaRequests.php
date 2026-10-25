@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\BuybackCycle;
 use App\Models\Customer;
 use App\Models\FollowUp;
+use App\Models\Invoice;
 use App\Models\Lead;
 use App\Models\PurchaseOrder;
 use Illuminate\Http\Request;
@@ -32,6 +33,7 @@ class HandleInertiaRequests extends Middleware
                 'customers' => Customer::whereIn('status', ['active', 'attention', 'risk'])->count(),
                 'leads' => Lead::active()->count(),
                 'pos' => PurchaseOrder::whereNotIn('status', ['completed', 'cancelled'])->count(),
+                'invoices' => Invoice::whereIn('status', ['draft', 'sent', 'overdue'])->count(),
                 'buybacks' => BuybackCycle::where('status', '!=', 'settled')->count(),
                 'followups_today' => FollowUp::open()->whereDate('due_at', '<=', today())->count(),
                 'followups_overdue' => FollowUp::open()->whereDate('due_at', '<', today())->count(),

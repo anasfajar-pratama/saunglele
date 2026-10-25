@@ -82,6 +82,11 @@ class PurchaseOrder extends Model
         return $this->hasMany(Delivery::class);
     }
 
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class)->latest('issued_at');
+    }
+
     public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');

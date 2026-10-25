@@ -96,6 +96,7 @@ export default function PurchaseOrderShow({ order, steps, statusOptions }: Props
                         <div className="page-actions">
                             <button className="btn btn-secondary" onClick={sendUpdate}><Icon name="whatsapp" /> Kirim update</button>
                             <button className="btn btn-secondary" onClick={copyPublicLink}><Icon name="link" /> {copied ? 'Link tersalin' : 'Salin link'}</button>
+                            <Link className="btn btn-secondary" href={route('invoices.create', { purchase_order_id: order.id })}><Icon name="invoice" /> Buat invoice</Link>
                             <button className="btn btn-secondary" onClick={() => window.print()}><Icon name="clipboard" /> Surat jalan</button>
                             <button className="btn btn-primary" onClick={() => setShowStatus(true)}><Icon name="refresh" /> Update status</button>
                         </div>
@@ -238,6 +239,13 @@ export default function PurchaseOrderShow({ order, steps, statusOptions }: Props
                                 <div className="doc-list">
                                     <div className="doc-item"><span className="doc-icon"><Icon name="file" /></span><div className="doc-main"><strong>PO Customer - {order.customer_po_number ?? order.number}.pdf</strong><span>Dokumen PO</span></div><Link className="icon-btn sm" href={route('purchase-orders.show', order.id)}><Icon name="eye" /></Link></div>
                                     {order.quotation && <div className="doc-item"><span className="doc-icon"><Icon name="file-check" /></span><div className="doc-main"><strong>Quotation {order.quotation.number}.pdf</strong><span>Referensi penawaran</span></div><Link className="icon-btn sm" href={route('quotations.show', order.quotation.id)}><Icon name="eye" /></Link></div>}
+                                    {order.invoices?.map((invoice: any) => (
+                                        <div className="doc-item" key={invoice.id}>
+                                            <span className="doc-icon"><Icon name="invoice" /></span>
+                                            <div className="doc-main"><strong>Invoice {invoice.number}</strong><span>{invoice.status_label} · jatuh tempo {invoice.due_label}</span></div>
+                                            <Link className="icon-btn sm" href={route('invoices.show', invoice.id)}><Icon name="eye" /></Link>
+                                        </div>
+                                    ))}
                                     <div className="doc-item"><span className="doc-icon"><Icon name="truck" /></span><div className="doc-main"><strong>Surat Jalan {order.number}</strong><span>{order.latest_delivery?.status_label ?? 'Draft'}</span></div><button className="icon-btn sm" onClick={() => window.print()}><Icon name="eye" /></button></div>
                                 </div>
                             </div>

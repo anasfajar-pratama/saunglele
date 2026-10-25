@@ -3,6 +3,7 @@
 use App\Http\Controllers\BuybackController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\MessageTemplateController;
@@ -23,6 +24,9 @@ Route::get('/share/quotation/{token}', [PublicDocumentController::class, 'quotat
 Route::get('/share/po/{token}', [PublicDocumentController::class, 'purchaseOrder'])
     ->middleware('throttle:60,1')
     ->name('public.purchase-orders.show');
+Route::get('/share/invoice/{token}', [PublicDocumentController::class, 'invoice'])
+    ->middleware('throttle:60,1')
+    ->name('public.invoices.show');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
@@ -58,6 +62,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/purchase-orders/{purchaseOrder}', [PurchaseOrderController::class, 'show'])->name('purchase-orders.show');
     Route::patch('/purchase-orders/{purchaseOrder}/status', [PurchaseOrderController::class, 'updateStatus'])->name('purchase-orders.status');
     Route::post('/purchase-orders/{purchaseOrder}/deliveries', [PurchaseOrderController::class, 'storeDelivery'])->name('purchase-orders.deliveries.store');
+
+    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+    Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
+    Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
+    Route::get('/invoices/{invoice}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit');
+    Route::patch('/invoices/{invoice}/status', [InvoiceController::class, 'updateStatus'])->name('invoices.status');
+    Route::post('/invoices/{invoice}/payments', [InvoiceController::class, 'storePayment'])->name('invoices.payments.store');
+    Route::patch('/invoices/{invoice}/payments/{payment}', [InvoiceController::class, 'updatePayment'])->name('invoices.payments.update');
+    Route::delete('/invoices/{invoice}/payments/{payment}', [InvoiceController::class, 'destroyPayment'])->name('invoices.payments.destroy');
+    Route::patch('/invoices/{invoice}', [InvoiceController::class, 'update'])->name('invoices.update');
+    Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
 
     Route::get('/buybacks', [BuybackController::class, 'index'])->name('buybacks.index');
     Route::post('/buybacks/cycles', [BuybackController::class, 'storeCycle'])->name('buybacks.cycles.store');

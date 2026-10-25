@@ -16,6 +16,7 @@ type SharedProps = {
         customers: number;
         leads: number;
         pos: number;
+        invoices: number;
         buybacks: number;
         followups_today: number;
         followups_overdue: number;
@@ -56,6 +57,7 @@ const NAV: { label: string; items: NavItem[] }[] = [
         items: [
             { label: 'Quotation', icon: 'file', href: '/quotations', active: 'quotations' },
             { label: 'Pesanan (PO)', icon: 'package', href: '/purchase-orders', active: 'purchase-orders', badgeKey: 'pos' },
+            { label: 'Invoice', icon: 'invoice', href: '/invoices', active: 'invoices', badgeKey: 'invoices' },
         ],
     },
     {

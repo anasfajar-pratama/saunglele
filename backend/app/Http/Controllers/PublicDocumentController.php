@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use App\Models\PurchaseOrder;
 use App\Models\Quotation;
 use App\Support\PublicDocumentLink;
@@ -32,6 +33,19 @@ class PublicDocumentController extends Controller
 
         return view('public.purchase-order', [
             'purchaseOrder' => $purchaseOrder,
+            'expiresAt' => Carbon::createFromTimestamp($payload['expires_at']),
+        ]);
+    }
+
+    public function invoice(string $token): View
+    {
+        $payload = PublicDocumentLink::decode($token, 'invoice');
+
+        $invoice = Invoice::with(['customer.primaryContact', 'purchaseOrder', 'quotation', 'items.product', 'creator', 'payments'])
+            ->findOrFail($payload['id']);
+
+        return view('public.invoice', [
+            'invoice' => $invoice,
             'expiresAt' => Carbon::createFromTimestamp($payload['expires_at']),
         ]);
     }

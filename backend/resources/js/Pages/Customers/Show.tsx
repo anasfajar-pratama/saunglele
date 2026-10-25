@@ -25,6 +25,7 @@ const TABS = [
     { key: 'timeline', label: 'Timeline' },
     { key: 'quotations', label: 'Quotation' },
     { key: 'orders', label: 'PO' },
+    { key: 'invoices', label: 'Invoice' },
     { key: 'buyback', label: 'Buyback' },
     { key: 'documents', label: 'Dokumen' },
 ];
@@ -190,6 +191,13 @@ export default function CustomerShow({ customer, templates, users }: Props) {
             href: route('purchase-orders.show', po.id),
             icon: 'package',
         })),
+        ...customer.invoices.map((invoice: any) => ({
+            id: `inv-${invoice.id}`,
+            name: `Invoice ${invoice.number}.pdf`,
+            meta: `${invoice.status_label} · ${formatRupiah(invoice.total)}`,
+            href: route('invoices.show', invoice.id),
+            icon: 'invoice',
+        })),
     ];
 
     return (
@@ -228,6 +236,7 @@ export default function CustomerShow({ customer, templates, users }: Props) {
                         <div className="profile-actions">
                             <button className="btn btn-wa" onClick={sendGeneric}><Icon name="whatsapp" /> WhatsApp</button>
                             <Link className="btn btn-secondary" href={route('quotations.index', { customer_id: customer.id })}><Icon name="file" /> Buat Quotation</Link>
+                            <Link className="btn btn-secondary" href={route('invoices.create', { customer_id: customer.id })}><Icon name="invoice" /> Buat Invoice</Link>
                             <a className="btn btn-secondary" href="#noteForm"><Icon name="plus" /> Catat Follow-up</a>
                             <button className="btn btn-secondary" onClick={() => setShowEdit(true)}><Icon name="edit" /> Edit Profil</button>
                         </div>
@@ -259,6 +268,7 @@ export default function CustomerShow({ customer, templates, users }: Props) {
                                     {item.label}
                                     {item.key === 'quotations' && <span className="count">{customer.quotations.length}</span>}
                                     {item.key === 'orders' && <span className="count">{customer.purchase_orders.length}</span>}
+                                    {item.key === 'invoices' && <span className="count">{customer.invoices.length}</span>}
                                     {item.key === 'buyback' && <span className="count">{customer.buyback_cycles.length}</span>}
                                 </button>
                             ))}
@@ -442,6 +452,51 @@ export default function CustomerShow({ customer, templates, users }: Props) {
                             </div>
                         )}
 
+                        {tab === 'invoices' && (
+                            <div className="tab-panel active">
+                                <div className="card-head">
+                                    <div><h2>Invoice pelanggan</h2><p>{customer.invoices.length} invoice</p></div>
+                                    <Link className="btn btn-primary btn-sm" href={route('invoices.create', { customer_id: customer.id })}><Icon name="plus" /> Invoice Baru</Link>
+                                </div>
+                                {customer.invoices.length > 0 ? (
+                                    <div className="table-wrap mt-2">
+                                        <table className="table">
+                                            <thead><tr><th>Nomor</th><th>Tanggal</th><th>Jatuh tempo</th><th>Item</th><th className="num">Nilai</th><th>Status</th><th /></tr></thead>
+                                            <tbody>
+                                                {customer.invoices.map((invoice: any) => (
+                                                    <tr key={invoice.id}>
+                                                        <td><Link className="link-strong" href={route('invoices.show', invoice.id)}>{invoice.number}</Link><span className="sub">{invoice.purchase_order ? `PO ${invoice.purchase_order}` : 'Manual'}</span></td>
+                                                        <td>{invoice.issued_label}</td>
+                                                        <td>{invoice.due_label}{invoice.is_overdue && <span className="sub">Lewat jatuh tempo</span>}</td>
+                                                        <td>{invoice.items_count} item<span className="sub">{invoice.items_summary}</span></td>
+                                                        <td className="num">{formatRupiah(invoice.total)}{Number(invoice.down_payment) > 0 && <span className="sub">DP {formatRupiah(invoice.down_payment)} · Sisa {formatRupiah(invoice.remaining)}</span>}</td>
+                                                        <td><span className={`badge ${statusBadgeClass(invoice.status)}`}>{invoice.status_label}</span><span className="sub">{invoice.payment_status_label}</span></td>
+                                                        <td className="cell-actions">
+                                                            {invoice.can_edit && (
+                                                                <Link className="icon-btn sm" href={route('invoices.edit', invoice.id)} title="Edit invoice" aria-label="Edit invoice">
+                                                                    <Icon name="edit" />
+                                                                </Link>
+                                                            )}
+                                                            <Link className="icon-btn sm" href={route('invoices.show', invoice.id)} title="Buka invoice" aria-label="Buka invoice">
+                                                                <Icon name="chevron-right" />
+                                                            </Link>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                ) : (
+                                    <div className="empty-state">
+                                        <div className="empty-icon"><Icon name="invoice" /></div>
+                                        <h3>Belum ada invoice</h3>
+                                        <p>Buat invoice untuk pelanggan ini dari PO atau item manual.</p>
+                                        <Link className="btn btn-primary btn-sm" href={route('invoices.create', { customer_id: customer.id })}><Icon name="plus" /> Invoice Baru</Link>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
                         {tab === 'buyback' && (
                             <div className="tab-panel active">
                                 {customer.buyback_cycles.length > 0 ? (
@@ -495,7 +550,7 @@ export default function CustomerShow({ customer, templates, users }: Props) {
                                             ))}
                                         </div>
                                     ) : (
-                                        <div className="empty-state"><div className="empty-icon"><Icon name="file" /></div><h3>Belum ada dokumen</h3><p>Dokumen quotation dan PO akan muncul di sini.</p></div>
+                                        <div className="empty-state"><div className="empty-icon"><Icon name="file" /></div><h3>Belum ada dokumen</h3><p>Dokumen quotation, PO, dan invoice akan muncul di sini.</p></div>
                                     )}
                                 </div>
                             </div>
